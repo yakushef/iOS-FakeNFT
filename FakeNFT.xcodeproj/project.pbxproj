@@ -38,6 +38,19 @@
 		3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* ExampleRequest.swift */; };
 		3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */; };
 		3FC8C39729D24D9D0081F015 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3FC8C39629D24D9D0081F015 /* .swiftlint.yml */; };
+		BC2C52A12AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */; };
+		BC2C52A22AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */; };
+		BC2C52A32AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */; };
+		BC2C52A42AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */; };
+		BC2C52A52AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */; };
+		BC2C52A62AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */; };
+		BC2C52A72AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */; };
+		BC2C52A82AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */; };
+		BC2C52A92AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */; };
+		BC2C52AB2AD5CA080066C940 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* Fonts.swift */; };
+		BC2C52AC2AD5CA080066C940 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* Fonts.swift */; };
+		BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
+		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +104,9 @@
 		3FC8C39029D2453B0081F015 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
 		3FC8C39629D24D9D0081F015 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +148,8 @@
 		3F478ECD29DB473000F6D39E /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				BC2C52AA2AD5C9E40066C940 /* Fonts */,
 				3F478ECE29DB474E00F6D39E /* Colors.swift */,
-				3F478ED029DB476500F6D39E /* Fonts.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -271,6 +287,17 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		BC2C52AA2AD5C9E40066C940 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3F478ED029DB476500F6D39E /* Fonts.swift */,
+				BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */,
+				BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */,
+				BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -386,8 +413,11 @@
 			files = (
 				3FC8C39729D24D9D0081F015 /* .swiftlint.yml in Resources */,
 				3F6806A329CBBAF200B4F915 /* LaunchScreen.storyboard in Resources */,
+				BC2C52A42AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */,
 				3F6806A029CBBAF200B4F915 /* Assets.xcassets in Resources */,
+				BC2C52A12AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */,
 				3F68069E29CBBAF100B4F915 /* Main.storyboard in Resources */,
+				BC2C52A72AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +425,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C52A22AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */,
+				BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */,
+				BC2C52A82AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */,
+				BC2C52A52AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +436,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C52A32AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */,
+				BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */,
+				BC2C52A92AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf in Resources */,
+				BC2C52A62AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C52AC2AD5CA080066C940 /* Fonts.swift in Sources */,
 				3F6806AE29CBBAF200B4F915 /* ExampleUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C52AB2AD5CA080066C940 /* Fonts.swift in Sources */,
 				3F6806B829CBBAF200B4F915 /* FakeNFTUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
