@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		31994A962AD486B800B57E7B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994A952AD486B800B57E7B /* Config.swift */; };
 		31994A982AD487AB00B57E7B /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994A972AD487AB00B57E7B /* Collection.swift */; };
-		31994A9E2AD53A4600B57E7B /* UIColors+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994A9D2AD53A4600B57E7B /* UIColors+Extensions.swift */; };
 		31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994A9F2AD53AAA00B57E7B /* UIBlockingProgressHUD.swift */; };
 		31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AA12AD53DBF00B57E7B /* Profile.swift */; };
 		31994AA42AD53E8700B57E7B /* ItemNFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AA32AD53E8700B57E7B /* ItemNFT.swift */; };
@@ -72,7 +71,6 @@
 /* Begin PBXFileReference section */
 		31994A952AD486B800B57E7B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		31994A972AD487AB00B57E7B /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		31994A9D2AD53A4600B57E7B /* UIColors+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColors+Extensions.swift"; sourceTree = "<group>"; };
 		31994A9F2AD53AAA00B57E7B /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		31994AA12AD53DBF00B57E7B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		31994AA32AD53E8700B57E7B /* ItemNFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNFT.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 		31994A9C2AD53A0B00B57E7B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				31994A9D2AD53A4600B57E7B /* UIColors+Extensions.swift */,
 				31994A9F2AD53AAA00B57E7B /* UIBlockingProgressHUD.swift */,
 			);
 			path = Helpers;
@@ -487,7 +484,6 @@
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
-				31994A9E2AD53A4600B57E7B /* UIColors+Extensions.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 			);
