@@ -49,6 +49,7 @@
 		BC2C52AC2AD5CA080066C940 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* Fonts.swift */; };
 		BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
+		BCB1DE052AD71E11002ED041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE042AD71E11002ED041 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
 		BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		BCB1DE042AD71E11002ED041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				BC2C52AA2AD5C9E40066C940 /* Fonts */,
 				3F478ECE29DB474E00F6D39E /* Colors.swift */,
+				BCB1DE042AD71E11002ED041 /* RatingView.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				31994AA42AD53E8700B57E7B /* ItemNFT.swift in Sources */,
 				31994A962AD486B800B57E7B /* Config.swift in Sources */,
+				BCB1DE052AD71E11002ED041 /* RatingView.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
 				31994A982AD487AB00B57E7B /* Collection.swift in Sources */,
