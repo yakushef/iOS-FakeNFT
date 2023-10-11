@@ -48,24 +48,8 @@
                     <view key="view" contentMode="scaleToFill" id="Sqy-bH-JOA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Профиль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-qj-ep5">
-                                <rect key="frame" x="16" y="159" width="361" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="6VI-CQ-FAl"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="n1C-DF-ZFC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="cJe-qj-ep5" firstAttribute="top" secondItem="n1C-DF-ZFC" secondAttribute="top" constant="100" id="4Fo-Tx-9Va"/>
-                            <constraint firstItem="n1C-DF-ZFC" firstAttribute="trailing" secondItem="cJe-qj-ep5" secondAttribute="trailing" constant="16" id="6sV-6P-M1p"/>
-                            <constraint firstItem="cJe-qj-ep5" firstAttribute="leading" secondItem="n1C-DF-ZFC" secondAttribute="leading" constant="16" id="876-Qa-CFn"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Профиль" image="circle.fill" catalog="system" id="Bq6-vk-Wno"/>
                 </viewController>
