@@ -8,11 +8,52 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    private let containerView: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+//        imageView.backgroundColor = .white
+        imageView.image = UIImage(named: "UserPic")
+        imageView.frame.size = CGSize(width: 70, height: 70)
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let profileNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Joaquin Phoenix"
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+//        label.backgroundColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let profileBioLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
+        label.font = UIFont.systemFont(ofSize: 13)
+//        label.backgroundColor = .orange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
         setupNavigationBar()
+        setupContainerView()
+        setupProfileImageView()
+        setupProfileNameLabel()
+        setupBioTextField()
     }
     
     private func setupNavigationBar() {
@@ -24,8 +65,50 @@ final class ProfileViewController: UIViewController {
         )
     }
     
-    @objc
-    private func editButtonDidTap() {
+    private func setupContainerView() {
+        view.addSubview(containerView)
         
+        NSLayoutConstraint.activate([
+            containerView.heightAnchor.constraint(equalToConstant: 162),
+            containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
+    
+    private func setupProfileImageView() {
+        containerView.addSubview(profileImageView)
+        
+        NSLayoutConstraint.activate([
+            profileImageView.widthAnchor.constraint(equalToConstant: 70),
+            profileImageView.heightAnchor.constraint(equalToConstant: 70),
+            profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            profileImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16)
+        ])
+    }
+    
+    private func setupProfileNameLabel() {
+        containerView.addSubview(profileNameLabel)
+        
+        NSLayoutConstraint.activate([
+            profileNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 21),
+            profileNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -113),
+            profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            profileNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+    }
+    
+    private func setupBioTextField() {
+        containerView.addSubview(profileBioLabel)
+        
+        NSLayoutConstraint.activate([
+            profileBioLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 90),
+            profileBioLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            profileBioLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            profileBioLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -18)
+        ])
+    }
+    
+    @objc
+    private func editButtonDidTap() {}
 }
