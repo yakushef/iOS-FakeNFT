@@ -16,7 +16,12 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Edit"), style: .done, target: self, action: #selector(editButtonDidTap))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "Edit"),
+            style: .done,
+            target: self,
+            action: #selector(editButtonDidTap)
+        )
     }
     
     @objc
