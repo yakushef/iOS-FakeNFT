@@ -12,5 +12,15 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Edit"), style: .done, target: self, action: #selector(editButtonDidTap))
+    }
+    
+    @objc
+    private func editButtonDidTap() {
+        
     }
 }
