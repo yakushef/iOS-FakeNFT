@@ -10,14 +10,14 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .red
+        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.backgroundColor = .white
+        imageView.backgroundColor = .white
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "Joaquin Phoenix"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-//        label.backgroundColor = .white
+        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,7 +40,19 @@ final class ProfileViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
         label.font = UIFont.systemFont(ofSize: 13)
-//        label.backgroundColor = .orange
+        label.backgroundColor = .orange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let siteLabel: UILabel = {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        let attributedString = NSMutableAttributedString(string: "Joaquin Phoenix.com")
+        if attributedString.setAsLink(textToFind: "Joaquin Phoenix.com", linkURL: "JoaquinPhoenix.com") {
+            label.attributedText = attributedString
+        }
+        label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,6 +66,7 @@ final class ProfileViewController: UIViewController {
         setupProfileImageView()
         setupProfileNameLabel()
         setupBioTextField()
+        setupSiteLabel()
     }
     
     private func setupNavigationBar() {
@@ -106,6 +119,16 @@ final class ProfileViewController: UIViewController {
             profileBioLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             profileBioLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             profileBioLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -18)
+        ])
+    }
+    
+    private func setupSiteLabel() {
+        view.addSubview(siteLabel)
+        
+        NSLayoutConstraint.activate([
+            siteLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 12),
+            siteLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            siteLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
