@@ -14,7 +14,8 @@ final class CartViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.register(CartItemCell.self)
-        table.backgroundColor = .ypBlack
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
         
         return table
     }()
@@ -50,7 +51,14 @@ final class CartViewController: UIViewController {
         ])
     
         //MARK: Cart item table
-        
+        view.addSubview(cartTable)
+        cartTable.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cartTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            cartTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cartTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cartTable.bottomAnchor.constraint(equalTo: paymentView.topAnchor)
+        ])
     }
     
     //MARK: - Navigation
@@ -61,7 +69,9 @@ final class CartViewController: UIViewController {
 
 //MARK: - TableViewDelegate
 extension CartViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        140
+    }
 }
 
 //MARK: - TableViewDataSource
@@ -71,6 +81,8 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell: CartItemCell = tableView.dequeueReusableCell()
+        cell.setupCellUI()
+        return cell
     }
 }
