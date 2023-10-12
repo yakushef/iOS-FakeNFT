@@ -10,14 +10,14 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+//        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .white
+//        imageView.backgroundColor = .white
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "Joaquin Phoenix"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.backgroundColor = .white
+//        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,7 +40,7 @@ final class ProfileViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
         label.font = UIFont.systemFont(ofSize: 13)
-        label.backgroundColor = .orange
+//        label.backgroundColor = .orange
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,6 +57,18 @@ final class ProfileViewController: UIViewController {
         return label
     }()
     
+    private let profileTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 54
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private let cells = ["Мои NFT", "Избранные NFT", "О разработчике"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +79,7 @@ final class ProfileViewController: UIViewController {
         setupProfileNameLabel()
         setupBioTextField()
         setupSiteLabel()
+        setupProfileTableView()
     }
     
     private func setupNavigationBar() {
@@ -132,6 +145,43 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
+    private func setupProfileTableView() {
+        profileTableView.dataSource = self
+        view.addSubview(profileTableView)
+        
+        NSLayoutConstraint.activate([
+            profileTableView.topAnchor.constraint(equalTo: siteLabel.bottomAnchor, constant: 40),
+            profileTableView.heightAnchor.constraint(
+                equalToConstant: profileTableView.rowHeight * CGFloat(cells.count)
+            ),
+            profileTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            profileTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
     @objc
     private func editButtonDidTap() {}
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
+        cell.accessoryView = UIImageView(image: UIImage(named: "chevron.forward"))
+        
+        if #available(iOS 14.0, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = cells[indexPath.row]
+            content.textProperties.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.contentConfiguration = content
+        } else {
+            cell.textLabel?.text = cells[indexPath.row]
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        }
+        
+        return cell
+    }
 }
