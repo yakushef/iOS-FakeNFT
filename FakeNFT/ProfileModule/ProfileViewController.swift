@@ -169,7 +169,7 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func editButtonDidTap() {
-        present(UINavigationController(rootViewController: ProfileEditingViewController()), animated: true)
+        present(ProfileEditingViewController(), animated: true)
     }
 }
 
