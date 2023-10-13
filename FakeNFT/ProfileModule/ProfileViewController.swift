@@ -168,7 +168,9 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
-    private func editButtonDidTap() {}
+    private func editButtonDidTap() {
+        present(UINavigationController(rootViewController: ProfileEditingViewController()), animated: true)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
