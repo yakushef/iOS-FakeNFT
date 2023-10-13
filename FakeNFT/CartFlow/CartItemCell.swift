@@ -14,10 +14,11 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
                               right: 16)
     
     private lazy var removeButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "Cart_Delete"), for: .normal)
         button.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
         button.tintColor = .ypBlack
-        button.setImage(UIImage(named: "Cart_Delete"), for: .normal)
+        button.adjustsImageWhenHighlighted = true
         return button
     }()
     
