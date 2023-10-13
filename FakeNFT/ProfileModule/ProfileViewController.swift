@@ -37,10 +37,18 @@ final class ProfileViewController: UIViewController {
     private let profileBioLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
-        label.font = UIFont.systemFont(ofSize: 13)
-//        label.backgroundColor = .orange
+        
+        let text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.minimumLineHeight = 18
+        
+        let attrString = NSMutableAttributedString(string: text)
+        let range = NSMakeRange(0, attrString.length)
+        
+        attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        attrString.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: range)
+        
+        label.attributedText = attrString
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -60,7 +68,6 @@ final class ProfileViewController: UIViewController {
     private let profileTableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
-        tableView.separatorStyle = .none
         tableView.rowHeight = 54
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +153,7 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupProfileTableView() {
+        profileTableView.separatorStyle = .none
         profileTableView.dataSource = self
         view.addSubview(profileTableView)
         
