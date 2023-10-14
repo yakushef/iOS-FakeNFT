@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PaymentView: UIView {
+final class CheckoutView: UIView {
     
     private var quantity: Int = 0 {
         didSet {
@@ -47,7 +47,7 @@ final class PaymentView: UIView {
         let priceLabel = UILabel()
         priceLabel.text = "\(price) ETH"
         priceLabel.font = .bold17
-        priceLabel.textColor = UIColor(red: 0.11, green: 0.624, blue: 0, alpha: 1)
+        priceLabel.textColor = .greenUniversal
         return priceLabel
     }()
     

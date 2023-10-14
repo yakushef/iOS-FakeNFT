@@ -9,6 +9,9 @@ import UIKit
 
 final class CartViewController: UIViewController {
     
+    var viewModel: CartViewModel?
+    private var orderItems: [ItemNFT] = []
+    
     private lazy var cartTable: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -20,14 +23,16 @@ final class CartViewController: UIViewController {
         return table
     }()
     
-    private lazy var paymentView: PaymentView = {
-        let view = PaymentView()
+    private lazy var paymentView: CheckoutView = {
+        let view = CheckoutView()
         return view
     }()
 
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = CartViewModel(vc: self)
         
         setupUI()
     }
@@ -65,6 +70,12 @@ final class CartViewController: UIViewController {
     @objc private func sortButtonTapped() {
         
     }
+    
+    func orderUpdated() {
+        orderItems = viewModel?.currentOrder ?? []
+            print(viewModel?.currentOrder)
+            cartTable.reloadData()
+        }
 }
 
 //MARK: - TableViewDelegate
@@ -77,12 +88,13 @@ extension CartViewController: UITableViewDelegate {
 //MARK: - TableViewDataSource
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        orderItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartItemCell = tableView.dequeueReusableCell()
         cell.setupCellUI()
+        cell.configureCellFor(nft: orderItems[indexPath.row])
         return cell
     }
 }

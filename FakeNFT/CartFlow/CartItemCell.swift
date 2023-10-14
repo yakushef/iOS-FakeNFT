@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CartItemCell: UITableViewCell, ReuseIdentifying {
     private let insets = UIEdgeInsets(top: 16,
@@ -111,17 +112,34 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         ])
     }
     
-    func setPrice(_ price: Double) {
-        
+    //MARK: - Configure content
+    
+    func configureCellFor(nft: ItemNFT) {
+        setPrice(nft.price)
+        setName(nft.name)
+        setRating(UInt(nft.rating))
+        setPreviewImage(nft.images.first)
     }
     
-    func setRating(_ rating: UInt) {
+    private func setPrice(_ price: Double) {
+        priceLabel.text = "\(price) ETH"
+    }
+    
+    private func setRating(_ rating: UInt) {
         ratingView.setRating(to: rating)
     }
     
-    func setName(_ name: String) {
-        
+    private func setName(_ name: String) {
+        titleLabel.text = name
     }
+    
+    private func setPreviewImage(_ imageURLString: String?) {
+        if let imageURLString {
+            nftPreview.kf.setImage(with: URL(string: imageURLString)!, placeholder: UIImage(named: "NFT_Placeholder"))
+        }
+    }
+    
+    //MARK: - Navigation
     
     @objc private func removeButtonTapped() {
         print("remove test")
