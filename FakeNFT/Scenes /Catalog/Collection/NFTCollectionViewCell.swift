@@ -14,7 +14,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     
     var likeButtonAction:(() -> Void)?
     var cartButtonAction:(() -> Void)?
-            
+    
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -25,14 +25,14 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var likeButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var ratingStackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 2
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,14 +40,14 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var nftNameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var priceLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

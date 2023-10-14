@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class CatalogViewController: UIViewController {
-        
+    
     private var viewModel = CatalogViewModel()
     private var collections: [Collection] {
         viewModel.collections
@@ -58,7 +58,7 @@ final class CatalogViewController: UIViewController {
         
         addSubviews()
         setupConstraints()
-//        setupNavBar()
+        //        setupNavBar()
         
         viewModel.loadingStarted = self.loadIndicatorStartAnimating
         viewModel.loadingFinished = self.loadIndicatorStopAnimating

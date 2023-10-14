@@ -19,7 +19,7 @@ final class CatalogViewModel: NSObject {
     override init() {
         super.init()
     }
-
+    
     func updateData() {
         fetchData()
     }

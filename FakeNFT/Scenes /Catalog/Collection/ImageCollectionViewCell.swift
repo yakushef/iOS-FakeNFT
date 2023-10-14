@@ -12,7 +12,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     static let identifier = "ImageCell"
     
     lazy var imageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
         imageView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]

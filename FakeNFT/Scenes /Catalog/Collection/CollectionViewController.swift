@@ -10,7 +10,7 @@ import Kingfisher
 final class CollectionViewController: UIViewController {
     
     private let viewModel: CollectionViewModel
- 
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
@@ -31,13 +31,13 @@ final class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         addSubviews()
         setupConstraints()
         setupNavBar()
         setupCollectionView()
     }
-        
+    
     private func addSubviews() {
         [collectionView].forEach {
             view.addSubview($0)
