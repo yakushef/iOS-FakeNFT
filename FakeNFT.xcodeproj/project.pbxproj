@@ -310,11 +310,19 @@
 		CBA8DF502AD6E6C8006A2601 /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
+				CBFDA18A2ADACAC300D2B6F9 /* CustomViews */,
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
 				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
 				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
 			);
 			path = ProfileModule;
+			sourceTree = "<group>";
+		};
+		CBFDA18A2ADACAC300D2B6F9 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
