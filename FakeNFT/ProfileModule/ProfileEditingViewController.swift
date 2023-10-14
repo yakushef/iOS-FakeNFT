@@ -47,45 +47,15 @@ final class ProfileEditingViewController: UIViewController {
     
     private let nameLabel = UILabel(text: "Имя")
     
-    private let nameTextView: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
-        textView.text = "Joaquin Phoenix" // TODO: Заменить на получение имени из ProfileViewController
-        textView.font = UIFont.systemFont(ofSize: 17)
-        textView.backgroundColor = .ypLightGrey
-        textView.layer.cornerRadius = 12
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
+    private let nameTextView = UITextView(text: "Joaquin Phoenix")
     
     private let bioLabel = UILabel(text: "Описание")
     
-    private let bioTextView: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
-        textView.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям." // TODO: Заменить на получение имени из ProfileViewController
-        textView.font = UIFont.systemFont(ofSize: 17)
-        textView.backgroundColor = .ypLightGrey
-        textView.layer.cornerRadius = 12
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
+    private let bioTextView = UITextView(text: "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям.")
     
     private let siteLabel = UILabel(text: "Сайт")
     
-    private let siteTextView: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
-        textView.text = "Joaquin Phoenix.com" // TODO: Заменить на получение имени из ProfileViewController
-        textView.font = UIFont.systemFont(ofSize: 17)
-        textView.backgroundColor = .ypLightGrey
-        textView.layer.cornerRadius = 12
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
+    private let siteTextView = UITextView(text: "Joaquin Phoenix.com")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,11 +67,11 @@ final class ProfileEditingViewController: UIViewController {
         setupProfileView()
         setupChangeProfileImageLabel()
         setupLabel(with: nameLabel, under: profileImageView)
-        setupNameTextView()
+        setupTextView(nameTextView, under: nameLabel)
         setupLabel(with: bioLabel, under: nameTextView)
-        setupBioTextView()
+        setupTextView(bioTextView, under: bioLabel)
         setupLabel(with: siteLabel, under: bioTextView)
-        setupSiteTextView()
+        setupTextView(siteTextView, under: siteLabel)
     }
     
     private func setupCloseButton() {
@@ -162,42 +132,13 @@ final class ProfileEditingViewController: UIViewController {
         ])
     }
     
-    private func setupNameTextView() {
-        view.addSubview(nameTextView)
+    private func setupTextView(_ textView: UITextView, under topView: UIView) {
+        view.addSubview(textView)
         
         NSLayoutConstraint.activate([
-            nameTextView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            nameTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            nameTextView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            )
-        ])
-    }
-    
-    private func setupBioTextView() {
-        view.addSubview(bioTextView)
-        
-        NSLayoutConstraint.activate([
-            bioTextView.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 8),
-            bioTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            bioTextView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            )
-        ])
-    }
-    
-    private func setupSiteTextView() {
-        view.addSubview(siteTextView)
-        
-        NSLayoutConstraint.activate([
-            siteTextView.topAnchor.constraint(equalTo: siteLabel.bottomAnchor, constant: 8),
-            siteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            siteTextView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
-            )
+            textView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 8),
+            textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     

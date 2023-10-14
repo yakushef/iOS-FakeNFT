@@ -54,6 +54,7 @@
 		CB6F168C2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */; };
 		CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */; };
 		CBFDA1902ADAEB8C00D2B6F9 /* UILablel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */; };
+		CBFDA1922ADAF11B00D2B6F9 /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILablel+Extensions.swift"; sourceTree = "<group>"; };
+		CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 			children = (
 				CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */,
 				CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */,
+				CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
+				CBFDA1922ADAF11B00D2B6F9 /* UITextView+Extensions.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */,
