@@ -45,6 +45,15 @@ final class ProfileEditingViewController: UIViewController {
         return label
     }()
     
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .ypBlack
+        label.text = "Имя"
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +62,7 @@ final class ProfileEditingViewController: UIViewController {
         setupProfileImageView()
         setupProfileView()
         setupChangeProfileImageLabel()
+        setupNameLabel()
     }
     
     private func setupCloseButton() {
@@ -100,6 +110,16 @@ final class ProfileEditingViewController: UIViewController {
                 constant: -13
             ),
             changeProfileImageLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor)
+        ])
+    }
+    
+    private func setupNameLabel() {
+        view.addSubview(nameLabel)
+        
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 24),
+            nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            nameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
