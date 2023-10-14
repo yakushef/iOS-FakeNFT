@@ -16,11 +16,43 @@ final class ProfileEditingViewController: UIViewController {
         return button
     }()
     
+    private let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "UserPic")
+        imageView.frame.size = CGSize(width: 70, height: 70)
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let profileView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blackUniversal?.withAlphaComponent(0.6)
+        view.frame.size = CGSize(width: 70, height: 70)
+        view.layer.cornerRadius = view.frame.size.width / 2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let changeProfileImageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .whiteUniversal
+        label.text = "Сменить фото"
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
         setupCloseButton()
+        setupProfileImageView()
+        setupProfileView()
+        setupChangeProfileImageLabel()
     }
     
     private func setupCloseButton() {
@@ -30,6 +62,44 @@ final class ProfileEditingViewController: UIViewController {
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    private func setupProfileImageView() {
+        view.addSubview(profileImageView)
+        
+        NSLayoutConstraint.activate([
+            profileImageView.widthAnchor.constraint(equalToConstant: 70),
+            profileImageView.heightAnchor.constraint(equalToConstant: 70),
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            profileImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+        ])
+    }
+    
+    private func setupProfileView() {
+        profileImageView.addSubview(profileView)
+        
+        NSLayoutConstraint.activate([
+            profileView.widthAnchor.constraint(equalToConstant: 70),
+            profileView.heightAnchor.constraint(equalToConstant: 70),
+            profileView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+            profileView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor)
+        ])
+    }
+    
+    private func setupChangeProfileImageLabel() {
+        profileImageView.addSubview(changeProfileImageLabel)
+        
+        NSLayoutConstraint.activate([
+            changeProfileImageLabel.leadingAnchor.constraint(
+                equalTo: profileImageView.leadingAnchor,
+                constant: 12
+            ),
+            changeProfileImageLabel.trailingAnchor.constraint(
+                equalTo: profileImageView.trailingAnchor,
+                constant: -13
+            ),
+            changeProfileImageLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor)
         ])
     }
     
