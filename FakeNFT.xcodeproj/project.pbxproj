@@ -114,6 +114,7 @@
 		31994ACF2ADA9C4100B57E7B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		31994AD12ADAA85600B57E7B /* SortCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollections.swift; sourceTree = "<group>"; };
 		31994AD32ADAAB7700B57E7B /* CollectionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRequest.swift; sourceTree = "<group>"; };
+		31994AD52ADAE1DD00B57E7B /* kruchenkov_catalog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = kruchenkov_catalog.md; sourceTree = "<group>"; };
 		3F478ECE29DB474E00F6D39E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		3F478ED029DB476500F6D39E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		3F68069329CBBAF100B4F915 /* FakeNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,6 +251,7 @@
 				3F68069F29CBBAF200B4F915 /* Assets.xcassets */,
 				3F6806A129CBBAF200B4F915 /* LaunchScreen.storyboard */,
 				3F6806A429CBBAF200B4F915 /* Info.plist */,
+				31994AD52ADAE1DD00B57E7B /* kruchenkov_catalog.md */,
 			);
 			path = FakeNFT;
 			sourceTree = "<group>";
