@@ -9,6 +9,8 @@ import Foundation
 
 final class CatalogViewModel {
     
+    private (set) var collections: [Collection] = []
+    
     var reloadData: (() -> Void)?
     
 }
