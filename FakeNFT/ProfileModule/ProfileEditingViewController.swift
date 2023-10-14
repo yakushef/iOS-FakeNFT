@@ -66,11 +66,11 @@ final class ProfileEditingViewController: UIViewController {
         setupProfileImageView()
         setupProfileView()
         setupChangeProfileImageLabel()
-        setupLabel(with: nameLabel, under: profileImageView)
+        setupLabel(nameLabel, under: profileImageView)
         setupTextView(nameTextView, under: nameLabel)
-        setupLabel(with: bioLabel, under: nameTextView)
+        setupLabel(bioLabel, under: nameTextView)
         setupTextView(bioTextView, under: bioLabel)
-        setupLabel(with: siteLabel, under: bioTextView)
+        setupLabel(siteLabel, under: bioTextView)
         setupTextView(siteTextView, under: siteLabel)
     }
     
@@ -122,7 +122,7 @@ final class ProfileEditingViewController: UIViewController {
         ])
     }
     
-    private func setupLabel(with label: UILabel, under topView: UIView) {
+    private func setupLabel(_ label: UILabel, under topView: UIView) {
         view.addSubview(label)
         
         NSLayoutConstraint.activate([
