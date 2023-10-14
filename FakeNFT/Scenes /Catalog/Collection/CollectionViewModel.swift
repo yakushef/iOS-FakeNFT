@@ -98,7 +98,7 @@ final class CollectionViewModel: NSObject {
     
     var reloadData: (() -> Void)?
     
-    override init() {
+    init(collection: Collection) {
         self.collection = Collection(createdAt: "2023-04-20T02:22:27Z",
                                      name: "Beige",
                                      cover: "https://code.s3.yandex.net/Mobile/iOS/NFT/Обложки_коллекций/Beige.png",

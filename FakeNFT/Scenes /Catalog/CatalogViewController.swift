@@ -15,6 +15,15 @@ final class CatalogViewController: UIViewController {
         viewModel.collections
     }
     
+    private lazy var sortButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "sortButton"), for: .normal)
+        button.addTarget(self, action: #selector(sortButtonTapped), for: .touchUpInside)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -49,17 +58,23 @@ final class CatalogViewController: UIViewController {
         
         addSubviews()
         setupConstraints()
-        setupNavBar()
+//        setupNavBar()
+        
+        viewModel.loadingStarted = self.loadIndicatorStartAnimating
+        viewModel.loadingFinished = self.loadIndicatorStopAnimating
+        viewModel.updateData()
     }
     
     private func addSubviews() {
-        [tableView, loadIndicator].forEach {
+        [sortButton, tableView, loadIndicator].forEach {
             view.addSubview($0)
         }
     }
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            sortButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -18),
+            sortButton.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.07019),
+            tableView.topAnchor.constraint(equalTo: sortButton.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -69,22 +84,13 @@ final class CatalogViewController: UIViewController {
         ])
     }
     
-    private func setupNavBar() {
-        let sortButtonImage = UIImage(named: "sortButton")
-        let sortButton = UIBarButtonItem(image: sortButtonImage, style: .plain, target: self, action: #selector(sortButtonTapped))
-        sortButton.target = self
-        sortButton.action = #selector(sortButtonTapped)
-        sortButton.tintColor = .black
-        navigationItem.rightBarButtonItem = sortButton
-    }
-    
     @objc private func sortButtonTapped() {
         let allert = UIAlertController(title: "Cортировка", message: nil, preferredStyle: .actionSheet)
-        let sortByName = UIAlertAction(title: "По названию", style: .default) { _ in
-            //ToDo
+        let sortByName = UIAlertAction(title: "По названию", style: .default) { [weak self] _ in
+            self?.viewModel.sortByName()
         }
-        let sortByCount = UIAlertAction(title: "По количеству NFT", style: .default) { _ in
-            //ToDo
+        let sortByCount = UIAlertAction(title: "По количеству NFT", style: .default) { [weak self] _ in
+            self?.viewModel.sortByNFTsCount()
         }
         let cancel = UIAlertAction(title: "Закрыть", style: .cancel, handler: nil)
         
@@ -112,7 +118,13 @@ extension CatalogViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CatalogTableView.reuseIdentifier, for: indexPath) as? CatalogTableView else { return UITableViewCell()}
-
+        let collection = collections[indexPath.row]
+        if let imageURLString = collection.cover,
+           let imageURL = URL(string: imageURLString.encodeURL) {
+            cell.itemImageView.kf.setImage(with: imageURL)
+        }
+        cell.nameLabel.text = collection.name + "(\(collection.nfts.count))"
+        cell.selectionStyle = .none
         return cell
     }
 }

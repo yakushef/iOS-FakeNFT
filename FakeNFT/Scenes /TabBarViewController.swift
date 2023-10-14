@@ -15,9 +15,6 @@ class TabBarViewController: UITabBarController {
         tabBar.tintColor = .blue
         tabBar.barTintColor = .white
         tabBar.backgroundColor = .white
-        
-        tabBar.layer.borderColor = UIColor.gray.cgColor
-        tabBar.layer.borderWidth = 1
         tabBar.layer.masksToBounds = true
         
         let profileViewController = ProfileViewController()
