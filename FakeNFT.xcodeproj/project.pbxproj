@@ -53,6 +53,7 @@
 		CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */; };
 		CB6F168C2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */; };
 		CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */; };
+		CBFDA1902ADAEB8C00D2B6F9 /* UILablel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewController.swift; sourceTree = "<group>"; };
 		CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILablel+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */,
+				CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			files = (
 				3FC8C38B29D242E90081F015 /* ProductDetailsTableViewCell.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
+				CBFDA1902ADAEB8C00D2B6F9 /* UILablel+Extensions.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,
 				31994AAA2AD545D400B57E7B /* OrderPaymentStatus.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,

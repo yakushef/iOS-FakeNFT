@@ -45,14 +45,7 @@ final class ProfileEditingViewController: UIViewController {
         return label
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .ypBlack
-        label.text = "Имя"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let nameLabel = UILabel(text: "Имя")
     
     private let nameTextView: UITextView = {
         let textView = UITextView()
@@ -66,14 +59,7 @@ final class ProfileEditingViewController: UIViewController {
         return textView
     }()
     
-    private let bioLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .ypBlack
-        label.text = "Описание"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let bioLabel = UILabel(text: "Описание")
     
     private let bioTextView: UITextView = {
         let textView = UITextView()
@@ -87,14 +73,7 @@ final class ProfileEditingViewController: UIViewController {
         return textView
     }()
     
-    private let siteLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .ypBlack
-        label.text = "Сайт"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let siteLabel = UILabel(text: "Сайт")
     
     private let siteTextView: UITextView = {
         let textView = UITextView()
@@ -112,15 +91,16 @@ final class ProfileEditingViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
+        
         setupCloseButton()
         setupProfileImageView()
         setupProfileView()
         setupChangeProfileImageLabel()
-        setupNameLabel()
+        setupLabel(with: nameLabel, under: profileImageView)
         setupNameTextView()
-        setupBioLabel()
+        setupLabel(with: bioLabel, under: nameTextView)
         setupBioTextView()
-        setupSiteLabel()
+        setupLabel(with: siteLabel, under: bioTextView)
         setupSiteTextView()
     }
     
@@ -172,13 +152,13 @@ final class ProfileEditingViewController: UIViewController {
         ])
     }
     
-    private func setupNameLabel() {
-        view.addSubview(nameLabel)
+    private func setupLabel(with label: UILabel, under topView: UIView) {
+        view.addSubview(label)
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 24),
-            nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            label.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 24),
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
@@ -195,16 +175,6 @@ final class ProfileEditingViewController: UIViewController {
         ])
     }
     
-    private func setupBioLabel() {
-        view.addSubview(bioLabel)
-        
-        NSLayoutConstraint.activate([
-            bioLabel.topAnchor.constraint(equalTo: nameTextView.bottomAnchor, constant: 24),
-            bioLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            bioLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        ])
-    }
-    
     private func setupBioTextView() {
         view.addSubview(bioTextView)
         
@@ -215,16 +185,6 @@ final class ProfileEditingViewController: UIViewController {
                 equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                 constant: -16
             )
-        ])
-    }
-    
-    private func setupSiteLabel() {
-        view.addSubview(siteLabel)
-        
-        NSLayoutConstraint.activate([
-            siteLabel.topAnchor.constraint(equalTo: bioTextView.bottomAnchor, constant: 24),
-            siteLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            siteLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
