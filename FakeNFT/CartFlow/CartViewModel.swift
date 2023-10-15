@@ -8,19 +8,11 @@
 import Foundation
 
 final class CartViewModel {
-    var vc: CartViewController
     private var orderService: OrderAndPaymentServiceProtocol
     private var currency: Currency?
-    private(set) var currentOrder: [ItemNFT] = [] {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.vc.orderUpdated()
-            }
-        }
-    }
+    @Observable private(set) var currentOrder: [ItemNFT] = []
     
-    init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared, vc: CartViewController) {
-        self.vc = vc
+    init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared) {
         self.orderService = orderService
         self.orderService.cartVM = self
     }
@@ -31,10 +23,6 @@ final class CartViewModel {
     
     func getOrder() {
         orderService.getOrder()
-    }
-    
-    func startLoading() {
-        vc.showProgressView()
     }
 }
 

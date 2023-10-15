@@ -72,7 +72,6 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
     }
     
     func getOrder() {
-        cartVM?.startLoading()
         let urlString = Config.baseUrl + orderPathString
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: Order.self, onResponse: { [weak self] result in

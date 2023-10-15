@@ -39,6 +39,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     }()
     
     private let ratingView = RatingView()
+    
     private let titleLabel: UILabel = {
        let title = UILabel()
         title.textColor = .ypBlack

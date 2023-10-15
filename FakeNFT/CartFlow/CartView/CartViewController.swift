@@ -16,7 +16,7 @@ enum CartSortOrder {
 
 final class CartViewController: UIViewController {
     
-    var viewModel: CartViewModel?
+    var viewModel: CartViewModel? = CartViewModel()
     var router = CartFlowRouter.shared
     private var orderItems: [ItemNFT] = []
     
@@ -24,6 +24,22 @@ final class CartViewController: UIViewController {
         didSet {
             applySorting()
         }
+    }
+    
+    init(viewModel: CartViewModel? = CartViewModel(),
+         router: CartFlowRouter = CartFlowRouter.shared,
+         orderItems: [ItemNFT] = [],
+         sortingStyle: CartSortOrder = .title) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel = viewModel
+        self.router = router
+        self.orderItems = orderItems
+        self.sortingStyle = sortingStyle
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     //MARK: - UI elements
@@ -55,6 +71,7 @@ final class CartViewController: UIViewController {
        let label = UILabel()
         label.textColor = .ypBlack
         label.font = .bold17
+        label.text = "Корзина пуста"
         return label
     }()
 
@@ -62,16 +79,20 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = CartViewModel(vc: self)
+        viewModel?.$currentOrder.makeBinding { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.orderUpdated()
+            }
+        }
         CartFlowRouter.shared.cartVC = self
-        checkIfEmpty()
         setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        checkIfEmpty()
         viewModel?.getOrder()
+        showProgressView()
     }
     
     //MARK: - UI setup
@@ -128,7 +149,7 @@ final class CartViewController: UIViewController {
         paymentView.setQuantity(orderItems.count)
         paymentView.setTotalprice(orderItems.reduce(0) {$0 + $1.price})
         checkIfEmpty()
-        ProgressHUD.dismiss()
+        hideProgressView()
     }
     
     private func checkIfEmpty() {
@@ -137,15 +158,21 @@ final class CartViewController: UIViewController {
         emptyCartLabel.isHidden = !orderItems.isEmpty
     }
     
-    func showProgressView() {
+    private func hideProgressView() {
+        ProgressHUD.dismiss()
+        view.isUserInteractionEnabled = true
+    }
+    
+    private func showProgressView() {
         ProgressHUD.show()
+        view.isUserInteractionEnabled = false
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {
         sortingStyle = newSortingStyle
     }
     
-    func applySorting() {
+    private func applySorting() {
         switch sortingStyle {
         case .price:
             orderItems.sort { item1, item2 in
@@ -160,7 +187,6 @@ final class CartViewController: UIViewController {
                 item1.name > item2.name
             }
         }
-        
         cartTable.reloadData()
     }
 }

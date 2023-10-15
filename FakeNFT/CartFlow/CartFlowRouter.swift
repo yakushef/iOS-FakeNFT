@@ -9,8 +9,8 @@ import UIKit
 
 final class CartFlowRouter {
     static var shared = CartFlowRouter()
-    var cartVC: CartViewController?
-    var checkoutVC: CheckoutViewController?
+    weak var cartVC: CartViewController?
+    weak var checkoutVC: CheckoutViewController?
     
     private init() {
         
@@ -65,9 +65,8 @@ final class CartFlowRouter {
     }
     
     func showPaymentScreen() {
-        checkoutVC = CheckoutViewController()
-        if let paymentVC = checkoutVC {
-            cartVC?.show(paymentVC, sender: nil)
-        }
+        let checkout = CheckoutViewController()
+        checkoutVC = checkout
+        cartVC?.show(checkout, sender: nil)
     }
 }
