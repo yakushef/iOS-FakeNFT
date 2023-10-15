@@ -8,7 +8,14 @@
 import UIKit
 import Kingfisher
 
+protocol CartItemCellDelegate {
+    func removeItem(id: String)
+}
+
 final class CartItemCell: UITableViewCell, ReuseIdentifying {
+    private var nft: ItemNFT? = nil
+    var delegate: CartItemCellDelegate?
+    
     private let insets = UIEdgeInsets(top: 16,
                               left: 16,
                               bottom: 16,
@@ -24,7 +31,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     }()
     
     private let nftPreview: UIImageView = {
-        let nftView = UIImageView(image: UIImage(named: "NFT_Placeholder"))
+        let nftView = UIImageView()
         nftView.contentMode = .scaleAspectFill
         nftView.clipsToBounds = true
         nftView.layer.cornerRadius = 16
@@ -115,6 +122,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     //MARK: - Configure content
     
     func configureCellFor(nft: ItemNFT) {
+        self.nft = nft
         setPrice(nft.price)
         setName(nft.name)
         setRating(UInt(nft.rating))
@@ -135,13 +143,23 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     
     private func setPreviewImage(_ imageURLString: String?) {
         if let imageURLString {
-            nftPreview.kf.setImage(with: URL(string: imageURLString)!, placeholder: UIImage(named: "NFT_Placeholder"))
+            nftPreview.kf.setImage(with: URL(string: imageURLString)!,
+                                   placeholder: UIImage(named: "NFT_Placeholder"),
+                                   options: [.transition (.fade (0.3))])
         }
     }
     
     //MARK: - Navigation
     
     @objc private func removeButtonTapped() {
-        print("remove test")
+        delegate?.removeItem(id: nft?.id ?? "")
+        isUserInteractionEnabled = false
+        UIView.animate(withDuration: 0.25, delay: 0, animations: {
+            self.alpha = 0.2
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.55, delay: 0, options: [.autoreverse, .repeat], animations: {
+                self.alpha = 0.5
+            })
+        })
     }
 }

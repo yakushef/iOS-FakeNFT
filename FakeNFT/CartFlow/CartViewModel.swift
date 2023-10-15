@@ -11,18 +11,35 @@ final class CartViewModel {
     var vc: CartViewController
     private var orderService: OrderAndPaymentServiceProtocol
     private var currency: Currency?
-    private(set) var currentOrder: [ItemNFT] = []
+    private(set) var currentOrder: [ItemNFT] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.vc.orderUpdated()
+            }
+        }
+    }
     
     init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared, vc: CartViewController) {
         self.vc = vc
         self.orderService = orderService
+        self.orderService.cartVM = self
+    }
+    
+    func setOrder(_ newOrder: [ItemNFT]) {
+        currentOrder = newOrder
+    }
+    
+    func getOrder() {
         orderService.getOrder()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now()+5, execute: {
-            self.currentOrder = orderService.currentOrder
-            vc.orderUpdated()
-        })
-        
-        
+    }
+    
+    func startLoading() {
+        vc.showProgressView()
+    }
+}
+
+extension CartViewModel: CartItemCellDelegate {
+    func removeItem(id: String) {
+        orderService.removeItemFromOrder(id: id)
     }
 }

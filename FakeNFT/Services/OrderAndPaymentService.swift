@@ -8,25 +8,44 @@
 import Foundation
 
 protocol OrderAndPaymentServiceProtocol {
-    var currentOrder: [ItemNFT] {get}
+    var cartVM: CartViewModel? {get set}
+    var currentOrderItems: [ItemNFT] {get}
     
-    func getOrder() -> [ItemNFT]
+    func getOrder()
     func getCurrency(byID id: String) -> Currency?
     func getAllCurrencies() -> [Currency]
     func payWith(currecyID: String)
     func addItemToOrder(_ newItem: ItemNFT)
-    func removeItemFromOrder(_ itemToRemove: ItemNFT)
+    func removeItemFromOrder(id: String)
 }
 
 struct cartRequest: NetworkRequest {
     var endpoint: URL?
 }
 
+struct cartChangeRequest: NetworkRequest {
+    var endpoint: URL?
+    var httpMethod: HttpMethod = .put
+    var dto: [String]
+}
+
 final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
+    var cartVM: CartViewModel?
 
     static var shared = OrderAndPaymentService()
-    private(set) var currentOrder: [ItemNFT] = []
+    private(set) var currentOrderItems: [ItemNFT] = [] {
+        didSet {
+            if currentOrder?.nfts.count == currentOrderItems.count {
+                cartVM?.setOrder(currentOrderItems)
+            }
+        }
+    }
     private var networkClient: NetworkClient
+    private var currentOrder: Order? = nil {
+        didSet {
+            getOrderItems()
+        }
+    }
     
     //MARK: - URL paths
     
@@ -39,26 +58,21 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
         self.networkClient = networkClient
     }
     
-    private func getNFTbyID(_ id: String) -> ItemNFT? {
-        var newItem: ItemNFT? = nil
+    private func getNFTbyID(_ id: String) {
         let urlString = Config.baseUrl + getNFTByIDString + id
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: ItemNFT.self, onResponse: { [weak self] result in
             switch result {
             case .success(let item):
-                print(item)
-                self?.currentOrder.append(item)
+                self?.currentOrderItems.append(item)
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
         })
-
-        return newItem
     }
     
-    func getOrder() -> [ItemNFT] {
-        var itemsList = [ItemNFT]()
-        var nftIDList: [String] = []
+    func getOrder() {
+        cartVM?.startLoading()
         let urlString = Config.baseUrl + orderPathString
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: Order.self, onResponse: { [weak self] result in
@@ -67,22 +81,37 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
             }
             switch result {
             case .success(let order):
-                order.nfts.forEach({ nft in
-                    if let NFTItem = self.getNFTbyID(nft) {
-                        print(NFTItem)
-                        itemsList.append(NFTItem)
-                    }
-                })
+                self.currentOrder = order
+            case .failure(let error):
+                self.currentOrder = nil
+                self.currentOrderItems = []
+                assertionFailure(error.localizedDescription)
+            }
+        })
+    }
+    
+    private func getOrderItems() {
+        currentOrderItems = []
+        
+        if let nfts = currentOrder?.nfts {
+            for nft in nfts {
+                getNFTbyID(nft)
+            }
+        }
+    }
+    
+    private func replaceOrder(with newOrder: Order) {
+        let url = Config.baseUrl + orderPathString
+        let request = cartChangeRequest(endpoint: URL(string: url)!,
+                                        dto: newOrder.nfts)
+        networkClient.send(request: request, onResponse: { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.getOrder()
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
         })
-    
-        return itemsList
-    }
-    
-    private func replaceOrder(with newOrder: [ItemNFT]) {
-        
     }
     
     //MARK: - Cart protocol methods
@@ -103,7 +132,10 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
         
     }
     
-    func removeItemFromOrder(_ itemToRemove: ItemNFT) {
-        
+    func removeItemFromOrder(id: String) {
+        let newNFTs = currentOrder?.nfts.filter { $0 != id } ?? []
+        let newOrder = Order(nfts: newNFTs,
+                             id: currentOrder?.id ?? "1")
+        replaceOrder(with: newOrder)
     }
 }

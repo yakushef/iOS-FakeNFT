@@ -15,15 +15,15 @@ final class CheckoutView: UIView {
         }
     }
     
-    private var price: Double = 0 {
+    private var price: String = "?" {
         didSet {
-            totalPriceLabel.text = "\(price) ETH"
+            totalPriceLabel.text = price + " ETH"
         }
     }
     
     private let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     
-    private lazy var payButton: UIButton = {
+    lazy var payButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("К оплате", for: .normal)
         button.tintColor = .ypWhite
@@ -100,6 +100,7 @@ final class CheckoutView: UIView {
     }
     
     func setTotalprice(_ newPrice: Double) {
-        price = newPrice
+        let priceString = String (format: "%.2f", newPrice)
+        price = priceString
     }
 }

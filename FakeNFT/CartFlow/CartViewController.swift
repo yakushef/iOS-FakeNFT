@@ -6,11 +6,34 @@
 //
 
 import UIKit
+import ProgressHUD
+
+enum CartSortOrder {
+    case price,
+    rating,
+    title
+}
 
 final class CartViewController: UIViewController {
     
     var viewModel: CartViewModel?
+    var router = CartFlowRouter.shared
     private var orderItems: [ItemNFT] = []
+    
+    private var sortingStyle: CartSortOrder = .title {
+        didSet {
+            applySorting()
+        }
+    }
+    
+    //MARK: - UI elements
+    
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
     
     private lazy var cartTable: UITableView = {
         let table = UITableView()
@@ -28,17 +51,40 @@ final class CartViewController: UIViewController {
         return view
     }()
 
+    private lazy var emptyCartLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = .ypBlack
+        label.font = .bold17
+        return label
+    }()
+
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = CartViewModel(vc: self)
-        
+        CartFlowRouter.shared.cartVC = self
+        checkIfEmpty()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel?.getOrder()
     }
     
     //MARK: - UI setup
     private func setupUI() {
+        ProgressHUD.animationType = .systemActivityIndicator
+        
+        //MARK: - Empty label
+        view.addSubview(emptyCartLabel)
+        emptyCartLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         
         //MARK: Sort button
         let sortButton = UIBarButtonItem(image: UIImage(named: "Sort"), style: .plain, target: self, action: #selector(sortButtonTapped))
@@ -54,6 +100,7 @@ final class CartViewController: UIViewController {
             paymentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             paymentView.heightAnchor.constraint(equalToConstant: 76)
         ])
+        paymentView.payButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
     
         //MARK: Cart item table
         view.addSubview(cartTable)
@@ -68,14 +115,54 @@ final class CartViewController: UIViewController {
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
-        
+        router.showSortSheet()
+    }
+    
+    @objc private func payButtonTapped() {
+        router.showPaymentScreen()
     }
     
     func orderUpdated() {
         orderItems = viewModel?.currentOrder ?? []
-            print(viewModel?.currentOrder)
-            cartTable.reloadData()
+        applySorting()
+        paymentView.setQuantity(orderItems.count)
+        paymentView.setTotalprice(orderItems.reduce(0) {$0 + $1.price})
+        checkIfEmpty()
+        ProgressHUD.dismiss()
+    }
+    
+    private func checkIfEmpty() {
+        paymentView.isHidden = orderItems.isEmpty
+        cartTable.isHidden = orderItems.isEmpty
+        emptyCartLabel.isHidden = !orderItems.isEmpty
+    }
+    
+    func showProgressView() {
+        ProgressHUD.show()
+    }
+    
+    func setSorting(to newSortingStyle: CartSortOrder) {
+        sortingStyle = newSortingStyle
+    }
+    
+    func applySorting() {
+        switch sortingStyle {
+        case .price:
+            orderItems.sort { item1, item2 in
+                item1.price > item2.price
+            }
+        case .rating:
+            orderItems.sort { item1, item2 in
+                item1.rating > item2.rating
+            }
+        case .title:
+            orderItems.sort { item1, item2 in
+                item1.name > item2.name
+            }
         }
+        
+        cartTable.reloadData()
+    }
 }
 
 //MARK: - TableViewDelegate
@@ -94,6 +181,7 @@ extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartItemCell = tableView.dequeueReusableCell()
         cell.setupCellUI()
+        cell.delegate = viewModel
         cell.configureCellFor(nft: orderItems[indexPath.row])
         return cell
     }
