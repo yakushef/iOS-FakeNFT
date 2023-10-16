@@ -86,13 +86,17 @@ final class CartViewController: UIViewController {
         }
         CartFlowRouter.shared.cartVC = self
         setupUI()
+        
+        checkIfEmpty()
+        viewModel?.getOrder()
+        showProgressView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIfEmpty()
-        viewModel?.getOrder()
-        showProgressView()
+//        checkIfEmpty()
+//        viewModel?.getOrder()
+//        showProgressView()
     }
     
     //MARK: - UI setup
@@ -142,6 +146,8 @@ final class CartViewController: UIViewController {
     @objc private func payButtonTapped() {
         router.showPaymentScreen()
     }
+    
+    //MARK: - Order updated
     
     func orderUpdated() {
         orderItems = viewModel?.currentOrder ?? []

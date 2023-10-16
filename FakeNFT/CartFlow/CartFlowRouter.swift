@@ -69,4 +69,16 @@ final class CartFlowRouter {
         checkoutVC = checkout
         cartVC?.show(checkout, sender: nil)
     }
+    
+    func showDeleteConfirmationForNFT(_ nft: ItemNFT?, removalAction: @escaping () -> Void) {
+        let vc = DeleteConfirmationViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.removalAction = removalAction
+        vc.nftImageURL = nft?.images.first
+        CartFlowRouter.shared.cartVC?.present(vc, animated: true)
+    }
+    
+    func dismiss() {
+        cartVC?.dismiss(animated: true)
+    }
 }

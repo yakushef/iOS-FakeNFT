@@ -24,6 +24,11 @@ final class CartViewModel {
     func getOrder() {
         orderService.getOrder()
     }
+    
+    func orderUpdated() {
+        CartFlowRouter.shared.dismiss()
+        getOrder()
+    }
 }
 
 extension CartViewModel: CartItemCellDelegate {

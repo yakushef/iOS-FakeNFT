@@ -153,14 +153,25 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     //MARK: - Navigation
     
     @objc private func removeButtonTapped() {
+        CartFlowRouter.shared.showDeleteConfirmationForNFT(nft,
+                                                           removalAction: removeItem)
+    }
+}
+
+//MARK: - Remove item
+
+extension CartItemCell {
+    func removeItem() {
         delegate?.removeItem(id: nft?.id ?? "")
-        isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.25, delay: 0, animations: {
-            self.alpha = 0.2
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.55, delay: 0, options: [.autoreverse, .repeat], animations: {
-                self.alpha = 0.5
+        DispatchQueue.main.async {
+            self.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.25, delay: 0, animations: {
+                self.alpha = 0.2
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.55, delay: 0, options: [.autoreverse, .repeat], animations: {
+                    self.alpha = 0.5
+                })
             })
-        })
+        }
     }
 }

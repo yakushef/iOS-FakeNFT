@@ -105,8 +105,8 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
                                         dto: newOrder.nfts)
         networkClient.send(request: request, onResponse: { [weak self] result in
             switch result {
-            case .success(let data):
-                self?.getOrder()
+            case .success(_):
+                self?.cartVM?.orderUpdated()
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
