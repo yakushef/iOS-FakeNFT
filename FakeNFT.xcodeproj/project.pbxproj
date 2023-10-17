@@ -43,6 +43,9 @@
 		FAE0C0962AD6F3BC000AD7B3 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0C0952AD6F3BC000AD7B3 /* StatisticsViewModel.swift */; };
 		FAE0C0982AD6F3EA000AD7B3 /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0C0972AD6F3EA000AD7B3 /* StatisticsModel.swift */; };
 		FAE0C09C2AD6FFAF000AD7B3 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0C09B2AD6FFAF000AD7B3 /* MainTabBarViewController.swift */; };
+		FAF290B72ADD90C300DA3258 /* UserCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF290B62ADD90C300DA3258 /* UserCardViewController.swift */; };
+		FAF290B92ADD974E00DA3258 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF290B82ADD974E00DA3258 /* UserCardViewModel.swift */; };
+		FAF290BB2ADD978F00DA3258 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF290BA2ADD978F00DA3258 /* UserCardModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,9 @@
 		FAE0C0952AD6F3BC000AD7B3 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		FAE0C0972AD6F3EA000AD7B3 /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
 		FAE0C09B2AD6FFAF000AD7B3 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		FAF290B62ADD90C300DA3258 /* UserCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewController.swift; sourceTree = "<group>"; };
+		FAF290B82ADD974E00DA3258 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
+		FAF290BA2ADD978F00DA3258 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +283,9 @@
 				FA6CC9DC2AD5AC3400DC5406 /* Statistics.md */,
 				FAE0C0932AD6F378000AD7B3 /* StatisticsViewController.swift */,
 				FAE0C0952AD6F3BC000AD7B3 /* StatisticsViewModel.swift */,
+				FAF290B62ADD90C300DA3258 /* UserCardViewController.swift */,
+				FAF290B82ADD974E00DA3258 /* UserCardViewModel.swift */,
+				FAF290BA2ADD978F00DA3258 /* UserCardModel.swift */,
 				FAE0C0972AD6F3EA000AD7B3 /* StatisticsModel.swift */,
 				FA6CC9D52AD5A74900DC5406 /* StatisticsViewCell */,
 			);
@@ -469,11 +478,14 @@
 				31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */,
 				FAE0C0982AD6F3EA000AD7B3 /* StatisticsModel.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				FAF290B92ADD974E00DA3258 /* UserCardViewModel.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
+				FAF290BB2ADD978F00DA3258 /* UserCardModel.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				FA6CC9D72AD5A7C000DC5406 /* UserViewCell.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
+				FAF290B72ADD90C300DA3258 /* UserCardViewController.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,

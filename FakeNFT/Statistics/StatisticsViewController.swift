@@ -120,6 +120,12 @@ extension StatisticsViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
+            let user = viewModel.users[indexPath.row]
+            
+            let viewController = UserCardViewController(userId: user.id)
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(viewController, animated: true)
         }
 }
 
