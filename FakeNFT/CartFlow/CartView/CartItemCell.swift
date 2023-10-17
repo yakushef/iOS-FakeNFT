@@ -43,21 +43,21 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     private let titleLabel: UILabel = {
        let title = UILabel()
         title.textColor = .ypBlack
-        title.font = .bold17
+        title.font = .Bold.small
         title.text = "Title"
         return title
     }()
     private let priceHeaderLabel: UILabel = {
         let title = UILabel()
          title.textColor = .ypBlack
-         title.font = .regular13
+        title.font = .Regular.small
          title.text = "Цена"
          return title
     }()
     private let priceLabel: UILabel = {
        let title = UILabel()
         title.textColor = .ypBlack
-        title.font = .bold17
+        title.font = .Bold.small
         title.text = "1,23 ETH"
         return title
     }()

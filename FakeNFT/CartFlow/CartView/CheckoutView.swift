@@ -27,7 +27,7 @@ final class CheckoutView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("К оплате", for: .normal)
         button.tintColor = .ypWhite
-        button.titleLabel?.font = .bold17
+        button.titleLabel?.font = .Bold.small
         button.backgroundColor = .ypBlack
         button.clipsToBounds = true
         button.layer.cornerRadius = 16
@@ -38,7 +38,7 @@ final class CheckoutView: UIView {
     private lazy var quantityLabel: UILabel = {
         let quantityLabel = UILabel()
         quantityLabel.text = "\(quantity) NFT"
-        quantityLabel.font = .regular15
+        quantityLabel.font = .Regular.medium
         quantityLabel.textColor = .ypBlack
         return quantityLabel
     }()
@@ -46,7 +46,7 @@ final class CheckoutView: UIView {
     private lazy var totalPriceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.text = "\(price) ETH"
-        priceLabel.font = .bold17
+        priceLabel.font = .Bold.small
         priceLabel.textColor = .greenUniversal
         return priceLabel
     }()

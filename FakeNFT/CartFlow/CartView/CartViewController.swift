@@ -70,7 +70,7 @@ final class CartViewController: UIViewController {
     private lazy var emptyCartLabel: UILabel = {
        let label = UILabel()
         label.textColor = .ypBlack
-        label.font = .bold17
+        label.font = .Bold.small
         label.text = "Корзина пуста"
         return label
     }()

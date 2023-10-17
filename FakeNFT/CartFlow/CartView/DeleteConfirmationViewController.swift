@@ -33,7 +33,7 @@ final class DeleteConfirmationViewController: UIViewController {
     
     private lazy var alertText: UILabel = {
         let alertText = UILabel()
-        alertText.font = .regular13
+        alertText.font = .Regular.small
         alertText.numberOfLines = 2
         alertText.text = "Вы уверены, что хотите\nудалить объект из корзины?"
         alertText.textAlignment = .center
@@ -56,7 +56,7 @@ final class DeleteConfirmationViewController: UIViewController {
         cancelButton.addTarget(self,
                                action: #selector(cancelButtonTapped),
                                for: .touchUpInside)
-        cancelButton.titleLabel?.font = .regular17
+        cancelButton.titleLabel?.font = .Regular.large
         cancelButton.setTitleColor(.ypWhite, for: .normal)
         cancelButton.setTitle("Вернуться", for: .normal)
         cancelButton.backgroundColor = .ypBlack
@@ -70,7 +70,7 @@ final class DeleteConfirmationViewController: UIViewController {
         cancelButton.addTarget(self,
                                action: #selector(removeButtonTapped),
                                for: .touchUpInside)
-        cancelButton.titleLabel?.font = .regular17
+        cancelButton.titleLabel?.font = .Regular.large
         cancelButton.setTitleColor(.redUniversal, for: .normal)
         cancelButton.setTitle("Удалить", for: .normal)
         cancelButton.backgroundColor = .ypBlack

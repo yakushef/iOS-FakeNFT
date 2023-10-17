@@ -15,7 +15,7 @@ class MakePaymentView: UIView {
     private lazy var payButton: UIButton = {
         let payButton = UIButton(type: .system)
         payButton.setTitle("Оплатить", for: .normal)
-        payButton.titleLabel?.font = .bold17
+        payButton.titleLabel?.font = .Bold.small
         payButton.backgroundColor = .ypBlack
         payButton.tintColor = .ypWhite
         payButton.clipsToBounds = true
@@ -27,7 +27,7 @@ class MakePaymentView: UIView {
         let agreementButton = UIButton(type: .system)
         agreementButton.tintColor = .blueUniversal
         agreementButton.setTitle("Пользовательского соглашения", for: .normal)
-        agreementButton.titleLabel?.font = .regular13
+        agreementButton.titleLabel?.font = .Regular.small
         agreementButton.backgroundColor = .clear
         agreementButton.contentHorizontalAlignment = .left
         return agreementButton
@@ -37,7 +37,7 @@ class MakePaymentView: UIView {
         let disclaimerLabel = UILabel()
         disclaimerLabel.text = "Совершая покупку, вы соглашаетесь с условиями"
         disclaimerLabel.textColor = .ypBlack
-        disclaimerLabel.font = .regular13
+        disclaimerLabel.font = .Regular.small
         disclaimerLabel.backgroundColor = .clear
         disclaimerLabel.textAlignment = .left
         return disclaimerLabel

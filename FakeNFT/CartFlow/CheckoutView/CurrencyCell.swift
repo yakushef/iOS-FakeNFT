@@ -46,14 +46,14 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var fullTitleLabel: UILabel = {
         let title = UILabel()
         title.textColor = .ypBlack
-        title.font = .regular13
+        title.font = .Regular.small
         return title
     }()
     
     private lazy var shortTitleLabel: UILabel = {
         let title = UILabel()
         title.textColor = .greenUniversal
-        title.font = .regular13
+        title.font = .Regular.small
         return title
     }()
     
@@ -64,7 +64,7 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
     
     private func setupUI() {
         backgroundView = UIView(frame: frame)
-        backgroundView?.layer.borderColor = UIColor.ypBlack?.cgColor
+        backgroundView?.layer.borderColor = UIColor.ypBlack.cgColor
         backgroundView?.backgroundColor = .ypLightGrey
         backgroundView?.clipsToBounds = true
         backgroundView?.layer.cornerRadius = 12
