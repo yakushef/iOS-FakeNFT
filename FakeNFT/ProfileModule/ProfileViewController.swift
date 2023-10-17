@@ -10,14 +10,12 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.backgroundColor = .white
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -29,7 +27,6 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "Joaquin Phoenix"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-//        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
