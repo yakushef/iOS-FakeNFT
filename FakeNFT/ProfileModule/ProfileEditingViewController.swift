@@ -27,7 +27,7 @@ final class ProfileEditingViewController: UIViewController {
     
     private let profileView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blackUniversal?.withAlphaComponent(0.6)
+        view.backgroundColor = .blackUniversal.withAlphaComponent(0.6)
         view.frame.size = CGSize(width: 70, height: 70)
         view.layer.cornerRadius = view.frame.size.width / 2
         view.translatesAutoresizingMaskIntoConstraints = false
