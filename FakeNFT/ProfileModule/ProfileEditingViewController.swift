@@ -12,7 +12,6 @@ final class ProfileEditingViewController: UIViewController {
        let button = UIButton()
         button.frame.size = CGSize(width: 42, height: 42)
         button.setImage(UIImage(named: "Close"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -21,7 +20,6 @@ final class ProfileEditingViewController: UIViewController {
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -30,7 +28,6 @@ final class ProfileEditingViewController: UIViewController {
         view.backgroundColor = .blackUniversal.withAlphaComponent(0.6)
         view.frame.size = CGSize(width: 70, height: 70)
         view.layer.cornerRadius = view.frame.size.width / 2
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -41,7 +38,6 @@ final class ProfileEditingViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 10)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -62,6 +58,7 @@ final class ProfileEditingViewController: UIViewController {
         
         view.backgroundColor = .ypWhite
         
+        setupView()
         setupCloseButton()
         setupProfileImageView()
         setupProfileView()
@@ -72,6 +69,12 @@ final class ProfileEditingViewController: UIViewController {
         setupTextView(bioTextView, under: bioLabel)
         setupLabel(siteLabel, under: bioTextView)
         setupTextView(siteTextView, under: siteLabel)
+    }
+    
+    private func setupView() {
+        [closeButton, profileImageView, profileView, changeProfileImageLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setupCloseButton() {
