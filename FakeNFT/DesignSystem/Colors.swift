@@ -21,17 +21,17 @@ extension UIColor {
     }
 
     // Primary Colors
-    static let ypBlack = UIColor(named: "Black")
-    static let ypLightGrey = UIColor(named: "Light grey")
-    static let ypWhite = UIColor(named: "White")
+    static let ypBlack = UIColor(named: "Black") ?? .black
+    static let ypLightGrey = UIColor(named: "Light grey") ?? .lightGray
+    static let ypWhite = UIColor(named: "White") ?? .white
 
     // Universal Colors
-    static let backgroundUniversal = UIColor(named: "Background Universal")
-    static let blackUniversal = UIColor(named: "Black Universal")
-    static let blueUniversal = UIColor(named: "Blue Universal")
-    static let grayUniversal = UIColor(named: "Gray Universal")
-    static let greenUniversal = UIColor(named: "Green Universal")
-    static let redUniversal = UIColor(named: "Red Universal")
-    static let whiteUniversal = UIColor(named: "White Universal")
-    static let yellowUniversal = UIColor(named: "Yellow Universal")
+    static let backgroundUniversal = UIColor(named: "Background Universal") ?? .gray
+    static let blackUniversal = UIColor(named: "Black Universal") ?? .black
+    static let blueUniversal = UIColor(named: "Blue Universal") ?? .blue
+    static let grayUniversal = UIColor(named: "Gray Universal") ?? .darkGray
+    static let greenUniversal = UIColor(named: "Green Universal") ?? .green
+    static let redUniversal = UIColor(named: "Red Universal") ?? .red
+    static let whiteUniversal = UIColor(named: "White Universal") ?? .white
+    static let yellowUniversal = UIColor(named: "Yellow Universal") ?? .yellow
 }
