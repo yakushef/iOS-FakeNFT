@@ -51,6 +51,7 @@
 		BC2C84D22ADDA32B006C4E91 /* DeleteConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */; };
 		BC2C84D42ADEF2E3006C4E91 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */; };
 		BC2C84D62ADF1503006C4E91 /* MakePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */; };
+		BC2C84D82ADF26A6006C4E91 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */; };
 		BC35DED12AD9B116008C252D /* OrderAndPaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */; };
 		BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
@@ -119,6 +120,7 @@
 		BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationViewController.swift; sourceTree = "<group>"; };
 		BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePaymentView.swift; sourceTree = "<group>"; };
+		BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentService.swift; sourceTree = "<group>"; };
 		BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowRouter.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 		BC2C84CD2ADC78A3006C4E91 /* CartView */ = {
 			isa = PBXGroup;
 			children = (
+				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */,
 				BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */,
 				BCB1DE002AD70B37002ED041 /* CheckoutView.swift */,
@@ -336,6 +339,7 @@
 				BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */,
 				BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */,
 				BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */,
+				BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */,
 			);
 			path = CheckoutView;
 			sourceTree = "<group>";
@@ -344,7 +348,6 @@
 			isa = PBXGroup;
 			children = (
 				BC2C84CF2ADC7917006C4E91 /* Observable.swift */,
-				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */,
 				BC2C84CE2ADC78AE006C4E91 /* CheckoutView */,
 				BC2C84CD2ADC78A3006C4E91 /* CartView */,
@@ -502,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C84D82ADF26A6006C4E91 /* CheckoutViewModel.swift in Sources */,
 				3FC8C38B29D242E90081F015 /* ProductDetailsTableViewCell.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,

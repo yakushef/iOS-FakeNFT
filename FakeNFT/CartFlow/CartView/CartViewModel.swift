@@ -9,7 +9,6 @@ import Foundation
 
 final class CartViewModel {
     private var orderService: OrderAndPaymentServiceProtocol
-    private var currency: Currency?
     @Observable private(set) var currentOrder: [ItemNFT] = []
     
     init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared) {

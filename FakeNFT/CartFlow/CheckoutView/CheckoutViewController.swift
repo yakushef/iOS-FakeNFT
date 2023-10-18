@@ -6,26 +6,40 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class CheckoutViewController: UIViewController {
+    private var viewModel: CheckoutViewModel?
+    private lazy var paymentView: UIView = {
+        MakePaymentView()
+    }()
     private lazy var currencyCollection: UICollectionView = {
        let currencyCollection = UICollectionView(frame: CGRect(),
                                                  collectionViewLayout: UICollectionViewLayout())
        return currencyCollection
     }()
+    
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypWhite
         navigationItem.title = "Выберете способ оплаты"
+        viewModel = CheckoutViewModel()
+        viewModel?.$currencyList.makeBinding(action: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.currencyListUpdated()
+            }
+        })
         
         setupUI()
+        viewModel?.getCurrencyList()
+        ProgressHUD.show()
     }
     
     func setupUI() {
         setupCollection()
         
-        let paymentView = MakePaymentView()
         view.addSubview(paymentView)
         paymentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -33,7 +47,6 @@ final class CheckoutViewController: UIViewController {
             paymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             paymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
     }
     
     private func setupCollection() {
@@ -50,9 +63,20 @@ final class CheckoutViewController: UIViewController {
         currencyCollection.register(CurrencyCell.self)
         view.addSubview(currencyCollection)
     }
+    
+    private func currencyListUpdated() {
+            self.currencyCollection.reloadData()
+            ProgressHUD.dismiss()
+    }
 }
 
 extension CheckoutViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let currency = viewModel?.currencyList[indexPath.row] {
+            viewModel?.setCurrencyTo(id: currency.id)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         7
     }
@@ -71,12 +95,13 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
 
 extension CheckoutViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        viewModel?.currencyList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CurrencyCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.configureCell(for: nil)
+        let currency = viewModel?.currencyList[indexPath.row]
+        cell.configureCell(for: currency)
         return cell
     }
 }
