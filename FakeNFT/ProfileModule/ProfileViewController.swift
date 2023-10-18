@@ -47,9 +47,8 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.isUserInteractionEnabled = true
         let attributedString = NSMutableAttributedString(string: "Joaquin Phoenix.com")
-        if attributedString.setAsLink(textToFind: "Joaquin Phoenix.com", linkURL: "JoaquinPhoenix.com") {
-            label.attributedText = attributedString
-        }
+        attributedString.addAttribute(.link, value: "JoaquinPhoenix.com", range: NSMakeRange(0, attributedString.length))
+        label.attributedText = attributedString
         label.font = UIFont.Regular.medium
         return label
     }()
@@ -77,6 +76,22 @@ final class ProfileViewController: UIViewController {
         setupBioTextField()
         setupSiteLabel()
         setupProfileTableView()
+        
+        addGesture()
+    }
+    
+    func addGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(labelTapped(_:)))
+        tap.numberOfTapsRequired = 1
+        siteLabel.isUserInteractionEnabled = true
+        siteLabel.addGestureRecognizer(tap)
+    }
+
+    @objc
+    func labelTapped(_ tap: UITapGestureRecognizer) {
+        let webViewController = WebViewController()
+        webViewController.selectedWebSite = "hackingwithswift.com"
+        navigationController?.pushViewController(webViewController, animated: true)
     }
     
     private func setupView() {

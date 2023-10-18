@@ -50,8 +50,8 @@
 		BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BCB1DE052AD71E11002ED041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE042AD71E11002ED041 /* RatingView.swift */; };
+		CB30AB242AE04D4600001D8B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB30AB232AE04D4600001D8B /* WebViewController.swift */; };
 		CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */; };
-		CB6F168C2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */; };
 		CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */; };
 		CBFDA1902ADAEB8C00D2B6F9 /* UILablel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */; };
 		CBFDA1922ADAF11B00D2B6F9 /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */; };
@@ -110,8 +110,8 @@
 		BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
 		BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		BCB1DE042AD71E11002ED041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		CB30AB232AE04D4600001D8B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewController.swift; sourceTree = "<group>"; };
-		CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILablel+Extensions.swift"; sourceTree = "<group>"; };
 		CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
@@ -309,7 +309,6 @@
 		CB6F168A2AD84E630070D0E3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CB6F168B2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift */,
 				CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */,
 				CBFDA1912ADAF11B00D2B6F9 /* UITextView+Extensions.swift */,
 			);
@@ -322,6 +321,7 @@
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
 				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
 				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
+				CB30AB232AE04D4600001D8B /* WebViewController.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
@@ -496,8 +496,8 @@
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
+				CB30AB242AE04D4600001D8B /* WebViewController.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
-				CB6F168C2AD84E850070D0E3 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */,
