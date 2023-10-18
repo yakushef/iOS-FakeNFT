@@ -10,7 +10,7 @@ import ProgressHUD
 
 final class CheckoutViewController: UIViewController {
     private var viewModel: CheckoutViewModel?
-    private lazy var paymentView: UIView = {
+    private lazy var paymentView: MakePaymentView = {
         MakePaymentView()
     }()
     private lazy var currencyCollection: UICollectionView = {
@@ -47,6 +47,10 @@ final class CheckoutViewController: UIViewController {
             paymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             paymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        paymentView.setPaymentAction { [weak self] in
+            self?.payButtonTapped()
+        }
     }
     
     private func setupCollection() {
@@ -67,6 +71,10 @@ final class CheckoutViewController: UIViewController {
     private func currencyListUpdated() {
             self.currencyCollection.reloadData()
             ProgressHUD.dismiss()
+    }
+    
+    @objc private func payButtonTapped() {
+        viewModel?.makePayment()
     }
 }
 

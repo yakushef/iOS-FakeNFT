@@ -66,19 +66,6 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
         self.networkClient = networkClient
     }
     
-//    private func getNFTbyID(_ id: String, in group: DispatchGroup) -> ItemNFT? {
-//        let urlString = Config.baseUrl + getNFTByIDString + id
-//        let request = cartRequest(endpoint: URL(string: urlString))
-//        networkClient.send(request: request, type: ItemNFT.self, onResponse: { [weak self] result in
-//            switch result {
-//            case .success(let item):
-//                self?.currentOrderItems.append(item)
-//            case .failure(let error):
-//                assertionFailure(error.localizedDescription)
-//            }
-//        })
-//    }
-    
     func getOrder() {
         let urlString = Config.baseUrl + orderPathString
         let request = cartRequest(endpoint: URL(string: urlString))
@@ -102,16 +89,15 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
         var newOrderItems: [ItemNFT] = []
         let cartGroup = DispatchGroup()
         
-        print(currentOrder)
-        
         if let nfts = currentOrder?.nfts {
             for nft in nfts {
                 cartGroup.enter()
                 
                 let urlString = Config.baseUrl + getNFTByIDString + nft
                 let request = cartRequest(endpoint: URL(string: urlString))
-                networkClient.send(request: request, type: ItemNFT.self, onResponse: { [weak self] result in
-                    print(result)
+                networkClient.send(request: request,
+                                   type: ItemNFT.self,
+                                   onResponse: { result in
                     switch result {
                     case .success(let item):
                         newOrderItems.append(item)
@@ -146,6 +132,12 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
     //MARK: - Cart protocol methods
     
     func payWith(currecyID: String) {
+        let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
+        print(urlString)
+        let request = cartRequest(endpoint: URL(string: urlString))
+        networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { result in
+            
+        })
         
     }
     

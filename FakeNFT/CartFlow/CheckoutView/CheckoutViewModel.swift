@@ -30,4 +30,17 @@ final class CheckoutViewModel {
     func setCurrencyTo(id: String) {
         currencyID = id
     }
+    
+    func makePayment() {
+        guard let id = currencyID else {return}
+        orderService.payWith(currecyID: id)
+        currencyID = nil
+    }
+    
+    func paymentSuccessfull() {
+    }
+    
+    func paymentFailed() {
+        
+    }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
-    private var currency: Currency? = nil {
+    private(set) var currency: Currency? = nil {
         didSet {
             changeCurrency()
         }

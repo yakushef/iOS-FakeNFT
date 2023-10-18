@@ -14,19 +14,24 @@ class MakePaymentView: UIView {
                                       right: 16)
     private lazy var payButton: UIButton = {
         let payButton = UIButton(type: .system)
-        payButton.setTitle("Оплатить", for: .normal)
+        payButton.setTitle("Оплатить",
+                           for: .normal)
         payButton.titleLabel?.font = .Bold.small
         payButton.backgroundColor = .ypBlack
         payButton.tintColor = .ypWhite
         payButton.clipsToBounds = true
         payButton.layer.cornerRadius = 16
+        payButton.addTarget(self,
+                            action: #selector(payButtonTapped),
+                            for: .touchUpInside)
         return payButton
     }()
     
     private lazy var userAgreementButton: UIButton = {
         let agreementButton = UIButton(type: .system)
         agreementButton.tintColor = .blueUniversal
-        agreementButton.setTitle("Пользовательского соглашения", for: .normal)
+        agreementButton.setTitle("Пользовательского соглашения",
+                                 for: .normal)
         agreementButton.titleLabel?.font = .Regular.small
         agreementButton.backgroundColor = .clear
         agreementButton.contentHorizontalAlignment = .left
@@ -42,6 +47,8 @@ class MakePaymentView: UIView {
         disclaimerLabel.textAlignment = .left
         return disclaimerLabel
     }()
+    
+    private var paymentAction: () -> Void = { }
 
     //MARK: - Lifecycle
     
@@ -52,6 +59,10 @@ class MakePaymentView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setPaymentAction(action: @escaping () -> Void) {
+        paymentAction = action
     }
     
     //MARK: - UI setup
@@ -88,5 +99,8 @@ class MakePaymentView: UIView {
             disclaimerLabel.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
         ])
     }
-
+    
+    @objc private func payButtonTapped() {
+        paymentAction()
+    }
 }
