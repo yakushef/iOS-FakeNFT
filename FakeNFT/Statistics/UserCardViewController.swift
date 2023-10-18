@@ -41,7 +41,7 @@ final class UserCardViewController: UIViewController {
         button.layer.borderColor = UIColor.ypBlack.cgColor
         button.layer.borderWidth = 1.0
         button.backgroundColor = .clear
-        button.addTarget(self, 
+        button.addTarget(self,
                          action: #selector(openWebView),
                          for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ final class UserCardViewController: UIViewController {
     private lazy var nftButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
-        button.addTarget(self, 
+        button.addTarget(self,
                          action: #selector(openWebView),
                          for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +86,9 @@ final class UserCardViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: button.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: button.bottomAnchor)
         ])
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(getUsersCollection))
+        stackView.addGestureRecognizer(tapGesture)
+        stackView.isUserInteractionEnabled = true
         return button
     }()
     
@@ -105,6 +108,16 @@ final class UserCardViewController: UIViewController {
     
     @objc
     private func openWebView() {
+        guard
+            let urlString = viewModel.user?.website,
+            let url = URL(string: urlString)
+        else { return }
+        let webViewController = SFSafariViewController(url: url)
+        present(webViewController, animated: true)
+    }
+    
+    @objc
+    private func getUsersCollection() {
     }
     
     func configure() {
