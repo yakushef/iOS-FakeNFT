@@ -35,7 +35,7 @@ final class ProfileEditingViewController: UIViewController {
         let label = UILabel()
         label.textColor = .whiteUniversal
         label.text = "Сменить фото"
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.Medium.medium
         label.textAlignment = .center
         label.numberOfLines = 0
         return label

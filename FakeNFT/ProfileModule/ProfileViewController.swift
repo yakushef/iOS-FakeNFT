@@ -21,7 +21,7 @@ final class ProfileViewController: UIViewController {
     private let profileNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Joaquin Phoenix"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = UIFont.Bold.medium
         return label
     }()
     
@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController {
         let range = NSMakeRange(0, attrString.length)
         
         attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
-        attrString.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: range)
+        attrString.addAttribute(.font, value: UIFont.Regular.small ?? UIFont.systemFont(ofSize: 13), range: range)
         
         label.attributedText = attrString
         return label
@@ -50,7 +50,7 @@ final class ProfileViewController: UIViewController {
         if attributedString.setAsLink(textToFind: "Joaquin Phoenix.com", linkURL: "JoaquinPhoenix.com") {
             label.attributedText = attributedString
         }
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.Regular.medium
         return label
     }()
     
