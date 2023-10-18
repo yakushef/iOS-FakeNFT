@@ -178,6 +178,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
         cell.accessoryView = UIImageView(image: UIImage(named: "chevron.forward"))
+        cell.selectionStyle = .none
         
         if #available(iOS 14.0, *) {
             var content = cell.defaultContentConfiguration()
