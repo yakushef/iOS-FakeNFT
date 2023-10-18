@@ -131,7 +131,7 @@ extension CollectionViewController: UICollectionViewDataSource {
             descriptionCell.configure(
                 collectionName: viewModel.collection.name,
                 subTitle: "Автор коллекции:",
-                authorName: viewModel.user.name,
+                authorName: viewModel.user?.name ?? "ФИО",
                 description: viewModel.collection.description,
                 authorNameButtonAction: showWebViewAboutAuthor)
             return descriptionCell

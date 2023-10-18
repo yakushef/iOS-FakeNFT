@@ -15,16 +15,6 @@ final class CatalogViewController: UIViewController {
         viewModel.collections
     }
     
-    private lazy var sortButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "sortButton"), for: .normal)
-        button.addTarget(self, action: #selector(sortButtonTapped), for: .touchUpInside)
-        button.tintColor = .black
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CatalogTableView.self, forCellReuseIdentifier: CatalogTableView.reuseIdentifier)
@@ -58,7 +48,7 @@ final class CatalogViewController: UIViewController {
         
         addSubviews()
         setupConstraints()
-        //        setupNavBar()
+        setupNavBar()
         
         viewModel.loadingStarted = self.loadIndicatorStartAnimating
         viewModel.loadingFinished = self.loadIndicatorStopAnimating
@@ -66,15 +56,13 @@ final class CatalogViewController: UIViewController {
     }
     
     private func addSubviews() {
-        [sortButton, tableView, loadIndicator].forEach {
+        [tableView, loadIndicator].forEach {
             view.addSubview($0)
         }
     }
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            sortButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -18),
-            sortButton.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.07019),
-            tableView.topAnchor.constraint(equalTo: sortButton.bottomAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -82,6 +70,15 @@ final class CatalogViewController: UIViewController {
             loadIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loadIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+    }
+    
+    private func setupNavBar() {
+        let sortButtonImage = UIImage(named: "sortButton")
+        let sortButton = UIBarButtonItem(image: sortButtonImage, style: .plain, target: self, action: #selector(sortButtonTapped))
+        sortButton.target = self
+        sortButton.action = #selector(sortButtonTapped)
+        sortButton.tintColor = .black
+        navigationItem.rightBarButtonItem = sortButton
     }
     
     @objc private func sortButtonTapped() {
