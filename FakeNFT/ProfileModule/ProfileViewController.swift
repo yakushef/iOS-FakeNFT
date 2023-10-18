@@ -8,18 +8,13 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private let containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let containerView = UIView()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -27,7 +22,6 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "Joaquin Phoenix"
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -46,7 +40,6 @@ final class ProfileViewController: UIViewController {
         attrString.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: range)
         
         label.attributedText = attrString
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -58,7 +51,6 @@ final class ProfileViewController: UIViewController {
             label.attributedText = attributedString
         }
         label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -67,7 +59,6 @@ final class ProfileViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.rowHeight = 54
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileCell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -77,6 +68,8 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
+        
+        setupView()
         setupNavigationBar()
         setupContainerView()
         setupProfileImageView()
@@ -84,6 +77,12 @@ final class ProfileViewController: UIViewController {
         setupBioTextField()
         setupSiteLabel()
         setupProfileTableView()
+    }
+    
+    private func setupView() {
+        [containerView, profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setupNavigationBar() {
