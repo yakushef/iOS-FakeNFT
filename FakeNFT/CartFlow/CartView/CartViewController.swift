@@ -8,7 +8,7 @@
 import UIKit
 import ProgressHUD
 
-enum CartSortOrder {
+enum CartSortOrder: String {
     case price,
     rating,
     title
@@ -17,30 +17,8 @@ enum CartSortOrder {
 final class CartViewController: UIViewController {
     
     var viewModel: CartViewModel? = CartViewModel()
-    var router = CartFlowRouter.shared
+    var router: CartFlowRouter? = CartFlowRouter.shared
     private var orderItems: [ItemNFT] = []
-    
-    private var sortingStyle: CartSortOrder = .title {
-        didSet {
-            applySorting()
-        }
-    }
-    
-    init(viewModel: CartViewModel? = CartViewModel(),
-         router: CartFlowRouter = CartFlowRouter.shared,
-         orderItems: [ItemNFT] = [],
-         sortingStyle: CartSortOrder = .title) {
-        super.init(nibName: nil, bundle: nil)
-        
-        self.viewModel = viewModel
-        self.router = router
-        self.orderItems = orderItems
-        self.sortingStyle = sortingStyle
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     //MARK: - UI elements
     
@@ -79,11 +57,12 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.$currentOrder.makeBinding { [weak self] _ in
+        viewModel?.$currentOrderSorted.makeBinding { [weak self] _ in
             DispatchQueue.main.async {
                 self?.orderUpdated()
             }
         }
+        
         CartFlowRouter.shared.cartVC = self
         setupUI()
 
@@ -139,20 +118,20 @@ final class CartViewController: UIViewController {
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
-        router.showSortSheet()
+        router?.showSortSheet()
     }
     
     @objc private func payButtonTapped() {
-        router.showPaymentScreen()
+        router?.showPaymentScreen()
     }
     
     //MARK: - Order updated
     
     func orderUpdated() {
-        orderItems = viewModel?.currentOrder ?? []
-        applySorting()
+        orderItems = viewModel?.currentOrderSorted ?? []
         paymentView.setQuantity(orderItems.count)
         paymentView.setTotalprice(orderItems.reduce(0) {$0 + $1.price})
+        cartTable.reloadData()
         checkIfEmpty()
         hideProgressView()
     }
@@ -174,25 +153,7 @@ final class CartViewController: UIViewController {
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {
-        sortingStyle = newSortingStyle
-    }
-    
-    private func applySorting() {
-        switch sortingStyle {
-        case .price:
-            orderItems.sort { item1, item2 in
-                item1.price > item2.price
-            }
-        case .rating:
-            orderItems.sort { item1, item2 in
-                item1.rating > item2.rating
-            }
-        case .title:
-            orderItems.sort { item1, item2 in
-                item1.name > item2.name
-            }
-        }
-        cartTable.reloadData()
+        viewModel?.setSortingStyle(to: newSortingStyle)
     }
 }
 

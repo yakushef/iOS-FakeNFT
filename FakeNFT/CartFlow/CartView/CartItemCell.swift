@@ -61,8 +61,8 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         title.text = "1,23 ETH"
         return title
     }()
-
-//MARK: - UI setup
+    
+    //MARK: - UI setup
     func setupCellUI() {
         selectionStyle = .none
         isUserInteractionEnabled = true
