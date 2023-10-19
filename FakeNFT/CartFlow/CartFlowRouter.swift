@@ -10,7 +10,7 @@ import UIKit
 final class CartFlowRouter {
     static var shared = CartFlowRouter()
     weak var cartVC: CartViewController?
-    weak var checkoutVC: CheckoutViewController?
+    var checkoutVC: CheckoutViewController?
     
     private init() {
         
@@ -65,9 +65,12 @@ final class CartFlowRouter {
     }
     
     func showPaymentScreen() {
-        let checkout = CheckoutViewController()
-        checkoutVC = checkout
-        cartVC?.show(checkout, sender: nil)
+        checkoutVC = CheckoutViewController()
+        if let checkoutVC {
+            let checkout = UINavigationController(rootViewController: CheckoutViewController())
+            checkout.modalPresentationStyle = .fullScreen
+            cartVC?.parent?.present(checkout, animated: true) //show(checkout, sender: nil)
+        }
     }
     
     func showDeleteConfirmationForNFT(_ nft: ItemNFT?, removalAction: @escaping () -> Void) {

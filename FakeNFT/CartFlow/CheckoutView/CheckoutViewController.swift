@@ -25,19 +25,23 @@ final class CheckoutViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .ypWhite
         navigationItem.title = "Выберете способ оплаты"
+        
         viewModel = CheckoutViewModel()
         viewModel?.$currencyList.makeBinding(action: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.currencyListUpdated()
             }
         })
-        
         setupUI()
         viewModel?.getCurrencyList()
         ProgressHUD.show()
     }
     
     func setupUI() {
+        let backButton = UIBarButtonItem(image: UIImage(named: "Backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .ypBlack
+        navigationItem.leftBarButtonItem = backButton
+        
         setupCollection()
         
         view.addSubview(paymentView)
@@ -75,6 +79,10 @@ final class CheckoutViewController: UIViewController {
     
     @objc private func payButtonTapped() {
         viewModel?.makePayment()
+    }
+    
+    @objc private func backButtonTapped() {
+        dismiss(animated: true)
     }
 }
 

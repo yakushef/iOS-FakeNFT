@@ -86,6 +86,8 @@ final class CartViewController: UIViewController {
         }
         CartFlowRouter.shared.cartVC = self
         setupUI()
+
+        parent?.tabBarItem.image = UIImage(named: "Tab_Cart")
         
         checkIfEmpty()
         viewModel?.getOrder()
@@ -94,9 +96,6 @@ final class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        checkIfEmpty()
-//        viewModel?.getOrder()
-//        showProgressView()
     }
     
     //MARK: - UI setup
