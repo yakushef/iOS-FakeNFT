@@ -166,6 +166,7 @@ final class ProfileViewController: UIViewController {
     private func setupProfileTableView() {
         profileTableView.separatorStyle = .none
         profileTableView.dataSource = self
+        profileTableView.delegate = self
         view.addSubview(profileTableView)
         
         NSLayoutConstraint.activate([
@@ -205,5 +206,22 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let myNFTsViewController = MyNFTsViewController()
+            myNFTsViewController.navTitle = cells[indexPath.row]
+            navigationController?.pushViewController(myNFTsViewController, animated: true)
+        case 1:
+            break
+        case 2:
+            break
+        default:
+            break
+        }
     }
 }
