@@ -22,8 +22,10 @@ final class WebViewController: UIViewController {
         
         tabBarController?.tabBar.isHidden = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Backward"), style: .plain, target: self, action: #selector(backButtonDidTap))
-
-        webView.load(URLRequest(url: URL(string: "https://" + (selectedWebSite ?? ""))!))
+        
+        if let url = URL(string: "https://" + (selectedWebSite ?? "")) {
+            webView.load(URLRequest(url: url))
+        }
     }
     
     @objc
