@@ -10,11 +10,9 @@ import UIKit
 final class CartFlowRouter {
     static var shared = CartFlowRouter()
     weak var cartVC: CartViewController?
-    var checkoutVC: CheckoutViewController?
+    weak var checkoutVC: CheckoutViewController?
     
-    private init() {
-        
-    }
+    private init() { }
     
     func showPaymentError() {
         let alert = UIAlertController(title: "Упс! Что-то пошло не так :(",
@@ -65,12 +63,9 @@ final class CartFlowRouter {
     }
     
     func showPaymentScreen() {
-        checkoutVC = CheckoutViewController()
-        if let checkoutVC {
             let checkout = UINavigationController(rootViewController: CheckoutViewController())
             checkout.modalPresentationStyle = .fullScreen
-            cartVC?.parent?.present(checkout, animated: true) //show(checkout, sender: nil)
-        }
+            cartVC?.parent?.present(checkout, animated: true)
     }
     
     func showDeleteConfirmationForNFT(_ nft: ItemNFT?, removalAction: @escaping () -> Void) {

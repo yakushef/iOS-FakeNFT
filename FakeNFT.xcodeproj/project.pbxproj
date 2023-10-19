@@ -57,6 +57,8 @@
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */; };
 		BC6257712ADC4B0B00E3E0F9 /* CartFlowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */; };
+		BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */; };
+		BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */; };
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
 		BCB1DDFD2AD70867002ED041 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */; };
 		BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */; };
@@ -124,6 +126,8 @@
 		BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentService.swift; sourceTree = "<group>"; };
 		BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowRouter.swift; sourceTree = "<group>"; };
+		BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
+		BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				BC2C52AA2AD5C9E40066C940 /* Fonts */,
 				3F478ECE29DB474E00F6D39E /* Colors.swift */,
 				BCB1DE022AD7108A002ED041 /* RatingView.swift */,
+				BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */,
+				BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				BC2C84D82ADF26A6006C4E91 /* CheckoutViewModel.swift in Sources */,
 				3FC8C38B29D242E90081F015 /* ProductDetailsTableViewCell.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
+				BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,
 				BCB1DE032AD7108A002ED041 /* RatingView.swift in Sources */,
 				31994AAA2AD545D400B57E7B /* OrderPaymentStatus.swift in Sources */,
@@ -538,6 +545,7 @@
 				BC2C84D02ADC7917006C4E91 /* Observable.swift in Sources */,
 				BC2C84D22ADDA32B006C4E91 /* DeleteConfirmationViewController.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
+				BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */,
 				BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 			);

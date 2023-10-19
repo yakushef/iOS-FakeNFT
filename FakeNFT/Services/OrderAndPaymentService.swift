@@ -85,7 +85,6 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
     }
     
     private func getOrderItems() {
-        currentOrderItems = []
         var newOrderItems: [ItemNFT] = []
         let cartGroup = DispatchGroup()
         
@@ -133,10 +132,9 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
     
     func payWith(currecyID: String) {
         let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
-        print(urlString)
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { result in
-            
+            //TODO: - Handle order status
         })
         
     }

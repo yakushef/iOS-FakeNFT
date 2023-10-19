@@ -12,18 +12,16 @@ class MakePaymentView: UIView {
                                       left: 16,
                                       bottom: 16,
                                       right: 16)
-    private lazy var payButton: UIButton = {
-        let payButton = UIButton(type: .system)
+    private lazy var payButton: GenericButton = {
+        let payButton = GenericButton(type: .system)
         payButton.setTitle("Оплатить",
                            for: .normal)
         payButton.titleLabel?.font = .Bold.small
-        payButton.backgroundColor = .ypBlack
-        payButton.tintColor = .ypWhite
-        payButton.clipsToBounds = true
-        payButton.layer.cornerRadius = 16
+        payButton.layer.cornerRadius = CornerRadius.big.cgFloat()
         payButton.addTarget(self,
                             action: #selector(payButtonTapped),
                             for: .touchUpInside)
+        payButton.switchActiveState(isActive: false)
         return payButton
     }()
     
@@ -98,6 +96,10 @@ class MakePaymentView: UIView {
             disclaimerLabel.bottomAnchor.constraint(equalTo: userAgreementButton.topAnchor),
             disclaimerLabel.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
         ])
+    }
+    
+    func switchPayButtonState(isActive: Bool) {
+        payButton.switchActiveState(isActive: isActive)
     }
     
     @objc private func payButtonTapped() {

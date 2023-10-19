@@ -8,6 +8,8 @@
 import Foundation
 
 final class CartViewModel {
+    private var router = CartFlowRouter.shared
+    
     private var orderService: OrderAndPaymentServiceProtocol
     @Observable private(set) var currentOrder: [ItemNFT] = []
     

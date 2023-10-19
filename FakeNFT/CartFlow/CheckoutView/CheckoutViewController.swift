@@ -9,6 +9,7 @@ import UIKit
 import ProgressHUD
 
 final class CheckoutViewController: UIViewController {
+    private var router = CartFlowRouter.shared
     private var viewModel: CheckoutViewModel?
     private lazy var paymentView: MakePaymentView = {
         MakePaymentView()
@@ -20,9 +21,10 @@ final class CheckoutViewController: UIViewController {
     }()
     
     //MARK: - Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        router.checkoutVC = self
+        
         view.backgroundColor = .ypWhite
         navigationItem.title = "Выберете способ оплаты"
         
@@ -42,8 +44,6 @@ final class CheckoutViewController: UIViewController {
         backButton.tintColor = .ypBlack
         navigationItem.leftBarButtonItem = backButton
         
-        setupCollection()
-        
         view.addSubview(paymentView)
         paymentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -54,13 +54,15 @@ final class CheckoutViewController: UIViewController {
         
         paymentView.setPaymentAction { [weak self] in
             self?.payButtonTapped()
+            self?.dismiss(animated: true)
         }
+        
+        setupCollection()
     }
     
     private func setupCollection() {
-        let frame = view.safeAreaLayoutGuide.layoutFrame
         let layout = UICollectionViewFlowLayout()
-        currencyCollection = UICollectionView(frame: frame, collectionViewLayout: layout)
+        currencyCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         
         currencyCollection.dataSource = self
         currencyCollection.delegate = self
@@ -70,6 +72,13 @@ final class CheckoutViewController: UIViewController {
                                                        right: 16)
         currencyCollection.register(CurrencyCell.self)
         view.addSubview(currencyCollection)
+        currencyCollection.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            currencyCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            currencyCollection.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            currencyCollection.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            currencyCollection.bottomAnchor.constraint(equalTo: paymentView.topAnchor)
+        ])
     }
     
     private func currencyListUpdated() {
@@ -90,6 +99,7 @@ extension CheckoutViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let currency = viewModel?.currencyList[indexPath.row] {
             viewModel?.setCurrencyTo(id: currency.id)
+            paymentView.switchPayButtonState(isActive: true)
         }
     }
     

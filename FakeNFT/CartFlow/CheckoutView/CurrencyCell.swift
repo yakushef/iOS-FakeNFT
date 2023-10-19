@@ -31,7 +31,7 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
         logoView.contentMode = .scaleAspectFill
         logoView.backgroundColor = .ypBlack
         logoView.clipsToBounds = true
-        logoView.layer.cornerRadius = 6
+        logoView.layer.cornerRadius = CornerRadius.small.cgFloat()
         return logoView
     }()
     
