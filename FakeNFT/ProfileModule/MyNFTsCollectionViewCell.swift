@@ -24,10 +24,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let containerView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private let containerView = UIView()
     
     private let nftNameLabel: UILabel = {
        let label = UILabel()
