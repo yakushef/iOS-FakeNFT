@@ -39,6 +39,8 @@ final class CheckoutViewController: UIViewController {
         ProgressHUD.show()
     }
     
+    //MARK: UI setup
+    
     func setupUI() {
         let backButton = UIBarButtonItem(image: UIImage(named: "Backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .ypBlack
@@ -81,10 +83,14 @@ final class CheckoutViewController: UIViewController {
         ])
     }
     
+    //MARK: Handle updates from model
+    
     private func currencyListUpdated() {
             self.currencyCollection.reloadData()
             ProgressHUD.dismiss()
     }
+    
+    //MARK: - Navigation
     
     @objc private func payButtonTapped() {
         viewModel?.makePayment()
@@ -94,6 +100,8 @@ final class CheckoutViewController: UIViewController {
         dismiss(animated: true)
     }
 }
+
+//MARK: CollectionViewDelegates
 
 extension CheckoutViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -118,6 +126,8 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: 46)
     }
 }
+
+//MARK: - CollectionViewDataSource
 
 extension CheckoutViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

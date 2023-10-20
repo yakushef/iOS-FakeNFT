@@ -12,7 +12,6 @@ final class CheckoutViewModel {
     private var currencyID: String?
     @Observable private(set) var currencyList: [Currency] = []
     
-    
     init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared, currency: Currency? = nil) {
         self.orderService = orderService
         self.orderService.checkoutVM = self
@@ -38,9 +37,10 @@ final class CheckoutViewModel {
     }
     
     func paymentSuccessfull() {
+        //TODO: - Handle successfull payment
     }
     
     func paymentFailed() {
-        
+        //TODO: - Handle payment failure
     }
 }

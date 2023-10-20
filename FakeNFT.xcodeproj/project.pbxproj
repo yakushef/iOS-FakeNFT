@@ -62,7 +62,7 @@
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
 		BCB1DDFD2AD70867002ED041 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */; };
 		BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */; };
-		BCB1DE012AD70B37002ED041 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE002AD70B37002ED041 /* CheckoutView.swift */; };
+		BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE002AD70B37002ED041 /* CartTotalView.swift */; };
 		BCB1DE032AD7108A002ED041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE022AD7108A002ED041 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -131,7 +131,7 @@
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
-		BCB1DE002AD70B37002ED041 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		BCB1DE002AD70B37002ED041 /* CartTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTotalView.swift; sourceTree = "<group>"; };
 		BCB1DE022AD7108A002ED041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -333,7 +333,7 @@
 				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */,
 				BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */,
-				BCB1DE002AD70B37002ED041 /* CheckoutView.swift */,
+				BCB1DE002AD70B37002ED041 /* CartTotalView.swift */,
 				BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */,
 			);
 			path = CartView;
@@ -523,7 +523,7 @@
 				31994AA42AD53E8700B57E7B /* ItemNFT.swift in Sources */,
 				BC35DED12AD9B116008C252D /* OrderAndPaymentService.swift in Sources */,
 				31994A962AD486B800B57E7B /* Config.swift in Sources */,
-				BCB1DE012AD70B37002ED041 /* CheckoutView.swift in Sources */,
+				BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */,
 				BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,

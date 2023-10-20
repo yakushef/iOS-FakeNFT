@@ -12,6 +12,9 @@ class MakePaymentView: UIView {
                                       left: 16,
                                       bottom: 16,
                                       right: 16)
+    
+    //MARK: - UI elements
+    
     private lazy var payButton: GenericButton = {
         let payButton = GenericButton(type: .system)
         payButton.setTitle("Оплатить",
@@ -59,11 +62,11 @@ class MakePaymentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - UI setup
+    
     func setPaymentAction(action: @escaping () -> Void) {
         paymentAction = action
     }
-    
-    //MARK: - UI setup
     
     func setupUI() {
         backgroundColor = .ypLightGrey
@@ -97,6 +100,8 @@ class MakePaymentView: UIView {
             disclaimerLabel.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
         ])
     }
+    
+    //MARK: - Button interaction
     
     func switchPayButtonState(isActive: Bool) {
         payButton.switchActiveState(isActive: isActive)

@@ -13,17 +13,12 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
             changeCurrency()
         }
     }
-    
-    override var isSelected: Bool {
-        didSet {
-            backgroundView?.layer.borderWidth = isSelected ? 1 : 0
-        }
-    }
-    
     private let insets = UIEdgeInsets(top: 4,
                                       left: 12,
                                       bottom: 4,
                                       right: 12)
+    
+    //MARK: - UI elements
     
     private lazy var currencyLogoView: UIImageView = {
         let logoView = UIImageView()
@@ -56,6 +51,16 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
         title.font = .Regular.small
         return title
     }()
+    
+    //MARK: - Handle selection
+    
+    override var isSelected: Bool {
+        didSet {
+            backgroundView?.layer.borderWidth = isSelected ? 1 : 0
+        }
+    }
+    
+    //MARK: - Configure cell
     
     func configureCell(for currency: Currency?) {
         setupUI()

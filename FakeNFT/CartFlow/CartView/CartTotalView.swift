@@ -1,5 +1,5 @@
 //
-//  PaymentView.swift
+//  CartTotalView.swift
 //  FakeNFT
 //
 //  Created by Aleksey Yakushev on 11.10.2023.
@@ -7,30 +7,27 @@
 
 import UIKit
 
-final class CheckoutView: UIView {
+final class CartTotalView: UIView {
+    private let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     
     private var quantity: Int = 0 {
         didSet {
             quantityLabel.text = "\(quantity) NFT"
         }
     }
-    
     private var price: String = "?" {
         didSet {
             totalPriceLabel.text = price + " ETH"
         }
     }
+    private var checkoutAction: () -> Void = { }
+
     
-    private let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-    
-    lazy var payButton: UIButton = {
-        let button = UIButton(type: .system)
+    lazy var payButton: GenericButton = {
+        let button = GenericButton(type: .system)
         button.setTitle("К оплате", for: .normal)
-        button.tintColor = .ypWhite
         button.titleLabel?.font = .Bold.small
-        button.backgroundColor = .ypBlack
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = CornerRadius.big.cgFloat()
         button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -92,7 +89,7 @@ final class CheckoutView: UIView {
     }
     
     @objc private func payButtonTapped() {
-        
+        checkoutAction()
     }
     
     func setQuantity(_ newQuantity: Int) {
@@ -102,5 +99,9 @@ final class CheckoutView: UIView {
     func setTotalprice(_ newPrice: Double) {
         let priceString = String (format: "%.2f", newPrice)
         price = priceString
+    }
+    
+    func setCheckoutAction(_ action: @escaping () -> Void) {
+        checkoutAction = action
     }
 }

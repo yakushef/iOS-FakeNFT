@@ -20,6 +20,8 @@ final class DeleteConfirmationViewController: UIViewController {
         }
     }
     
+    //MARK: - UI elements
+    
     private lazy var nftView: UIImageView = {
         let nftView = UIImageView()
         nftView.image = UIImage(named: "NFT_Placeholder")
@@ -52,43 +54,37 @@ final class DeleteConfirmationViewController: UIViewController {
     }()
     
     private lazy var cancelButton: UIButton = {
-        let cancelButton = UIButton(type: .system)
+        let cancelButton = GenericButton(type: .system)
         cancelButton.addTarget(self,
                                action: #selector(cancelButtonTapped),
                                for: .touchUpInside)
         cancelButton.titleLabel?.font = .Regular.large
-        cancelButton.setTitleColor(.ypWhite, for: .normal)
         cancelButton.setTitle("Вернуться", for: .normal)
-        cancelButton.backgroundColor = .ypBlack
-        cancelButton.clipsToBounds = true
-        cancelButton.layer.cornerRadius = 12
+        cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
         return cancelButton
     }()
     
     private lazy var removeButton: UIButton = {
-        let cancelButton = UIButton(type: .system)
+        let cancelButton = GenericButton(type: .system)
         cancelButton.addTarget(self,
                                action: #selector(removeButtonTapped),
                                for: .touchUpInside)
         cancelButton.titleLabel?.font = .Regular.large
         cancelButton.setTitleColor(.redUniversal, for: .normal)
         cancelButton.setTitle("Удалить", for: .normal)
-        cancelButton.backgroundColor = .ypBlack
-        cancelButton.clipsToBounds = true
-        cancelButton.layer.cornerRadius = 12
+        cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
         return cancelButton
     }()
-    
-    override var prefersStatusBarHidden: Bool {
-           return true
-       }
+
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNeedsStatusBarAppearanceUpdate()
         setupUI()
     }
+    
+    //MARK: UI setup
     
     private func setupUI() {
         view.backgroundColor = .clear
@@ -121,6 +117,8 @@ final class DeleteConfirmationViewController: UIViewController {
         buttonStack.addArrangedSubview(removeButton)
         buttonStack.addArrangedSubview(cancelButton)
     }
+    
+    //MARK: - Button interaction
     
     @objc private func removeButtonTapped() {
         dismiss(animated: true, completion: removalAction)

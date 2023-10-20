@@ -7,6 +7,8 @@
 
 import Foundation
 
+//MARK: - Cart service protocol
+
 protocol OrderAndPaymentServiceProtocol {
     var cartVM: CartViewModel? {get set}
     var checkoutVM: CheckoutViewModel? {get set}
@@ -16,12 +18,11 @@ protocol OrderAndPaymentServiceProtocol {
     
     func getOrder()
     func getAllCurrencies()
-    
     func payWith(currecyID: String)
-    
-    func addItemToOrder(_ newItem: ItemNFT)
     func removeItemFromOrder(id: String)
 }
+
+//MARK: - Network requests
 
 struct cartRequest: NetworkRequest {
     var endpoint: URL?
@@ -62,9 +63,13 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
     private let paymentPathString = "/payment/"
     private let getNFTByIDString = "nft/"
     
+    //MARK: - init
+    
     private init(networkClient: NetworkClient = DefaultNetworkClient()) {
         self.networkClient = networkClient
     }
+    
+    //MARK: - Helper methods
     
     func getOrder() {
         let urlString = Config.baseUrl + orderPathString
@@ -80,6 +85,8 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
                 self.currentOrder = nil
                 self.currentOrderItems = []
                 assertionFailure(error.localizedDescription)
+                
+                //TODO: Network error alert
             }
         })
     }
@@ -150,10 +157,6 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
                 assertionFailure(error.localizedDescription)
             }
         })
-    }
-    
-    func addItemToOrder(_ newItem: ItemNFT) {
-        
     }
     
     func removeItemFromOrder(id: String) {

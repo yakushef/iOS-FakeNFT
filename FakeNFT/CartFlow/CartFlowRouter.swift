@@ -14,24 +14,6 @@ final class CartFlowRouter {
     
     private init() { }
     
-    private func createAlertAction(type: CartSortOrder) -> UIAlertAction {
-        var title: String?
-        switch type {
-            case .price:
-                title = "По цене"
-            case .rating:
-                title = "По рейтингу"
-            case .title:
-                title = "По названию"
-        }
-        return UIAlertAction(
-            title: title,
-            style: .default
-        ) { [weak self] _ in
-            self?.cartVC?.setSorting(to: type)
-        }
-    }
-    
     // Метод для отображения алерта с ошибкой оплаты
     func showPaymentError() {
         let alert = UIAlertController(title: "Упс! Что-то пошло не так :(",
@@ -79,5 +61,25 @@ final class CartFlowRouter {
     // Метод для скрытия текущего экрана
     func dismiss() {
         cartVC?.dismiss(animated: true)
+    }
+    
+    //MARK: Helper methods
+    
+    private func createAlertAction(type: CartSortOrder) -> UIAlertAction {
+        var title: String?
+        switch type {
+            case .price:
+                title = "По цене"
+            case .rating:
+                title = "По рейтингу"
+            case .title:
+                title = "По названию"
+        }
+        return UIAlertAction(
+            title: title,
+            style: .default
+        ) { [weak self] _ in
+            self?.cartVC?.setSorting(to: type)
+        }
     }
 }

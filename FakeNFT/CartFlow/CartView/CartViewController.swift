@@ -40,8 +40,8 @@ final class CartViewController: UIViewController {
         return table
     }()
     
-    private lazy var paymentView: CheckoutView = {
-        let view = CheckoutView()
+    private lazy var paymentView: CartTotalView = {
+        let view = CartTotalView()
         return view
     }()
 
@@ -73,10 +73,6 @@ final class CartViewController: UIViewController {
         showProgressView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     //MARK: - UI setup
     private func setupUI() {
         ProgressHUD.animationType = .systemActivityIndicator
@@ -103,7 +99,9 @@ final class CartViewController: UIViewController {
             paymentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             paymentView.heightAnchor.constraint(equalToConstant: 76)
         ])
-        paymentView.payButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+        paymentView.setCheckoutAction { [weak self] in
+            self?.payButtonTapped()
+        }
     
         //MARK: Cart item table
         view.addSubview(cartTable)
@@ -121,7 +119,7 @@ final class CartViewController: UIViewController {
         router?.showSortSheet()
     }
     
-    @objc private func payButtonTapped() {
+    private func payButtonTapped() {
         router?.showPaymentScreen()
     }
     
@@ -135,6 +133,8 @@ final class CartViewController: UIViewController {
         checkIfEmpty()
         hideProgressView()
     }
+    
+    //MARK: - Helper methods
     
     private func checkIfEmpty() {
         paymentView.isHidden = orderItems.isEmpty

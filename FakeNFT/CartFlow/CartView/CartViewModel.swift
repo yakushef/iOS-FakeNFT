@@ -9,15 +9,15 @@ import Foundation
 
 final class CartViewModel {
     private var router = CartFlowRouter.shared
-    private var sortingStyle: CartSortOrder = .title {
-        didSet {
-            setSortingStyle()
-            sortCurrentOrder()
-        }
-    }
     private var orderService: OrderAndPaymentServiceProtocol
     private var currentOrder: [ItemNFT] = [] {
         didSet {
+            sortCurrentOrder()
+        }
+    }
+    private var sortingStyle: CartSortOrder = .title {
+        didSet {
+            setSortingStyle()
             sortCurrentOrder()
         }
     }
@@ -28,6 +28,8 @@ final class CartViewModel {
         self.orderService.cartVM = self
         getSortingStyle()
     }
+    
+    //MARK: Order
     
     func setOrder(_ newOrder: [ItemNFT]) {
         currentOrder = newOrder
@@ -41,6 +43,8 @@ final class CartViewModel {
         CartFlowRouter.shared.dismiss()
         getOrder()
     }
+    
+    //MARK: - Sorting
     
     func sortNFT(_ items: [ItemNFT], by style: CartSortOrder) -> [ItemNFT] {
         var newItems = items
@@ -90,6 +94,8 @@ final class CartViewModel {
         sortingStyle = newStyle
     }
 }
+
+    //MARK: Remove item from order
 
 extension CartViewModel: CartItemCellDelegate {
     func removeItem(id: String) {
