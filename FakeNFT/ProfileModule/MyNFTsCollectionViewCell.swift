@@ -15,20 +15,17 @@ final class MyNFTsTableViewCell: UITableViewCell {
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let nftLikeView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Favorites_Inactive")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let containerView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -36,14 +33,12 @@ final class MyNFTsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "Lilo"
         label.font = UIFont.Bold.small
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let ratingView: RatingView = {
         let ratingView = RatingView()
         ratingView.setRating(to: 4)
-        ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
     }()
     
@@ -51,7 +46,6 @@ final class MyNFTsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "от John Doe"
         label.font = UIFont.Regular.small
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -59,7 +53,6 @@ final class MyNFTsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "Цена"
         label.font = UIFont.Regular.small
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -67,13 +60,13 @@ final class MyNFTsTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "1,78 ETH"
         label.font = UIFont.Bold.small
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        setupView()
         setupNFTImageView()
         setupNFTLikeView()
         setupContainerView()
@@ -86,6 +79,21 @@ final class MyNFTsTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        [
+            nftImageView,
+            nftLikeView,
+            containerView,
+            nftNameLabel,
+            ratingView,
+            nftAuthorLabel,
+            priceTitleLabel,
+            priceLabel
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setupNFTImageView() {
