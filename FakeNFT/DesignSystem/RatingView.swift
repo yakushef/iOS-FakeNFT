@@ -52,7 +52,7 @@ final class RatingView: UIView {
         starStack.distribution = .equalSpacing
         stars.forEach { star in
             star.heightAnchor.constraint(equalToConstant: 12).isActive = true
-            star.heightAnchor.constraint(equalToConstant: 12).isActive = true
+            star.widthAnchor.constraint(equalToConstant: 12).isActive = true
             starStack.addArrangedSubview(star)
             star.translatesAutoresizingMaskIntoConstraints = false
         }

@@ -213,9 +213,9 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let myNFTsViewController = MyNFTsViewController()
-            myNFTsViewController.navTitle = cells[indexPath.row]
-            navigationController?.pushViewController(myNFTsViewController, animated: true)
+            let myNFTsTableViewController = MyNFTsTableViewController()
+            myNFTsTableViewController.navTitle = cells[indexPath.row]
+            navigationController?.pushViewController(myNFTsTableViewController, animated: true)
         case 1:
             break
         case 2:
