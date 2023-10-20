@@ -217,7 +217,9 @@ extension ProfileViewController: UITableViewDelegate {
             myNFTsTableViewController.navTitle = cells[indexPath.row]
             navigationController?.pushViewController(myNFTsTableViewController, animated: true)
         case 1:
-            break
+            let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController()
+            favoritesNFTsCollectionViewController.navTitle = cells[indexPath.row]
+            navigationController?.pushViewController(favoritesNFTsCollectionViewController, animated: true)
         case 2:
             break
         default:
