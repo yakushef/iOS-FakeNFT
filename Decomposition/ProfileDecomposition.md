@@ -28,7 +28,7 @@
 - Закрытие экрана редактирования профиля (est: 30 min; fact: 20 min).
 `Total:` est: 30 min; fact: 20 min).
 
-## Module 2 (est 570 min; fact x min).
+## Module 2 (est 840 min; fact x min).
 ### Экран Профиль
 #### Логика
 - Открытие экрана с webView при нажатии на ссылку сайта (est: 60 min; fact: 90 min).
@@ -56,7 +56,7 @@
 - Переиспользуемая ячейка коллекции с иконкой NFT, сердечком, названием, рейтингом и ценой (est: 120 min; fact: 60 min).
 `Total:` est: 270 min; fact: 130 min).
 
-## Module 3 (est 840 min; fact x min).
+## Module 3 (est 570 min; fact x min).
 ### Экран Мои NFT
 #### Логика
 - Открытие AlertController'а по нажатию на кнопку сортировки (est: 30 min; fact: x min).
