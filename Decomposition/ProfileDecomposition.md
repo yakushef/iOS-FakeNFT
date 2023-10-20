@@ -28,7 +28,7 @@
 - Закрытие экрана редактирования профиля (est: 30 min; fact: 20 min).
 `Total:` est: 30 min; fact: 20 min).
 
-## Module 2 (est 840 min; fact x min).
+## Module 2 (est 870 min; fact x min).
 ### Экран Профиль
 #### Логика
 - Открытие экрана с webView при нажатии на ссылку сайта (est: 60 min; fact: 90 min).
@@ -48,6 +48,9 @@
 - TableView со списком NFT (est: 30 min; fact: 40 min).
 - Переиспользуемая ячейка таблицы с иконкой NFT, названием, автором и ценой (est: 120 min; fact: 120 min).
 `Total:` est: 210 min; fact: 180 min).
+#### Логика
+- Открытие AlertController'а по нажатию на кнопку сортировки (est: 30 min; fact: x min).
+`Total:` est: 30 min; fact: 10 min).
 
 ### Экран Избранные NFT
 #### Вёрстка
@@ -56,13 +59,12 @@
 - Переиспользуемая ячейка коллекции с иконкой NFT, сердечком, названием, рейтингом и ценой (est: 120 min; fact: 60 min).
 `Total:` est: 270 min; fact: 130 min).
 
-## Module 3 (est 570 min; fact x min).
+## Module 3 (est 540 min; fact x min).
 ### Экран Мои NFT
 #### Логика
-- Открытие AlertController'а по нажатию на кнопку сортировки (est: 30 min; fact: x min).
 - Сортировка ячеек по цене, рейтингу и названию (est: 300 min; fact: x min).
 - Отображение надписи об отсутствии NFT (est: 60 min; fact: x min).
-`Total:` est: 390 min; fact: x min.
+`Total:` est: 360 min; fact: x min.
 
 ### Экран Избранные NFT
 #### Логика
