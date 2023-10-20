@@ -53,7 +53,14 @@ final class MyNFTsTableViewController: UITableViewController {
     }
     
     @objc
-    private func sortButtonDidTap() {}
+    private func sortButtonDidTap() {
+        let alertController = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "По цене", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "По рейтингу", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "По названию", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
+        present(alertController, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
