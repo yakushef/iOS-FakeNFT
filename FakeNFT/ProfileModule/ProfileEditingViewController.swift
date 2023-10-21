@@ -69,6 +69,15 @@ final class ProfileEditingViewController: UIViewController {
         setupTextView(bioTextView, under: bioLabel)
         setupLabel(siteLabel, under: bioTextView)
         setupTextView(siteTextView, under: siteLabel)
+        
+        addGesture()
+    }
+    
+    private func addGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(changeImageDidTap))
+        tap.numberOfTapsRequired = 1
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tap)
     }
     
     private func setupView() {
@@ -148,5 +157,15 @@ final class ProfileEditingViewController: UIViewController {
     @objc
     private func closeButtonDidTap() {
         dismiss(animated: true)
+    }
+    
+    @objc
+    private func changeImageDidTap() {
+        // simulation of downloading photo
+        UIBlockingProgressHUD.show()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            UIBlockingProgressHUD.dismiss()
+        }
     }
 }

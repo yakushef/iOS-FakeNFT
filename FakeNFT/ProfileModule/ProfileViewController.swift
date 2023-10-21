@@ -86,11 +86,6 @@ final class ProfileViewController: UIViewController {
         siteLabel.isUserInteractionEnabled = true
         siteLabel.addGestureRecognizer(tap)
     }
-
-    @objc
-    private func labelTapped(_ tap: UITapGestureRecognizer) {
-        openWebView()
-    }
     
     private func openWebView() {
         let webViewController = WebViewController()
@@ -186,6 +181,11 @@ final class ProfileViewController: UIViewController {
     @objc
     private func editButtonDidTap() {
         present(ProfileEditingViewController(), animated: true)
+    }
+    
+    @objc
+    private func labelTapped(_ tap: UITapGestureRecognizer) {
+        openWebView()
     }
 }
 
