@@ -80,7 +80,7 @@ final class ProfileViewController: UIViewController {
         addGesture()
     }
     
-    func addGesture() {
+    private func addGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(labelTapped(_:)))
         tap.numberOfTapsRequired = 1
         siteLabel.isUserInteractionEnabled = true
@@ -88,7 +88,11 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc
-    func labelTapped(_ tap: UITapGestureRecognizer) {
+    private func labelTapped(_ tap: UITapGestureRecognizer) {
+        openWebView()
+    }
+    
+    private func openWebView() {
         let webViewController = WebViewController()
         webViewController.selectedWebSite = "hackingwithswift.com"
         navigationController?.pushViewController(webViewController, animated: true)
@@ -221,7 +225,7 @@ extension ProfileViewController: UITableViewDelegate {
             favoritesNFTsCollectionViewController.navTitle = cells[indexPath.row]
             navigationController?.pushViewController(favoritesNFTsCollectionViewController, animated: true)
         case 2:
-            break
+            openWebView()
         default:
             break
         }
