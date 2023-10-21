@@ -194,9 +194,9 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
-				CBA8DF502AD6E6C8006A2601 /* ProfileModule */,
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
 				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
+				CBA8DF502AD6E6C8006A2601 /* ProfileModule */,
 				3F478ECD29DB473000F6D39E /* DesignSystem */,
 				3F6806CE29CBBD1B00B4F915 /* Foundation */,
 				3F6806C929CBBCAF00B4F915 /* Models */,
@@ -323,17 +323,41 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */ = {
+			isa = PBXGroup;
+			children = (
+				CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */,
+				CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */,
+			);
+			path = MyNFTs;
+			sourceTree = "<group>";
+		};
+		CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */ = {
+			isa = PBXGroup;
+			children = (
+				CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */,
+				CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */,
+			);
+			path = FavoritesNFTs;
+			sourceTree = "<group>";
+		};
+		CB85C9AD2AE4036200B2C5B9 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				CB30AB232AE04D4600001D8B /* WebViewController.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		CBA8DF502AD6E6C8006A2601 /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
 				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
 				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
-				CB30AB232AE04D4600001D8B /* WebViewController.swift */,
-				CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */,
-				CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */,
-				CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */,
-				CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */,
+				CB85C9AD2AE4036200B2C5B9 /* WebView */,
+				CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */,
+				CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
