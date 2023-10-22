@@ -58,6 +58,8 @@
 		BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */; };
 		BC6257712ADC4B0B00E3E0F9 /* CartFlowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */; };
 		BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */; };
+		BC986C0B2AE5986000E17267 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C092AE5986000E17267 /* WebViewController.swift */; };
+		BC986C0C2AE5986000E17267 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C0A2AE5986000E17267 /* WebViewModel.swift */; };
 		BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */; };
 		BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */; };
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
@@ -128,6 +130,8 @@
 		BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowRouter.swift; sourceTree = "<group>"; };
 		BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentRequests.swift; sourceTree = "<group>"; };
+		BC986C092AE5986000E17267 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		BC986C0A2AE5986000E17267 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
+				BC986C0D2AE5986A00E17267 /* WebView */,
 				BCB1DDF92AD707DD002ED041 /* CartFlow */,
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
 				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
@@ -351,6 +356,15 @@
 				BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */,
 			);
 			path = CheckoutView;
+			sourceTree = "<group>";
+		};
+		BC986C0D2AE5986A00E17267 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				BC986C092AE5986000E17267 /* WebViewController.swift */,
+				BC986C0A2AE5986000E17267 /* WebViewModel.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		BCB1DDF92AD707DD002ED041 /* CartFlow */ = {
@@ -537,6 +551,7 @@
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				BCB1DDFD2AD70867002ED041 /* CartItemCell.swift in Sources */,
+				BC986C0C2AE5986000E17267 /* WebViewModel.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */,
 				BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */,
@@ -551,6 +566,7 @@
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
 				BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */,
 				BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */,
+				BC986C0B2AE5986000E17267 /* WebViewController.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,6 +33,9 @@ class MakePaymentView: UIView {
         agreementButton.tintColor = .blueUniversal
         agreementButton.setTitle("Пользовательского соглашения",
                                  for: .normal)
+        agreementButton.addTarget(self, action:
+                                    #selector(agreementButtonTapped),
+                                  for: .touchUpInside)
         agreementButton.titleLabel?.font = .Regular.small
         agreementButton.backgroundColor = .clear
         agreementButton.contentHorizontalAlignment = .left
@@ -52,6 +55,7 @@ class MakePaymentView: UIView {
     }()
     
     private var paymentAction: () -> Void = { }
+    private var agreementAction: () -> Void = { }
 
     //MARK: - Lifecycle
     init() {
@@ -66,6 +70,10 @@ class MakePaymentView: UIView {
     //MARK: - UI setup
     func setPaymentAction(action: @escaping () -> Void) {
         paymentAction = action
+    }
+    
+    func setAgreementAction(action: @escaping () -> Void) {
+        agreementAction = action
     }
     
     func setupUI() {
@@ -104,6 +112,10 @@ class MakePaymentView: UIView {
     //MARK: - Button interaction
     func switchPayButtonState(isActive: Bool) {
         payButton.switchActiveState(isActive: isActive)
+    }
+    
+    @objc private func agreementButtonTapped() {
+        agreementAction()
     }
     
     @objc private func payButtonTapped() {

@@ -66,7 +66,9 @@ final class CheckoutViewController: UIViewController {
             self?.payButtonTapped()
             self?.dismiss(animated: true)
         }
-        
+        paymentView.setAgreementAction { [weak self] in
+            self?.agreementButtonTapped()
+        }
         setupCollection()
     }
     
@@ -99,8 +101,12 @@ final class CheckoutViewController: UIViewController {
     
     //MARK: - Navigation
     
-    @objc private func payButtonTapped() {
+    private func payButtonTapped() {
         viewModel?.makePayment()
+    }
+    
+    private func agreementButtonTapped() {
+        router.showAgreementWebView()
     }
     
     @objc private func backButtonTapped() {

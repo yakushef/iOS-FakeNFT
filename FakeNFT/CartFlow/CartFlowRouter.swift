@@ -42,6 +42,13 @@ final class CartFlowRouter {
         cartVC?.present(sortSheet, animated: true)
     }
     
+    func showAgreementWebView() {
+        let webViewmodel = WebViewModel(url: Config.userAgreementUrl)
+        let webView = WebViewController()
+        webView.model = webViewmodel
+        checkoutVC?.show(webView, sender: nil)
+    }
+    
     // Метод для перехода на экран оплаты
     func showPaymentScreen() {
         let checkout = CheckoutViewController()
