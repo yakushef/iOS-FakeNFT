@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */; };
 		318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA42AE57BF700FF0270 /* WebViewView.swift */; };
+		318C0CA82AE584DB00FF0270 /* CollectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */; };
 		31958C192ADEE8C600824EA4 /* ProfileUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C182ADEE8C600824EA4 /* ProfileUpdateDTO.swift */; };
 		31958C1B2ADEE8EF00824EA4 /* OrderUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C1A2ADEE8EF00824EA4 /* OrderUpdateDTO.swift */; };
 		31958C1F2ADF0A5D00824EA4 /* Float+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C1E2ADF0A5D00824EA4 /* Float+Extensions.swift */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionShortModel.swift; sourceTree = "<group>"; };
 		318C0CA42AE57BF700FF0270 /* WebViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewView.swift; sourceTree = "<group>"; };
+		318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItemViewController.swift; sourceTree = "<group>"; };
 		31958C182ADEE8C600824EA4 /* ProfileUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateDTO.swift; sourceTree = "<group>"; };
 		31958C1A2ADEE8EF00824EA4 /* OrderUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderUpdateDTO.swift; sourceTree = "<group>"; };
 		31958C1E2ADF0A5D00824EA4 /* Float+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extensions.swift"; sourceTree = "<group>"; };
@@ -177,6 +179,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		318C0CA62AE584A700FF0270 /* CollectionItem */ = {
+			isa = PBXGroup;
+			children = (
+				318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */,
+			);
+			path = CollectionItem;
+			sourceTree = "<group>";
+		};
 		31994A9C2AD53A0B00B57E7B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +220,7 @@
 				31994ACD2ADA8FC800B57E7B /* CollectionNFTSection.swift */,
 				318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */,
 				318C0CA42AE57BF700FF0270 /* WebViewView.swift */,
+				318C0CA62AE584A700FF0270 /* CollectionItem */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -545,6 +556,7 @@
 				31994AC62AD6818D00B57E7B /* ImageCollectionViewCell.swift in Sources */,
 				31994AC42AD67ADA00B57E7B /* CollectionViewModel.swift in Sources */,
 				31994AC22AD67AC200B57E7B /* CollectionViewController.swift in Sources */,
+				318C0CA82AE584DB00FF0270 /* CollectionItemViewController.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
 				31994A982AD487AB00B57E7B /* Collection.swift in Sources */,
 				31994ABD2AD597E000B57E7B /* ProfileViewController.swift in Sources */,

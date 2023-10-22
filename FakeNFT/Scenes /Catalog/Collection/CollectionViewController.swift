@@ -96,6 +96,11 @@ final class CollectionViewController: UIViewController {
         webViewVC.url = url
         self.navigationController?.pushViewController(webViewVC, animated: true)
     }
+    
+    private func showCollectionItemView() {
+        let collectionItemVC = CollectionItemViewController()
+        self.navigationController?.pushViewController(collectionItemVC, animated: true)
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -128,6 +133,7 @@ extension CollectionViewController: UICollectionViewDataSource {
                let imageURl = URL(string: imageURLString.encodeURL) {
                 imageCell.imageView.kf.setImage(with: imageURl)
             }
+            imageCell.configure(collectionImageAction: showCollectionItemView)
             return imageCell
             
         case .description:
@@ -163,7 +169,7 @@ extension CollectionViewController: UICollectionViewDataSource {
                 },
                                   cartButtonInteraction: { [weak self] in
                     self?.cartButtonTapped(nftIndex: nftIndex)
-                })
+                }, collectionImageAction: showCollectionItemView)
             }
             return nftCell
         }
@@ -226,3 +232,4 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
+
