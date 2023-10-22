@@ -4,13 +4,14 @@
 //
 //  Created by Andy Kruch on 11.10.23.
 //
+
 import UIKit
 import Kingfisher
 
 final class CollectionViewController: UIViewController {
     
     private let viewModel: CollectionViewModel
-    
+ 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
@@ -31,13 +32,13 @@ final class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         addSubviews()
         setupConstraints()
         setupNavBar()
         setupCollectionView()
     }
-    
+        
     private func addSubviews() {
         [collectionView].forEach {
             view.addSubview($0)
@@ -61,11 +62,11 @@ final class CollectionViewController: UIViewController {
     }
     
     private func likeButtonTapped(nftIndex: String) {
-        // TO DO
+        viewModel.updateLikeForNFT(with: nftIndex)
     }
     
     private func cartButtonTapped(nftIndex: String) {
-        // TO DO
+        viewModel.updateCartForNFT(with: nftIndex)
     }
     
     private func setupNavBar() {
@@ -131,7 +132,7 @@ extension CollectionViewController: UICollectionViewDataSource {
             descriptionCell.configure(
                 collectionName: viewModel.collection.name,
                 subTitle: "Автор коллекции:",
-                authorName: viewModel.user?.name ?? "ФИО",
+                authorName: viewModel.user?.name ?? "",
                 description: viewModel.collection.description,
                 authorNameButtonAction: showWebViewAboutAuthor)
             return descriptionCell
@@ -146,7 +147,7 @@ extension CollectionViewController: UICollectionViewDataSource {
             
             if let imageURLString = viewModel.nfts(by: nftIndex)?.images.first,
                let imageURL = URL(string: imageURLString.encodeURL),
-               let price = viewModel.nfts(by: nftIndex)?.price,
+               let price = viewModel.nfts(by: nftIndex)?.price.ethCurrency,
                let rating = viewModel.nfts(by: nftIndex)?.rating {
                 let isNFTLiked = viewModel.isNFTLiked(with: nftIndex)
                 let isNFTInOrder = viewModel.isNFTInOrder(with: nftIndex)
@@ -154,7 +155,7 @@ extension CollectionViewController: UICollectionViewDataSource {
                 likeButton = isNFTLiked ? "like" : "dislike"
                 cartButton = isNFTInOrder ? "inCart" : "cart"
                 
-                nftCell.configure(nftImage: imageURL, likeOrDislike: likeButton, rating: rating, nftName: viewModel.nfts(by: nftIndex)?.name ?? "", pirce: String(price), cartImage: cartButton, likeButtonInteraction: { [weak self] in
+                nftCell.configure(nftImage: imageURL, likeOrDislike: likeButton, rating: rating, nftName: viewModel.nfts(by: nftIndex)?.name ?? "", pirce: price, cartImage: cartButton, likeButtonInteraction: { [weak self] in
                     self?.likeButtonTapped(nftIndex: nftIndex)
                 },
                                   cartButtonInteraction: { [weak self] in

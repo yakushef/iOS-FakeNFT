@@ -103,7 +103,6 @@
 		31994AA72AD544F500B57E7B /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		31994AA92AD545D400B57E7B /* OrderPaymentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPaymentStatus.swift; sourceTree = "<group>"; };
 		31994AAB2AD5460500B57E7B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		31994AAF2AD55D5A00B57E7B /* kruchenkov_catalog.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = kruchenkov_catalog.md; path = ../Downloads/kruchenkov_catalog.md; sourceTree = "<group>"; };
 		31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		31994AB42AD57B8800B57E7B /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
@@ -225,7 +224,6 @@
 		3F68068A29CBBAF100B4F915 = {
 			isa = PBXGroup;
 			children = (
-				31994AAF2AD55D5A00B57E7B /* kruchenkov_catalog.md */,
 				3F68069529CBBAF100B4F915 /* FakeNFT */,
 				31994A9C2AD53A0B00B57E7B /* Helpers */,
 				3F6806AC29CBBAF200B4F915 /* FakeNFTTests */,
