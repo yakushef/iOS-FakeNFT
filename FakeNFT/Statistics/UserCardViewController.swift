@@ -118,6 +118,7 @@ final class UserCardViewController: UIViewController {
     
     @objc
     private func getUsersCollection() {
+        //TODO: - Switching to the screen Users Collection
     }
     
     func configure() {
@@ -171,7 +172,6 @@ final class UserCardViewController: UIViewController {
         view.tintColor = .ypBlack
         let model = UserCardModel()
         viewModel = UserCardViewModel(model: model)
-        viewModel.onChange = configure
         viewModel.onChange = { [weak self] in
             self?.configure()
         }
