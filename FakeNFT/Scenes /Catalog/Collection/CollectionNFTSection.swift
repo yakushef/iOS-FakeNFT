@@ -12,4 +12,3 @@ enum CollectionNFTSection: Int, CaseIterable {
     case description
     case nft
 }
-

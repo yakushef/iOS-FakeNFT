@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */; };
+		318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA42AE57BF700FF0270 /* WebViewView.swift */; };
 		31958C192ADEE8C600824EA4 /* ProfileUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C182ADEE8C600824EA4 /* ProfileUpdateDTO.swift */; };
 		31958C1B2ADEE8EF00824EA4 /* OrderUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C1A2ADEE8EF00824EA4 /* OrderUpdateDTO.swift */; };
 		31958C1F2ADF0A5D00824EA4 /* Float+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31958C1E2ADF0A5D00824EA4 /* Float+Extensions.swift */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionShortModel.swift; sourceTree = "<group>"; };
+		318C0CA42AE57BF700FF0270 /* WebViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewView.swift; sourceTree = "<group>"; };
 		31958C182ADEE8C600824EA4 /* ProfileUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateDTO.swift; sourceTree = "<group>"; };
 		31958C1A2ADEE8EF00824EA4 /* OrderUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderUpdateDTO.swift; sourceTree = "<group>"; };
 		31958C1E2ADF0A5D00824EA4 /* Float+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extensions.swift"; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				31994AC92AD6825900B57E7B /* NFTCollectionViewCell.swift */,
 				31994ACD2ADA8FC800B57E7B /* CollectionNFTSection.swift */,
 				318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */,
+				318C0CA42AE57BF700FF0270 /* WebViewView.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				31994AD02ADA9C4100B57E7B /* String+Extensions.swift in Sources */,
 				31994ACE2ADA8FC800B57E7B /* CollectionNFTSection.swift in Sources */,
 				31994AD22ADAA85600B57E7B /* SortCollections.swift in Sources */,
+				318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */,
 				31994AB72AD57BB100B57E7B /* CatalogTableViewCell.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,

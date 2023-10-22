@@ -91,7 +91,10 @@ final class CollectionViewController: UIViewController {
     }
     
     private func showWebViewAboutAuthor() {
-        //TO DO
+        let webViewVC = WebView()
+        guard let url = URL(string: viewModel.user?.website ?? "") else { return }
+        webViewVC.url = url
+        self.navigationController?.pushViewController(webViewVC, animated: true)
     }
 }
 

@@ -161,5 +161,3 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         }
     }
 }
-
-

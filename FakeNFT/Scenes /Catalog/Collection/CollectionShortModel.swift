@@ -26,4 +26,3 @@ struct OrderCollection {
         self.id = nft.id
     }
 }
-

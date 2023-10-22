@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Float {
+extension Double {
     var ethCurrency: String {
         let formater = NumberFormatter()
         formater.numberStyle = .currency
