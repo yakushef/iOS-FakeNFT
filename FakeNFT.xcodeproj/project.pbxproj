@@ -22,7 +22,7 @@
 		31994AAC2AD5460500B57E7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AAB2AD5460500B57E7B /* User.swift */; };
 		31994AB32AD57B6B00B57E7B /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */; };
 		31994AB52AD57B8800B57E7B /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB42AD57B8800B57E7B /* CatalogViewController.swift */; };
-		31994AB72AD57BB100B57E7B /* CatalogTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB62AD57BB100B57E7B /* CatalogTableView.swift */; };
+		31994AB72AD57BB100B57E7B /* CatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */; };
 		31994AB92AD596A400B57E7B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB82AD596A400B57E7B /* TabBarViewController.swift */; };
 		31994ABB2AD597B100B57E7B /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994ABA2AD597B100B57E7B /* CartViewController.swift */; };
 		31994ABD2AD597E000B57E7B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994ABC2AD597E000B57E7B /* ProfileViewController.swift */; };
@@ -106,7 +106,7 @@
 		31994AAF2AD55D5A00B57E7B /* kruchenkov_catalog.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = kruchenkov_catalog.md; path = ../Downloads/kruchenkov_catalog.md; sourceTree = "<group>"; };
 		31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		31994AB42AD57B8800B57E7B /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
-		31994AB62AD57BB100B57E7B /* CatalogTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableView.swift; sourceTree = "<group>"; };
+		31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
 		31994AB82AD596A400B57E7B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		31994ABA2AD597B100B57E7B /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		31994ABC2AD597E000B57E7B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 			children = (
 				31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */,
 				31994AB42AD57B8800B57E7B /* CatalogViewController.swift */,
-				31994AB62AD57BB100B57E7B /* CatalogTableView.swift */,
+				31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */,
 				31994AD12ADAA85600B57E7B /* SortCollections.swift */,
 				31994AC02AD5B81C00B57E7B /* Collection */,
 			);
@@ -565,7 +565,7 @@
 				31994AD02ADA9C4100B57E7B /* String+Extensions.swift in Sources */,
 				31994ACE2ADA8FC800B57E7B /* CollectionNFTSection.swift in Sources */,
 				31994AD22ADAA85600B57E7B /* SortCollections.swift in Sources */,
-				31994AB72AD57BB100B57E7B /* CatalogTableView.swift in Sources */,
+				31994AB72AD57BB100B57E7B /* CatalogTableViewCell.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 			);

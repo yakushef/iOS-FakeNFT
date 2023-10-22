@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CatalogTableView: UITableViewCell {
+final class CatalogTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "catalogCell"
     

@@ -20,51 +20,143 @@ final class CollectionViewModel: NSObject {
     init(collection: Collection) {
         self.collection = collection
         super .init()
-        fetchUserData()
+        fetchUserData(by: collection.author)
         fetchNFTData()
         fetchProfileData()
         fetchOrderData()
     }
     
-    func fetchUserData() {
-        
-        let data = User(name: "Elijah Anderson", avatar:  "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/179.jpg", description: "NFT collector and enthusiast 🚀", website: "https://practicum.yandex.ru/qa-engineer/", nfts: [
-            "1",
-            "4",
-            "6",
-            "8"
-        ], rating: "77", id: "1")
-        self.user = UserCollection(with: data)
+    func fetchUserData(by id: String) {
+        DefaultNetworkClient().send(request: CollectionRequests.userId(userId: id), type: User.self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.user = UserCollection(with: data)
+                DispatchQueue.main.async {
+                    self?.reloadData?()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print("fetch user data error status - \(error)")
+                }
+            }
+        }
     }
     
     func fetchNFTData() {
-        self.nft = [ItemNFT(createdAt: "2023-04-20T02:22:27Z", name: "April", images: ["https://code.s3.yandex.net/Mobile/iOS/NFT/Beige/April/1.png", "https://code.s3.yandex.net/Mobile/iOS/NFT/Beige/April/2.png", "https://code.s3.yandex.net/Mobile/iOS/NFT/Beige/April/3.png"], rating: 5, description: "A 3D model of a mythical creature.", price: 4.5, author: "6", id: "1")]
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: CollectionRequests.nft, type: [ItemNFT].self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.nft = data.map { $0 }
+                    DispatchQueue.main.async { [weak self] in
+                        self?.reloadData?()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("fetch nft data error status - \(error)")
+                    }
+                }
+            }
+        }
     }
     
     private func fetchOrderData() {
-        let data = Order(nfts: ["93", "95", "23", "75", "92", "50", "59", "56", "1", "74", "22"], id: "1")
-        
-        self.order = OrderCollection(with: data)
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: CollectionRequests.order, type: Order.self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.order = OrderCollection(with: data)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.reloadData?()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("fetch order data error status - \(error)")
+                    }
+                }
+            }
+        }
     }
     
     private func fetchProfileData() {
-        let data = Profile(name: "Студентус практикус", avatar: "https://3.bp.blogspot.com/-qmHbrjpisRg/V6xgteIDhCI/AAAAAAAAABI/WdlSlkwqAgQJd9Z2BZJ6tdUuZUAnEaS_wCLcB/s1600/Bradley-Cooper.jpg", description: "Прошел 5-й спринт, и этот пройду Прошел 5-й спринт, и этот пройду Прошел 5-й спринт, и этот пройду ", website: "https://practicum.yandex.ru/ios-developer", nfts: ["68", "69", "71"], likes: ["35", "39", "41", "47", "56", "66", "68", "69", "21", "75", "92", "50", "59", "1", "74", "2", "10", "11", "22", "23"], id: "1" )
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: CollectionRequests.profile, type: Profile.self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.profile = data
+                    DispatchQueue.main.async { [weak self] in self?.reloadData?()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("fetch profile data error status - \(error)")
+                    }
+                }
+            }
+        }
     }
     
-    func updateLikeForNFT() {
-        // TO DO
+    func updateLikeForNFT(with id: String) {
+        var likes = profile?.likes
+        if let index = likes?.firstIndex(of: id) {
+            likes?.remove(at: index)
+        } else {
+            likes?.append(id)
+        }
+        guard let likes = likes,
+              let id = profile?.id
+        else { return }
+        let dto = ProfileUpdateDTO(likes: likes, id: id)
+        updateProfileData(with: dto)
     }
     
-    private func updateProfileData() {
-        // TO DO
+    private func updateProfileData(with dto: ProfileUpdateDTO) {
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: ProfileUpdateRequest(profileUpdateDTO: dto), type: Profile.self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.profile = data
+                    DispatchQueue.main.async {
+                        self?.reloadData?()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("update order data error status \(error)")
+                    }
+                }
+            }
+        }
     }
     
-    func updateCartForNFT() {
-        // TO DO
+    func updateCartForNFT(with id: String) {
+        var nfts = order?.nfts
+        if let index = nfts?.firstIndex(of: id) {
+            nfts?.remove(at: index)
+        } else {
+            nfts?.append(id)
+        }
+        guard let nfts = nfts,
+              let id = order?.id
+        else { return }
+        let dto = OrderUpdateDTO(nfts: nfts, id: id)
+        updateOrderData(with: dto)
     }
     
-    private func updateOrderData() {
-        // TO DO
+    private func updateOrderData(with dto: OrderUpdateDTO) {
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: OrderUpdateRequest(orderUpdateDTO: dto), type: Order.self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.order = OrderCollection(with: data)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.reloadData?()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("update order data status error - \(error)")
+                    }
+                }
+            }
+        }
     }
     
     func nfts(by id: String) -> ItemNFT? {
@@ -72,11 +164,10 @@ final class CollectionViewModel: NSObject {
     }
     
     func isNFTLiked(with nftId: String) -> Bool {
-        return ((profile?.likes.contains(nftId)) != nil)
+        return profile?.likes.contains(nftId) ?? false
     }
     
     func isNFTInOrder(with nftId: String) -> Bool {
-        return ((order?.nfts.contains(nftId)) != nil)
+        return order?.nfts.contains(nftId) ?? false
     }
 }
-
