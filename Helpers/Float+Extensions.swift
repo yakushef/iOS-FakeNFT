@@ -11,6 +11,7 @@ extension Float {
     var ethCurrency: String {
         let formater = NumberFormatter()
         formater.numberStyle = .currency
+        formater.locale = Locale(identifier: "es_ES")
         formater.currencySymbol = "ETH"
         return formater.string(from: NSNumber(value: self)) ?? ""
     }

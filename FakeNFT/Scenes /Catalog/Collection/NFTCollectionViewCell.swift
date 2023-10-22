@@ -115,7 +115,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     private func setRating() {
         for _ in 0...5 {
             let starImage = UIImageView()
-            starImage.image = UIImage(named: "star")
+            starImage.image = UIImage(named: "Star_Inactive")
             ratingStackView.addArrangedSubview(starImage)
         }
     }
@@ -156,7 +156,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         
         for i in 0..<rating {
             if let starImage = ratingStackView.subviews[i] as? UIImageView {
-                starImage.image = UIImage(named: "star_yellow")
+                starImage.image = UIImage(named: "Star_Active")
             }
         }
     }
