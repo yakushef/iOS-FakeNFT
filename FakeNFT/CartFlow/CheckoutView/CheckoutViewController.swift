@@ -5,14 +5,16 @@
 //  Created by Aleksey Yakushev on 15.10.2023.
 //
 
-import UIKit
 import ProgressHUD
+import UIKit
 
 final class CheckoutViewController: UIViewController {
     private var router = CartFlowRouter.shared
     private var viewModel: CheckoutViewModel?
     private lazy var paymentView: MakePaymentView = {
-        MakePaymentView()
+        let paymentView = MakePaymentView()
+        paymentView.translatesAutoresizingMaskIntoConstraints = false
+        return paymentView
     }()
     private lazy var currencyCollection: UICollectionView = {
        let currencyCollection = UICollectionView(frame: CGRect(),
@@ -23,37 +25,43 @@ final class CheckoutViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        router.checkoutVC = self
-        
-        view.backgroundColor = .ypWhite
-        navigationItem.title = "Выберете способ оплаты"
-        
         viewModel = CheckoutViewModel()
         viewModel?.$currencyList.makeBinding(action: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.currencyListUpdated()
             }
         })
+        router.checkoutVC = self
+        
+        initialSetup()
+    }
+    
+    //MARK: - Initial setup
+    private func initialSetup() {
         setupUI()
         viewModel?.getCurrencyList()
         ProgressHUD.show()
     }
     
-    //MARK: UI setup
-    
-    func setupUI() {
-        let backButton = UIBarButtonItem(image: UIImage(named: "Backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+    //MARK: - UI setup
+    private func setupUI() {
+        ProgressHUD.animationType = .systemActivityIndicator
+        
+        view.backgroundColor = .ypWhite
+        navigationItem.title = "Выберете способ оплаты"
+        let backButton = UIBarButtonItem(image: UIImage(named: "Backward"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(backButtonTapped))
         backButton.tintColor = .ypBlack
         navigationItem.leftBarButtonItem = backButton
         
         view.addSubview(paymentView)
-        paymentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             paymentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             paymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             paymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
         paymentView.setPaymentAction { [weak self] in
             self?.payButtonTapped()
             self?.dismiss(animated: true)
@@ -83,11 +91,10 @@ final class CheckoutViewController: UIViewController {
         ])
     }
     
-    //MARK: Handle updates from model
-    
+    //MARK: - Handle updates from model
     private func currencyListUpdated() {
-            self.currencyCollection.reloadData()
-            ProgressHUD.dismiss()
+        self.currencyCollection.reloadData()
+        ProgressHUD.dismiss()
     }
     
     //MARK: - Navigation
@@ -97,44 +104,51 @@ final class CheckoutViewController: UIViewController {
     }
     
     @objc private func backButtonTapped() {
-        dismiss(animated: true)
+        router.pop(vc: self)
     }
 }
 
-//MARK: CollectionViewDelegates
-
+//MARK: - CollectionViewDelegates
 extension CheckoutViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         if let currency = viewModel?.currencyList[indexPath.row] {
             viewModel?.setCurrencyTo(id: currency.id)
             paymentView.switchPayButtonState(isActive: true)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         7
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         7
     }
 }
 
 extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = (collectionView.frame.width - 7) / 2  - collectionView.contentInset.left
         return CGSize(width: cellWidth, height: 46)
     }
 }
 
 //MARK: - CollectionViewDataSource
-
 extension CheckoutViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         viewModel?.currencyList.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CurrencyCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         let currency = viewModel?.currencyList[indexPath.row]
         cell.configureCell(for: currency)

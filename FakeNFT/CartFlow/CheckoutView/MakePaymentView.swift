@@ -14,7 +14,6 @@ class MakePaymentView: UIView {
                                       right: 16)
     
     //MARK: - UI elements
-    
     private lazy var payButton: GenericButton = {
         let payButton = GenericButton(type: .system)
         payButton.setTitle("Оплатить",
@@ -25,6 +24,7 @@ class MakePaymentView: UIView {
                             action: #selector(payButtonTapped),
                             for: .touchUpInside)
         payButton.switchActiveState(isActive: false)
+        payButton.translatesAutoresizingMaskIntoConstraints = false
         return payButton
     }()
     
@@ -36,6 +36,7 @@ class MakePaymentView: UIView {
         agreementButton.titleLabel?.font = .Regular.small
         agreementButton.backgroundColor = .clear
         agreementButton.contentHorizontalAlignment = .left
+        agreementButton.translatesAutoresizingMaskIntoConstraints = false
         return agreementButton
     }()
     
@@ -46,13 +47,13 @@ class MakePaymentView: UIView {
         disclaimerLabel.font = .Regular.small
         disclaimerLabel.backgroundColor = .clear
         disclaimerLabel.textAlignment = .left
+        disclaimerLabel.translatesAutoresizingMaskIntoConstraints = false
         return disclaimerLabel
     }()
     
     private var paymentAction: () -> Void = { }
 
     //MARK: - Lifecycle
-    
     init() {
         super.init(frame: .zero)
         setupUI()
@@ -63,7 +64,6 @@ class MakePaymentView: UIView {
     }
     
     //MARK: - UI setup
-    
     func setPaymentAction(action: @escaping () -> Void) {
         paymentAction = action
     }
@@ -74,8 +74,12 @@ class MakePaymentView: UIView {
         layer.cornerRadius = 12
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        addSubview(payButton)
-        payButton.translatesAutoresizingMaskIntoConstraints = false
+        [payButton,
+         userAgreementButton,
+         disclaimerLabel].forEach{
+            addSubview($0)
+        }
+        
         NSLayoutConstraint.activate([
             payButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
@@ -83,16 +87,12 @@ class MakePaymentView: UIView {
             payButton.heightAnchor.constraint(equalToConstant: 60),
         ])
         
-        addSubview(userAgreementButton)
-        userAgreementButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             userAgreementButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             userAgreementButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
             userAgreementButton.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -insets.top)
         ])
         
-        addSubview(disclaimerLabel)
-        disclaimerLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             disclaimerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             disclaimerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
@@ -102,7 +102,6 @@ class MakePaymentView: UIView {
     }
     
     //MARK: - Button interaction
-    
     func switchPayButtonState(isActive: Bool) {
         payButton.switchActiveState(isActive: isActive)
     }

@@ -29,6 +29,7 @@ final class CartTotalView: UIView {
         button.titleLabel?.font = .Bold.small
         button.layer.cornerRadius = CornerRadius.big.cgFloat()
         button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -37,6 +38,7 @@ final class CartTotalView: UIView {
         quantityLabel.text = "\(quantity) NFT"
         quantityLabel.font = .Regular.medium
         quantityLabel.textColor = .ypBlack
+        quantityLabel.translatesAutoresizingMaskIntoConstraints = false
         return quantityLabel
     }()
     
@@ -45,11 +47,11 @@ final class CartTotalView: UIView {
         priceLabel.text = "\(price) ETH"
         priceLabel.font = .Bold.small
         priceLabel.textColor = .greenUniversal
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
         return priceLabel
     }()
     
     //MARK: - Lifecycle
-    
     init() {
         super.init(frame: .zero)
         setupUI()
@@ -60,12 +62,15 @@ final class CartTotalView: UIView {
     }
     
     //MARK: - UI setup
-    
     private func setupUI() {
         backgroundColor = .ypLightGrey
         
-        addSubview(payButton)
-        payButton.translatesAutoresizingMaskIntoConstraints = false
+        [payButton,
+         quantityLabel,
+         totalPriceLabel].forEach{
+            addSubview($0)
+        }
+    
         NSLayoutConstraint.activate([
             payButton.widthAnchor.constraint(equalToConstant: 240),
             payButton.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
@@ -73,15 +78,11 @@ final class CartTotalView: UIView {
             payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(insets.right))
         ])
         
-        addSubview(quantityLabel)
-        quantityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             quantityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             quantityLabel.topAnchor.constraint(equalTo: topAnchor, constant: insets.top)
         ])
         
-        addSubview(totalPriceLabel)
-        totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             totalPriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             totalPriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(insets.bottom))

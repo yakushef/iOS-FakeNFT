@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class DeleteConfirmationViewController: UIViewController {
     var removalAction: () -> Void = { }
     var nftImageURL: String? {
@@ -21,7 +20,6 @@ final class DeleteConfirmationViewController: UIViewController {
     }
     
     //MARK: - UI elements
-    
     private lazy var nftView: UIImageView = {
         let nftView = UIImageView()
         nftView.image = UIImage(named: "NFT_Placeholder")
@@ -30,6 +28,7 @@ final class DeleteConfirmationViewController: UIViewController {
         nftView.widthAnchor.constraint(equalToConstant: 108).isActive = true
         nftView.clipsToBounds = true
         nftView.layer.cornerRadius = 12
+        nftView.translatesAutoresizingMaskIntoConstraints = false
         return nftView
     }()
     
@@ -40,6 +39,7 @@ final class DeleteConfirmationViewController: UIViewController {
         alertText.text = "Вы уверены, что хотите\nудалить объект из корзины?"
         alertText.textAlignment = .center
         alertText.textColor = .ypBlack
+        alertText.translatesAutoresizingMaskIntoConstraints = false
         return alertText
     }()
     
@@ -50,6 +50,7 @@ final class DeleteConfirmationViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.widthAnchor.constraint(equalToConstant: 262).isActive = true
         stack.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -77,39 +78,37 @@ final class DeleteConfirmationViewController: UIViewController {
     }()
 
     //MARK: - Lifecycle
-    
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         setupUI()
     }
     
-    //MARK: UI setup
-    
+    //MARK: - UI setup
     private func setupUI() {
         view.backgroundColor = .clear
         
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.bounds
-        view.addSubview(blurEffectView)
         
-        view.addSubview(nftView)
-        nftView.translatesAutoresizingMaskIntoConstraints = false
+        [blurEffectView,
+         nftView,
+         alertText,
+         buttonStack].forEach{
+            view.addSubview($0)
+        }
+
         NSLayoutConstraint.activate([
             nftView.topAnchor.constraint(equalTo: view.topAnchor, constant: 244),
             nftView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        view.addSubview(alertText)
-        alertText.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             alertText.topAnchor.constraint(equalTo: nftView.bottomAnchor, constant: 12),
             alertText.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        view.addSubview(buttonStack)
-        buttonStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonStack.topAnchor.constraint(equalTo: alertText.bottomAnchor, constant: 20),
             buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -119,7 +118,6 @@ final class DeleteConfirmationViewController: UIViewController {
     }
     
     //MARK: - Button interaction
-    
     @objc private func removeButtonTapped() {
         dismiss(animated: true, completion: removalAction)
     }

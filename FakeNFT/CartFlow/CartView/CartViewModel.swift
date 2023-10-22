@@ -9,7 +9,7 @@ import Foundation
 
 final class CartViewModel {
     private var router = CartFlowRouter.shared
-    private var orderService: OrderAndPaymentServiceProtocol
+    private var orderService: OrderServiceProtocol
     private var currentOrder: [ItemNFT] = [] {
         didSet {
             sortCurrentOrder()
@@ -23,14 +23,13 @@ final class CartViewModel {
     }
     @Observable private(set) var currentOrderSorted: [ItemNFT] = []
     
-    init(orderService: OrderAndPaymentServiceProtocol = OrderAndPaymentService.shared) {
+    init(orderService: OrderServiceProtocol = OrderAndPaymentService.shared) {
         self.orderService = orderService
         self.orderService.cartVM = self
         getSortingStyle()
     }
     
-    //MARK: Order
-    
+    //MARK: - Order
     func setOrder(_ newOrder: [ItemNFT]) {
         currentOrder = newOrder
     }
@@ -45,7 +44,6 @@ final class CartViewModel {
     }
     
     //MARK: - Sorting
-    
     func sortNFT(_ items: [ItemNFT], by style: CartSortOrder) -> [ItemNFT] {
         var newItems = items
         switch sortingStyle {
@@ -95,8 +93,7 @@ final class CartViewModel {
     }
 }
 
-    //MARK: Remove item from order
-
+//MARK: - Remove item from order
 extension CartViewModel: CartItemCellDelegate {
     func removeItem(id: String) {
         orderService.removeItemFromOrder(id: id)

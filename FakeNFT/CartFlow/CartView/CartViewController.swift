@@ -5,8 +5,8 @@
 //  Created by Aleksey Yakushev on 11.10.2023.
 //
 
-import UIKit
 import ProgressHUD
+import UIKit
 
 enum CartSortOrder: String {
     case price,
@@ -21,7 +21,6 @@ final class CartViewController: UIViewController {
     private var orderItems: [ItemNFT] = []
     
     //MARK: - UI elements
-    
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
@@ -42,6 +41,7 @@ final class CartViewController: UIViewController {
     
     private lazy var paymentView: CartTotalView = {
         let view = CartTotalView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -50,11 +50,11 @@ final class CartViewController: UIViewController {
         label.textColor = .ypBlack
         label.font = .Bold.small
         label.text = "Корзина пуста"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.$currentOrderSorted.makeBinding { [weak self] _ in
@@ -62,12 +62,16 @@ final class CartViewController: UIViewController {
                 self?.orderUpdated()
             }
         }
-        
         CartFlowRouter.shared.cartVC = self
-        setupUI()
-
+        
+        //временное решение до объединения эпиков с единым TabBarController в коде
         parent?.tabBarItem.image = UIImage(named: "Tab_Cart")
         
+        initialSetup()
+    }
+    
+    private func initialSetup() {
+        setupUI()
         checkIfEmpty()
         viewModel?.getOrder()
         showProgressView()
@@ -77,9 +81,13 @@ final class CartViewController: UIViewController {
     private func setupUI() {
         ProgressHUD.animationType = .systemActivityIndicator
         
+        [emptyCartLabel,
+        paymentView,
+         cartTable].forEach{
+            view.addSubview($0)
+        }
+        
         //MARK: - Empty label
-        view.addSubview(emptyCartLabel)
-        emptyCartLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -91,8 +99,6 @@ final class CartViewController: UIViewController {
         navigationItem.rightBarButtonItem = sortButton
         
         //MARK: Payment view
-        view.addSubview(paymentView)
-        paymentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             paymentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             paymentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -104,7 +110,6 @@ final class CartViewController: UIViewController {
         }
     
         //MARK: Cart item table
-        view.addSubview(cartTable)
         cartTable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cartTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -124,7 +129,6 @@ final class CartViewController: UIViewController {
     }
     
     //MARK: - Order updated
-    
     func orderUpdated() {
         orderItems = viewModel?.currentOrderSorted ?? []
         paymentView.setQuantity(orderItems.count)
@@ -135,7 +139,6 @@ final class CartViewController: UIViewController {
     }
     
     //MARK: - Helper methods
-    
     private func checkIfEmpty() {
         paymentView.isHidden = orderItems.isEmpty
         cartTable.isHidden = orderItems.isEmpty
@@ -159,18 +162,21 @@ final class CartViewController: UIViewController {
 
 //MARK: - TableViewDelegate
 extension CartViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         140
     }
 }
 
 //MARK: - TableViewDataSource
 extension CartViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         orderItems.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartItemCell = tableView.dequeueReusableCell()
         cell.setupCellUI()
         cell.delegate = viewModel

@@ -44,9 +44,9 @@ final class CartFlowRouter {
     
     // Метод для перехода на экран оплаты
     func showPaymentScreen() {
-            let checkout = UINavigationController(rootViewController: CheckoutViewController())
-            checkout.modalPresentationStyle = .fullScreen
-            cartVC?.parent?.present(checkout, animated: true)
+        let checkout = CheckoutViewController()
+        checkout.hidesBottomBarWhenPushed = true
+        cartVC?.show(checkout, sender: nil)
     }
     
     // Метод для отображения полноэкранного алерта при удалении товара
@@ -63,8 +63,12 @@ final class CartFlowRouter {
         cartVC?.dismiss(animated: true)
     }
     
-    //MARK: Helper methods
+    // Метод для перехода назад по стеку NavigationController
+    func pop(vc: UIViewController) {
+        vc.navigationController?.popViewController(animated: true)
+    }
     
+    //MARK: - Helper methods
     private func createAlertAction(type: CartSortOrder) -> UIAlertAction {
         var title: String?
         switch type {

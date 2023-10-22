@@ -5,8 +5,8 @@
 //  Created by Aleksey Yakushev on 11.10.2023.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
 
 protocol CartItemCellDelegate {
     func removeItem(id: String)
@@ -22,11 +22,12 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
                               right: 16)
     
     private lazy var removeButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.setImage(UIImage(named: "Cart_Delete"), for: .normal)
         button.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
         button.tintColor = .ypBlack
         button.adjustsImageWhenHighlighted = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -34,7 +35,8 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         let nftView = UIImageView()
         nftView.contentMode = .scaleAspectFill
         nftView.clipsToBounds = true
-        nftView.layer.cornerRadius = 16
+        nftView.layer.cornerRadius = CornerRadius.big.cgFloat()
+        nftView.translatesAutoresizingMaskIntoConstraints = false
         return nftView
     }()
     
@@ -45,21 +47,24 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         title.textColor = .ypBlack
         title.font = .Bold.small
         title.text = "Title"
+        title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
     private let priceHeaderLabel: UILabel = {
-        let title = UILabel()
-         title.textColor = .ypBlack
-        title.font = .Regular.small
-         title.text = "Цена"
-         return title
+        let priceHeader = UILabel()
+        priceHeader.textColor = .ypBlack
+        priceHeader.font = .Regular.small
+        priceHeader.text = "Цена"
+        priceHeader.translatesAutoresizingMaskIntoConstraints = false
+        return priceHeader
     }()
     private let priceLabel: UILabel = {
-       let title = UILabel()
-        title.textColor = .ypBlack
-        title.font = .Bold.small
-        title.text = "1,23 ETH"
-        return title
+       let price = UILabel()
+        price.textColor = .ypBlack
+        price.font = .Bold.small
+        price.text = "1,23 ETH"
+        price.translatesAutoresizingMaskIntoConstraints = false
+        return price
     }()
     
     //MARK: - UI setup
@@ -68,8 +73,15 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         isUserInteractionEnabled = true
         contentView.isHidden = true
         
-        addSubview(nftPreview)
-        nftPreview.translatesAutoresizingMaskIntoConstraints = false
+        [nftPreview,
+         removeButton,
+         titleLabel,
+         ratingView,
+         priceLabel,
+         priceHeaderLabel].forEach{
+            addSubview($0)
+        }
+        
         NSLayoutConstraint.activate([
             nftPreview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             nftPreview.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -77,8 +89,6 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
             nftPreview.widthAnchor.constraint(equalToConstant: 108)
         ])
         
-        addSubview(removeButton)
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             removeButton.heightAnchor.constraint(equalToConstant: 44),
             removeButton.widthAnchor.constraint(equalToConstant: 44),
@@ -86,15 +96,12 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
             removeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
         ])
         
-        addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: nftPreview.trailingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: removeButton.leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: insets.top + 8)
         ])
         
-        addSubview(ratingView)
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             ratingView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -104,16 +111,12 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         ])
         ratingView.setRating(to: 4)
         
-        addSubview(priceLabel)
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             priceLabel.leadingAnchor.constraint(equalTo: nftPreview.trailingAnchor, constant: 20),
             priceLabel.trailingAnchor.constraint(equalTo: removeButton.leadingAnchor),
             priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(insets.bottom) - 8)
         ])
         
-        addSubview(priceHeaderLabel)
-        priceHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             priceHeaderLabel.leadingAnchor.constraint(equalTo: nftPreview.trailingAnchor, constant: 20),
             priceHeaderLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -2)
@@ -121,7 +124,6 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     }
     
     //MARK: - Configure content
-    
     func configureCellFor(nft: ItemNFT) {
         self.nft = nft
         setPrice(nft.price)
@@ -151,7 +153,6 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     }
     
     //MARK: - Navigation
-    
     @objc private func removeButtonTapped() {
         CartFlowRouter.shared.showDeleteConfirmationForNFT(nft,
                                                            removalAction: removeItem)
@@ -159,7 +160,6 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
 }
 
 //MARK: - Remove item
-
 extension CartItemCell {
     func removeItem() {
         delegate?.removeItem(id: nft?.id ?? "")

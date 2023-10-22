@@ -19,7 +19,6 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
                                       right: 12)
     
     //MARK: - UI elements
-    
     private lazy var currencyLogoView: UIImageView = {
         let logoView = UIImageView()
         logoView.image = nil
@@ -27,6 +26,7 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
         logoView.backgroundColor = .ypBlack
         logoView.clipsToBounds = true
         logoView.layer.cornerRadius = CornerRadius.small.cgFloat()
+        logoView.translatesAutoresizingMaskIntoConstraints = false
         return logoView
     }()
     
@@ -35,6 +35,7 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
         stack.axis = .vertical
         stack.spacing = 0
         stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -53,7 +54,6 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
     }()
     
     //MARK: - Handle selection
-    
     override var isSelected: Bool {
         didSet {
             backgroundView?.layer.borderWidth = isSelected ? 1 : 0
@@ -61,7 +61,6 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     //MARK: - Configure cell
-    
     func configureCell(for currency: Currency?) {
         setupUI()
         self.currency = currency
@@ -74,8 +73,11 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
         backgroundView?.clipsToBounds = true
         backgroundView?.layer.cornerRadius = 12
         
-        addSubview(currencyLogoView)
-        currencyLogoView.translatesAutoresizingMaskIntoConstraints = false
+        [currencyLogoView,
+         titleStack].forEach{
+            addSubview($0)
+        }
+        
         NSLayoutConstraint.activate([
             currencyLogoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
             currencyLogoView.topAnchor.constraint(equalTo: topAnchor, constant: insets.top),
@@ -83,10 +85,8 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
             currencyLogoView.widthAnchor.constraint(equalTo: currencyLogoView.heightAnchor)
         ])
         
-        addSubview(titleStack)
         titleStack.addArrangedSubview(fullTitleLabel)
         titleStack.addArrangedSubview(shortTitleLabel)
-        titleStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleStack.leadingAnchor.constraint(equalTo: currencyLogoView.trailingAnchor, constant: 4),
             titleStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
