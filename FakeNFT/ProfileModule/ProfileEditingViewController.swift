@@ -17,7 +17,7 @@ final class ProfileEditingViewController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "UserPic")
+        imageView.image = UIImage(named: "Userpic_Placeholder")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -44,15 +44,15 @@ final class ProfileEditingViewController: UIViewController {
     
     private let nameLabel = UILabel(text: "Имя")
     
-    private let nameTextView = UITextView(text: "Joaquin Phoenix")
+    private let nameTextView = UITextView()
     
     private let bioLabel = UILabel(text: "Описание")
     
-    private let bioTextView = UITextView(text: "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям.")
+    private let bioTextView = UITextView()
     
     private let siteLabel = UILabel(text: "Сайт")
     
-    private let siteTextView = UITextView(text: "Joaquin Phoenix.com")
+    private let siteTextView = UITextView()
     
     var profileViewModel: ProfileViewModel?
     
@@ -74,6 +74,23 @@ final class ProfileEditingViewController: UIViewController {
         setupTextView(siteTextView, under: siteLabel)
         
         addGesture()
+        updateView()
+    }
+    
+    private func updateView() {
+        guard let profileViewModel else {
+            return
+        }
+        
+        let name = profileViewModel.profile?.name
+        let description = profileViewModel.profile?.description
+        let website = profileViewModel.profile?.website
+        profileViewModel.updatePhoto(profileImageView)
+        nameTextView.text = name
+        bioTextView.text = description
+        siteTextView.text = website
+        
+        view.layoutIfNeeded()
     }
     
     private func addGesture() {
@@ -84,14 +101,9 @@ final class ProfileEditingViewController: UIViewController {
     }
     
     private func setupView() {
-        [closeButton, profileImageView, profileView, changeProfileImageLabel].forEach {
+        [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        profileViewModel?.updatePhoto(profileImageView)
-        nameTextView.text = profileViewModel?.profile?.name
-        bioTextView.text = profileViewModel?.profile?.description
-        siteTextView.text = profileViewModel?.profile?.website
     }
     
     private func setupCloseButton() {

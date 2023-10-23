@@ -16,7 +16,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "UserPic")
+        imageView.image = UIImage(named: "Userpic_Placeholder")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.layer.masksToBounds = true
