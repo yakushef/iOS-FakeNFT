@@ -25,7 +25,6 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private let profileNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Joaquin Phoenix"
         label.font = UIFont.Bold.medium
         return label
     }()
@@ -33,27 +32,11 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     private let profileBioLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        
-        let text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.minimumLineHeight = 18
-        
-        let attrString = NSMutableAttributedString(string: text)
-        let range = NSMakeRange(0, attrString.length)
-        
-        attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
-        attrString.addAttribute(.font, value: UIFont.Regular.small ?? UIFont.systemFont(ofSize: 13), range: range)
-        
-        label.attributedText = attrString
         return label
     }()
     
     private let siteLabel: UILabel = {
         let label = UILabel()
-        label.isUserInteractionEnabled = true
-        let attributedString = NSMutableAttributedString(string: "Joaquin Phoenix.com")
-        attributedString.addAttribute(.link, value: "JoaquinPhoenix.com", range: NSMakeRange(0, attributedString.length))
-        label.attributedText = attributedString
         label.font = UIFont.Regular.medium
         return label
     }()
@@ -103,8 +86,27 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     private func updateProfileInfo() {
         profileNameLabel.text = profileViewModel?.profile?.name
         profileViewModel?.updatePhoto(profileImageView)
-        profileBioLabel.text = profileViewModel?.profile?.description
-        siteLabel.text = profileViewModel?.profile?.website
+        
+        guard let description = profileViewModel?.profile?.description, let website = profileViewModel?.profile?.website else {
+            return
+        }
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.minimumLineHeight = 18
+        
+        let attrString = NSMutableAttributedString(string: description)
+        let range = NSMakeRange(0, attrString.length)
+        
+        attrString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        attrString.addAttribute(.font, value: UIFont.Regular.small ?? UIFont.systemFont(ofSize: 13), range: range)
+        
+        profileBioLabel.attributedText = attrString
+        
+        let attributedString = NSMutableAttributedString(string: website)
+        attributedString.addAttribute(.link, value: website, range: NSMakeRange(0, attributedString.length))
+        siteLabel.attributedText = attributedString
+        
+        view.layoutIfNeeded()
     }
     
     private func addGesture() {
