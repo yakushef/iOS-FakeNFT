@@ -11,17 +11,18 @@ import Kingfisher
 final class ProfileViewModel {
     var profile: Profile?
     
-    let profileService = ProfileService()
+    let profileService: ProfileServiceProtocol?
     let viewController: ProfileViewControllerProtocol?
     
     init(viewController: ProfileViewControllerProtocol) {
         self.viewController = viewController
+        profileService = ProfileService()
     }
     
     static let didChangeNotification = Notification.Name(rawValue: "ProfileInfoDidChange")
     
     func getProfile() {
-        profileService.makeRequest { [weak self] profile in
+        profileService?.makeRequest { [weak self] profile in
             if let profile = profile as? Profile {
                 self?.profile = profile
                 NotificationCenter.default.post(name: ProfileViewModel.didChangeNotification, object: self)
