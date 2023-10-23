@@ -68,9 +68,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private let cells = ["Мои NFT", "Избранные NFT", "О разработчике"]
     
-    private let profileService = ProfileService()
     private var profileViewModel: ProfileViewModel?
-    
     private var profileObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
