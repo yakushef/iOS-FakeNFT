@@ -28,19 +28,21 @@
 - Закрытие экрана редактирования профиля (est: 30 min; fact: 20 min).
 `Total:` est: 30 min; fact: 20 min).
 
-## Module 2 (est 840 min; fact x min).
+## Module 2 (est 990 min; fact 570 min).
 ### Экран Профиль
 #### Логика
 - Открытие экрана с webView при нажатии на ссылку сайта (est: 60 min; fact: 90 min).
 - Переход на экран "Мои NFT" (est: 60 min; fact: 10 min).
 - Переход на экран "Избранные NFT" (est: 60 min; fact: 10 min).
 - Переход на экран "О разработчике" (est: 60 min; fact: 10 min).
-`Total:` est: 240 min; fact: 120 min.
+- Загрузка и отображение информации о пользователе с сервера (est: 60 min; fact: 60 min).
+`Total:` est: 330 min; fact: 180 min.
 
 ### Экран Редактирование профиля
 #### Логика
-- Изменение фотографии профиля (симуляция зарузки - отображение ProgressHUD) (est: 90 min; fact: x min).
-`Total:` est: 90 min; fact: x min.
+- Изменение фотографии профиля (симуляция зарузки - отображение ProgressHUD) (est: 90 min; fact: 40 min).
+- Отображение информации о пользователе с сервера (est: 60 min; fact: 30 min).
+`Total:` est: 150 min; fact: 70 min.
 
 ### Экран Мои NFT
 #### Вёрстка
