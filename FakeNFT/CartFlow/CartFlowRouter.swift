@@ -75,6 +75,16 @@ final class CartFlowRouter {
         vc.navigationController?.popViewController(animated: true)
     }
     
+    func backToCatalog() {
+        
+    }
+    
+    func paymentSuccessfull() {
+        let success = PaymentSuccessViewController()
+        success.modalPresentationStyle = .fullScreen
+        checkoutVC?.present(success, animated: true)
+    }
+    
     //MARK: - Helper methods
     private func createAlertAction(type: CartSortOrder) -> UIAlertAction {
         var title: String?

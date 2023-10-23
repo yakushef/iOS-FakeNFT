@@ -143,8 +143,21 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
     func payWith(currecyID: String) {
         let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
         let request = cartRequest(endpoint: URL(string: urlString))
-        networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { result in
-            //TODO: - Handle order status
+        networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { [weak self] result in
+            //TODO: - Handle ERRORS
+            print(result)
+            switch result {
+            case .success(let status):
+                DispatchQueue.main.async {
+                    if status.success {
+                        self?.checkoutVM?.paymentSuccessfull()
+                    } else {
+                        self?.checkoutVM?.paymentFailed()
+                    }
+                }
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
         })
         
     }

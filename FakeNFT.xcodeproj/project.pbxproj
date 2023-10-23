@@ -60,6 +60,7 @@
 		BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */; };
 		BC986C0B2AE5986000E17267 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C092AE5986000E17267 /* WebViewController.swift */; };
 		BC986C0C2AE5986000E17267 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C0A2AE5986000E17267 /* WebViewModel.swift */; };
+		BC986C162AE5A02D00E17267 /* PaymentSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C152AE5A02D00E17267 /* PaymentSuccessViewController.swift */; };
 		BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */; };
 		BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */; };
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
@@ -132,6 +133,7 @@
 		BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentRequests.swift; sourceTree = "<group>"; };
 		BC986C092AE5986000E17267 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BC986C0A2AE5986000E17267 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		BC986C152AE5A02D00E17267 /* PaymentSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessViewController.swift; sourceTree = "<group>"; };
 		BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */,
 				BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */,
 				BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */,
+				BC986C152AE5A02D00E17267 /* PaymentSuccessViewController.swift */,
 			);
 			path = CheckoutView;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				BC2C84D42ADEF2E3006C4E91 /* CurrencyCell.swift in Sources */,
 				31994AA42AD53E8700B57E7B /* ItemNFT.swift in Sources */,
+				BC986C162AE5A02D00E17267 /* PaymentSuccessViewController.swift in Sources */,
 				BC35DED12AD9B116008C252D /* OrderAndPaymentService.swift in Sources */,
 				31994A962AD486B800B57E7B /* Config.swift in Sources */,
 				BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */,

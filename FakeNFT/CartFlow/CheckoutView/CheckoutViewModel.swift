@@ -19,6 +19,7 @@ final class CheckoutViewModel {
     }
     
     func getCurrencyList() {
+        currencyID = nil
         orderService.getAllCurrencies()
     }
     
@@ -33,14 +34,13 @@ final class CheckoutViewModel {
     func makePayment() {
         guard let id = currencyID else {return}
         orderService.payWith(currecyID: id)
-        currencyID = nil
     }
     
     func paymentSuccessfull() {
-        //TODO: - Handle successfull payment
+        CartFlowRouter.shared.paymentSuccessfull()
     }
     
     func paymentFailed() {
-        //TODO: - Handle payment failure
+        CartFlowRouter.shared.showPaymentError()
     }
 }

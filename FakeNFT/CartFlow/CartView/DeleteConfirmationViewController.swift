@@ -76,6 +76,10 @@ final class DeleteConfirmationViewController: UIViewController {
         cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
         return cancelButton
     }()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     //MARK: - Lifecycle
     override func viewDidLoad(){
@@ -87,6 +91,7 @@ final class DeleteConfirmationViewController: UIViewController {
     //MARK: - UI setup
     private func setupUI() {
         view.backgroundColor = .clear
+        setNeedsStatusBarAppearanceUpdate()
         
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
