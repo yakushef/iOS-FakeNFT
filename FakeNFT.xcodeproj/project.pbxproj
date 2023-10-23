@@ -54,6 +54,8 @@
 		CB3153DE2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */; };
 		CB3153E02AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */; };
 		CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */; };
+		CB85C9AF2AE4069C00B2C5B9 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */; };
+		CB85C9B12AE4077C00B2C5B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */; };
 		CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */; };
 		CBDC4B022AE1472E007D39C5 /* MyNFTsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */; };
 		CBDC4B042AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */; };
@@ -118,6 +120,8 @@
 		CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNFTsCollectionViewController.swift; sourceTree = "<group>"; };
 		CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNFTsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewController.swift; sourceTree = "<group>"; };
+		CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTsTableViewController.swift; sourceTree = "<group>"; };
 		CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -354,10 +358,12 @@
 			children = (
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
 				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
+				CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */,
 				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
 				CB85C9AD2AE4036200B2C5B9 /* WebView */,
 				CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */,
 				CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */,
+				CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
@@ -542,8 +548,10 @@
 				CBDC4B042AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift in Sources */,
 				CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
+				CB85C9B12AE4077C00B2C5B9 /* ProfileViewModel.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
+				CB85C9AF2AE4069C00B2C5B9 /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

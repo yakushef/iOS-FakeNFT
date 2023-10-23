@@ -10,11 +10,12 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let containerView = UIView()
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -63,10 +64,24 @@ final class ProfileViewController: UIViewController {
     
     private let cells = ["Мои NFT", "Избранные NFT", "О разработчике"]
     
+    private let profileService = ProfileService()
+    private var profileViewModel: ProfileViewModel?
+    
+    private var profileObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
+        
+        profileViewModel = ProfileViewModel(viewController: self)
+        
+        profileObserver = NotificationCenter.default.addObserver(forName: ProfileViewModel.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.updateProfileInfo()
+            print(self?.profileViewModel?.profile)
+        }
+        
+        profileViewModel?.getProfile()
         
         setupView()
         setupNavigationBar()
@@ -80,6 +95,13 @@ final class ProfileViewController: UIViewController {
         addGesture()
     }
     
+    private func updateProfileInfo() {
+        profileNameLabel.text = profileViewModel?.profile?.name
+        profileViewModel?.updatePhoto()
+        profileBioLabel.text = profileViewModel?.profile?.description
+        siteLabel.text = profileViewModel?.profile?.website
+    }
+    
     private func addGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(labelTapped(_:)))
         tap.numberOfTapsRequired = 1
@@ -89,7 +111,7 @@ final class ProfileViewController: UIViewController {
     
     private func openWebView() {
         let webViewController = WebViewController()
-        webViewController.selectedWebSite = "hackingwithswift.com"
+        webViewController.selectedWebSite = profileViewModel?.profile?.website
         navigationController?.pushViewController(webViewController, animated: true)
     }
     
