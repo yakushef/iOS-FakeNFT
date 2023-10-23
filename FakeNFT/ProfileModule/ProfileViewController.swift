@@ -203,7 +203,9 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     @objc
     private func editButtonDidTap() {
-        present(ProfileEditingViewController(), animated: true)
+        let profileEditingViewController = ProfileEditingViewController()
+        profileEditingViewController.profileViewModel = profileViewModel
+        present(profileEditingViewController, animated: true)
     }
     
     @objc

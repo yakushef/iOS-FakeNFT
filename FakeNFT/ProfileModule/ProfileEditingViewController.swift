@@ -53,6 +53,8 @@ final class ProfileEditingViewController: UIViewController {
     
     private let siteTextView = UITextView(text: "Joaquin Phoenix.com")
     
+    var profileViewModel: ProfileViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,6 +86,10 @@ final class ProfileEditingViewController: UIViewController {
         [closeButton, profileImageView, profileView, changeProfileImageLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        nameTextView.text = profileViewModel?.profile?.name
+        bioTextView.text = profileViewModel?.profile?.description
+        siteTextView.text = profileViewModel?.profile?.website
     }
     
     private func setupCloseButton() {
