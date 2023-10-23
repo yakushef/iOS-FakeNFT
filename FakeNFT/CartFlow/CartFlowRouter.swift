@@ -26,6 +26,26 @@ final class CartFlowRouter {
         checkoutVC?.present(alert, animated: true)
     }
     
+    // Метод для отображения алерта с ошибкой получения данных
+    func showNetworkError(action: @escaping () -> Void) {
+        let alert = UIAlertController(title: "Упс! Что-то пошло не так :(",
+                                      message: "Попробуйте ещё раз!",
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Отмена", style: .default) { [weak self] _ in
+            self?.cartVC?.dismiss(animated: true)
+        }
+        
+        let retryAction = UIAlertAction(title: "Повторить", style: .cancel) { [weak self] _ in
+            action()
+            self?.cartVC?.dismiss(animated: true)
+        }
+        alert.addAction(retryAction)
+        alert.addAction(okAction)
+        
+        cartVC?.present(alert, animated: true)
+    }
+    
     // Метод вызова алеррта выбора типа сортировки товаров в корзине
     func showSortSheet() {
         let sortSheet = UIAlertController(title: "Сортировка",
@@ -76,7 +96,7 @@ final class CartFlowRouter {
     }
     
     func backToCatalog() {
-        
+        //TODO: при интеграции проекта отработать возвращение на экран каталога
     }
     
     func paymentSuccessfull() {

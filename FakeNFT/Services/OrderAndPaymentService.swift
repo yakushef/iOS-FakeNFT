@@ -100,8 +100,7 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
             case .success(_):
                 self?.cartVM?.orderUpdated()
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
-                //TODO: Handle network error
+                self?.cartVM?.networkError()
             }
         })
     }
@@ -120,9 +119,7 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
             case .failure(let error):
                 self.currentOrder = nil
                 self.currentOrderItems = []
-                assertionFailure(error.localizedDescription)
-                
-                //TODO: Network error alert
+                self.cartVM?.networkError()
             }
         })
     }

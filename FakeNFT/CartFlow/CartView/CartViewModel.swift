@@ -29,6 +29,14 @@ final class CartViewModel {
         getSortingStyle()
     }
     
+    func networkError() {
+        DispatchQueue.main.async { [weak self] in
+            self?.router.showNetworkError(action: {
+                self?.getOrder()
+            })
+        }
+    }
+    
     //MARK: - Order
     func setOrder(_ newOrder: [ItemNFT]) {
         currentOrder = newOrder
