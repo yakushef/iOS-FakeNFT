@@ -43,15 +43,10 @@ final class ProfileEditingViewController: UIViewController {
     }()
     
     private let nameLabel = UILabel(text: "Имя")
-    
     private let nameTextView = UITextView()
-    
     private let bioLabel = UILabel(text: "Описание")
-    
     private let bioTextView = UITextView()
-    
     private let siteLabel = UILabel(text: "Сайт")
-    
     private let siteTextView = UITextView()
     
     var profileViewModel: ProfileViewModel?
@@ -72,38 +67,26 @@ final class ProfileEditingViewController: UIViewController {
         setupTextView(bioTextView, under: bioLabel)
         setupLabel(siteLabel, under: bioTextView)
         setupTextView(siteTextView, under: siteLabel)
+        siteTextView.bottomAnchor.constraint(
+            lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor
+        ).isActive = true
         
         addGesture()
-        updateView()
-    }
-    
-    private func updateView() {
-        guard let profileViewModel else {
-            return
-        }
-        
-        let name = profileViewModel.profile?.name
-        let description = profileViewModel.profile?.description
-        let website = profileViewModel.profile?.website
-        profileViewModel.updatePhoto(profileImageView)
-        nameTextView.text = name
-        bioTextView.text = description
-        siteTextView.text = website
-        
-        view.layoutIfNeeded()
-    }
-    
-    private func addGesture() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(changeImageDidTap))
-        tap.numberOfTapsRequired = 1
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.addGestureRecognizer(tap)
     }
     
     private func setupView() {
         [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        guard let profileViewModel else {
+            return
+        }
+        
+        profileViewModel.updatePhoto(profileImageView)
+        nameTextView.text = profileViewModel.profile?.name
+        bioTextView.text = profileViewModel.profile?.description
+        siteTextView.text = profileViewModel.profile?.website
     }
     
     private func setupCloseButton() {
@@ -165,6 +148,13 @@ final class ProfileEditingViewController: UIViewController {
     }
     
     private func setupTextView(_ textView: UITextView, under topView: UIView) {
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.backgroundColor = .ypLightGrey
+        textView.layer.cornerRadius = 12
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(textView)
         
         NSLayoutConstraint.activate([
@@ -172,6 +162,13 @@ final class ProfileEditingViewController: UIViewController {
             textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
+    }
+    
+    private func addGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(changeImageDidTap))
+        tap.numberOfTapsRequired = 1
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tap)
     }
     
     @objc
