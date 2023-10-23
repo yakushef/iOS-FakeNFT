@@ -159,7 +159,6 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
                 assertionFailure(error.localizedDescription)
             }
         })
-        
     }
     
     func removeItemFromOrder(id: String) {
