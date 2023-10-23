@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController {
+protocol ProfileViewControllerProtocol {
+    var profileImageView: UIImageView { get }
+}
+
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
     private let containerView = UIView()
     
     let profileImageView: UIImageView = {
@@ -78,7 +82,6 @@ final class ProfileViewController: UIViewController {
         
         profileObserver = NotificationCenter.default.addObserver(forName: ProfileViewModel.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProfileInfo()
-            print(self?.profileViewModel?.profile)
         }
         
         profileViewModel?.getProfile()

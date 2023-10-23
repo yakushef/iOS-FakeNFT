@@ -10,10 +10,11 @@ import Kingfisher
 
 final class ProfileViewModel {
     var profile: Profile?
-    let profileService = ProfileService()
-    let viewController: ProfileViewController?
     
-    init(viewController: ProfileViewController) {
+    let profileService = ProfileService()
+    let viewController: ProfileViewControllerProtocol?
+    
+    init(viewController: ProfileViewControllerProtocol) {
         self.viewController = viewController
     }
     
@@ -21,8 +22,10 @@ final class ProfileViewModel {
     
     func getProfile() {
         profileService.makeRequest { [weak self] profile in
-            self?.profile = profile
-            NotificationCenter.default.post(name: ProfileViewModel.didChangeNotification, object: self)
+            if let profile = profile as? Profile {
+                self?.profile = profile
+                NotificationCenter.default.post(name: ProfileViewModel.didChangeNotification, object: self)
+            }
         }
     }
     

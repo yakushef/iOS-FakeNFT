@@ -6,12 +6,13 @@
 //
 
 protocol ProfileServiceProtocol {
+    func makeRequest(_ handler: @escaping (Codable) -> Void)
 }
 
 final class ProfileService: ProfileServiceProtocol {
     private let networkClient = DefaultNetworkClient()
     
-    func makeRequest(_ handler: @escaping (Profile) -> Void) {
+    func makeRequest(_ handler: @escaping (Codable) -> Void) {
         let networkRequest = ExampleRequest()
         
         networkClient.send(request: networkRequest, type: Profile.self) { result in
