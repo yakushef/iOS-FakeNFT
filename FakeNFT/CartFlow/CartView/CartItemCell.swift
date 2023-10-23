@@ -164,7 +164,7 @@ extension CartItemCell {
     func removeItem() {
         delegate?.removeItem(id: nft?.id ?? "")
         DispatchQueue.main.async {
-            self.isUserInteractionEnabled = false
+            UIBlockingProgressHUD.show()
             UIView.animate(withDuration: 0.25, delay: 0, animations: {
                 self.alpha = 0.2
             }, completion: { _ in

@@ -5,7 +5,6 @@
 //  Created by Aleksey Yakushev on 15.10.2023.
 //
 
-import ProgressHUD
 import UIKit
 
 final class CheckoutViewController: UIViewController {
@@ -40,13 +39,11 @@ final class CheckoutViewController: UIViewController {
     private func initialSetup() {
         setupUI()
         viewModel?.getCurrencyList()
-        ProgressHUD.show()
+        UIBlockingProgressHUD.show()
     }
     
     //MARK: - UI setup
     private func setupUI() {
-        ProgressHUD.animationType = .systemActivityIndicator
-        
         view.backgroundColor = .ypWhite
         navigationItem.title = "Выберете способ оплаты"
         let backButton = UIBarButtonItem(image: UIImage(named: "Backward"),
@@ -96,7 +93,7 @@ final class CheckoutViewController: UIViewController {
     //MARK: - Handle updates from model
     private func currencyListUpdated() {
         self.currencyCollection.reloadData()
-        ProgressHUD.dismiss()
+        UIBlockingProgressHUD.dismiss()
     }
     
     //MARK: - Navigation

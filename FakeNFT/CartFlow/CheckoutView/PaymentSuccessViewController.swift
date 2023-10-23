@@ -44,10 +44,13 @@ class PaymentSuccessViewController: UIViewController {
     }()
     
     private lazy var returnButton: UIButton = {
-        let button = GenericButton()
+        let button = GenericButton(type: .system)
         button.setTitle("Вернуться в каталог", for: .normal)
         button.titleLabel?.font = .Bold.small
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self,
+                         action: #selector(returnButtonTapped),
+                         for: .touchUpInside)
         return button
     }()
     

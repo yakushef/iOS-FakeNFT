@@ -5,7 +5,6 @@
 //  Created by Aleksey Yakushev on 11.10.2023.
 //
 
-import ProgressHUD
 import UIKit
 
 enum CartSortOrder: String {
@@ -70,6 +69,18 @@ final class CartViewController: UIViewController {
         initialSetup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let tabBarController = self.tabBarController {
+            let currentIndex = tabBarController.selectedIndex
+            if 2 != currentIndex {
+                // The view controller is appearing after switching tabs
+                viewModel?.getOrder()
+                showProgressView()
+            }
+        }
+    }
+    
     private func initialSetup() {
         setupUI()
         checkIfEmpty()
@@ -79,8 +90,6 @@ final class CartViewController: UIViewController {
     
     //MARK: - UI setup
     private func setupUI() {
-        ProgressHUD.animationType = .systemActivityIndicator
-        
         [emptyCartLabel,
         paymentView,
          cartTable].forEach{
@@ -146,13 +155,11 @@ final class CartViewController: UIViewController {
     }
     
     private func hideProgressView() {
-        ProgressHUD.dismiss()
-        view.isUserInteractionEnabled = true
+        UIBlockingProgressHUD.dismiss()
     }
     
-    private func showProgressView() {
-        ProgressHUD.show()
-        view.isUserInteractionEnabled = false
+    func showProgressView() {
+        UIBlockingProgressHUD.show()
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {

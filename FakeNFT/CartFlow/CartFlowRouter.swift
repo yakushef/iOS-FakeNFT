@@ -39,6 +39,7 @@ final class CartFlowRouter {
         let retryAction = UIAlertAction(title: "Повторить", style: .cancel) { [weak self] _ in
             action()
             self?.cartVC?.dismiss(animated: true)
+            self?.cartVC?.showProgressView()
         }
         alert.addAction(retryAction)
         alert.addAction(okAction)
@@ -95,8 +96,16 @@ final class CartFlowRouter {
         vc.navigationController?.popViewController(animated: true)
     }
     
+    // Метод для возврата в каталог
     func backToCatalog() {
-        //TODO: при интеграции проекта отработать возвращение на экран каталога
+        if let tabBar = cartVC?.tabBarController {
+            guard let window = UIApplication.shared.windows.first else { return }
+            window.rootViewController = nil
+            tabBar.selectedIndex = 1
+            UIView.transition(with: window, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                window.rootViewController = tabBar
+            }, completion: nil)
+        }
     }
     
     func paymentSuccessfull() {
