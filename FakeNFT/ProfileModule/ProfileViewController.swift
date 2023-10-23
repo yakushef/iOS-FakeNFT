@@ -78,7 +78,11 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileViewModel = ProfileViewModel(viewController: self)
         
-        profileObserver = NotificationCenter.default.addObserver(forName: ProfileViewModel.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+        profileObserver = NotificationCenter.default.addObserver(
+            forName: ProfileViewModel.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
             self?.updateProfileInfo()
         }
         
@@ -98,7 +102,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private func updateProfileInfo() {
         profileNameLabel.text = profileViewModel?.profile?.name
-        profileViewModel?.updatePhoto()
+        profileViewModel?.updatePhoto(profileImageView)
         profileBioLabel.text = profileViewModel?.profile?.description
         siteLabel.text = profileViewModel?.profile?.website
     }

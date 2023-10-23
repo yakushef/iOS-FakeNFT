@@ -19,6 +19,7 @@ final class ProfileEditingViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "UserPic")
         imageView.frame.size = CGSize(width: 70, height: 70)
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         return imageView
     }()
@@ -87,6 +88,7 @@ final class ProfileEditingViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        profileViewModel?.updatePhoto(profileImageView)
         nameTextView.text = profileViewModel?.profile?.name
         bioTextView.text = profileViewModel?.profile?.description
         siteTextView.text = profileViewModel?.profile?.website

@@ -5,7 +5,7 @@
 //  Created by Антон Кашников on 21/10/2023.
 //
 
-import Foundation
+import UIKit
 import Kingfisher
 
 final class ProfileViewModel {
@@ -29,13 +29,13 @@ final class ProfileViewModel {
         }
     }
     
-    func updatePhoto() {
+    func updatePhoto(_ imageView: UIImageView) {
         guard let profileImagePath = profile?.avatar else {
             return
         }
 
         let processor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: .ypBlack)
-        viewController?.profileImageView.kf.indicatorType = .activity
-        viewController?.profileImageView.kf.setImage(with: URL(string: profileImagePath), options: [.processor(processor)])
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: profileImagePath), options: [.processor(processor)])
     }
 }
