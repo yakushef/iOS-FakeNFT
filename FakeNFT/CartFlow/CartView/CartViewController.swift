@@ -5,45 +5,21 @@
 //  Created by Aleksey Yakushev on 11.10.2023.
 //
 
-import UIKit
 import ProgressHUD
+import UIKit
 
-enum CartSortOrder {
+enum CartSortOrder: String {
     case price,
     rating,
     title
 }
 
 final class CartViewController: UIViewController {
-    
-    var viewModel: CartViewModel? = CartViewModel()
-    var router = CartFlowRouter.shared
-    private var orderItems: [ItemNFT] = []
-    
-    private var sortingStyle: CartSortOrder = .title {
-        didSet {
-            applySorting()
-        }
-    }
-    
-    init(viewModel: CartViewModel? = CartViewModel(),
-         router: CartFlowRouter = CartFlowRouter.shared,
-         orderItems: [ItemNFT] = [],
-         sortingStyle: CartSortOrder = .title) {
-        super.init(nibName: nil, bundle: nil)
-        
-        self.viewModel = viewModel
-        self.router = router
-        self.orderItems = orderItems
-        self.sortingStyle = sortingStyle
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    var viewModel: CartViewModel = CartViewModel()
+    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
+    var router: CartFlowRouter? = CartFlowRouter.shared
     
     //MARK: - UI elements
-    
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
@@ -62,36 +38,41 @@ final class CartViewController: UIViewController {
         return table
     }()
     
-    private lazy var paymentView: CheckoutView = {
-        let view = CheckoutView()
+    private lazy var paymentView: CartTotalView = {
+        let view = CartTotalView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private lazy var emptyCartLabel: UILabel = {
        let label = UILabel()
         label.textColor = .ypBlack
-        label.font = .bold17
+        label.font = .Bold.small
         label.text = "Корзина пуста"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.$currentOrder.makeBinding { [weak self] _ in
+        viewModel.$currentOrderSorted.makeBinding { [weak self] _ in
             DispatchQueue.main.async {
                 self?.orderUpdated()
             }
         }
         CartFlowRouter.shared.cartVC = self
-        setupUI()
+        
+        //временное решение до объединения эпиков с единым TabBarController в коде
+        parent?.tabBarItem.image = UIImage(named: "Tab_Cart")
+        
+        initialSetup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private func initialSetup() {
+        setupUI()
         checkIfEmpty()
-        viewModel?.getOrder()
+        viewModel.getOrder()
         showProgressView()
     }
     
@@ -99,9 +80,13 @@ final class CartViewController: UIViewController {
     private func setupUI() {
         ProgressHUD.animationType = .systemActivityIndicator
         
+        [emptyCartLabel,
+         paymentView,
+         cartTable].forEach{
+            view.addSubview($0)
+        }
+        
         //MARK: - Empty label
-        view.addSubview(emptyCartLabel)
-        emptyCartLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -113,18 +98,17 @@ final class CartViewController: UIViewController {
         navigationItem.rightBarButtonItem = sortButton
         
         //MARK: Payment view
-        view.addSubview(paymentView)
-        paymentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             paymentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             paymentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             paymentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             paymentView.heightAnchor.constraint(equalToConstant: 76)
         ])
-        paymentView.payButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+        paymentView.setCheckoutAction { [weak self] in
+            self?.payButtonTapped()
+        }
     
         //MARK: Cart item table
-        view.addSubview(cartTable)
         cartTable.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cartTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -136,26 +120,27 @@ final class CartViewController: UIViewController {
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
-        router.showSortSheet()
+        router?.showSortSheet()
     }
     
-    @objc private func payButtonTapped() {
-        router.showPaymentScreen()
+    private func payButtonTapped() {
+        router?.showPaymentScreen()
     }
     
+    //MARK: - Order updated
     func orderUpdated() {
-        orderItems = viewModel?.currentOrder ?? []
-        applySorting()
-        paymentView.setQuantity(orderItems.count)
-        paymentView.setTotalprice(orderItems.reduce(0) {$0 + $1.price})
+        paymentView.setQuantity(viewModel.currentOrderSorted.count)
+        paymentView.setTotalprice(viewModel.currentOrderSorted.reduce(0) {$0 + $1.price})
+        cartTable.reloadData()
         checkIfEmpty()
         hideProgressView()
     }
     
+    //MARK: - Helper methods
     private func checkIfEmpty() {
-        paymentView.isHidden = orderItems.isEmpty
-        cartTable.isHidden = orderItems.isEmpty
-        emptyCartLabel.isHidden = !orderItems.isEmpty
+        paymentView.isHidden = viewModel.currentOrderSorted.isEmpty
+        cartTable.isHidden = viewModel.currentOrderSorted.isEmpty
+        emptyCartLabel.isHidden = !viewModel.currentOrderSorted.isEmpty
     }
     
     private func hideProgressView() {
@@ -169,46 +154,31 @@ final class CartViewController: UIViewController {
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {
-        sortingStyle = newSortingStyle
-    }
-    
-    private func applySorting() {
-        switch sortingStyle {
-        case .price:
-            orderItems.sort { item1, item2 in
-                item1.price > item2.price
-            }
-        case .rating:
-            orderItems.sort { item1, item2 in
-                item1.rating > item2.rating
-            }
-        case .title:
-            orderItems.sort { item1, item2 in
-                item1.name > item2.name
-            }
-        }
-        cartTable.reloadData()
+        viewModel.setSortingStyle(to: newSortingStyle)
     }
 }
 
 //MARK: - TableViewDelegate
 extension CartViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         140
     }
 }
 
 //MARK: - TableViewDataSource
 extension CartViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        orderItems.count
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        viewModel.currentOrderSorted.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartItemCell = tableView.dequeueReusableCell()
         cell.setupCellUI()
         cell.delegate = viewModel
-        cell.configureCellFor(nft: orderItems[indexPath.row])
+        cell.configureCellFor(nft: viewModel.currentOrderSorted[indexPath.row])
         return cell
     }
 }

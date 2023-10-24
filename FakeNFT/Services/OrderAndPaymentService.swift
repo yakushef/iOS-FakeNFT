@@ -7,70 +7,106 @@
 
 import Foundation
 
-protocol OrderAndPaymentServiceProtocol {
+//MARK: - Currency service
+protocol CheckoutServiceProtocol {
+    var checkoutVM: CheckoutViewModel? {get set}
+    var currencyList: [Currency] {get}
+    
+    func payWith(currecyID: String)
+    func getAllCurrencies()
+}
+
+//MARK: - Order service
+
+protocol OrderServiceProtocol {
     var cartVM: CartViewModel? {get set}
     var currentOrderItems: [ItemNFT] {get}
-    
+
     func getOrder()
-    func getCurrency(byID id: String) -> Currency?
-    func getAllCurrencies() -> [Currency]
-    func payWith(currecyID: String)
-    func addItemToOrder(_ newItem: ItemNFT)
     func removeItemFromOrder(id: String)
 }
 
-struct cartRequest: NetworkRequest {
-    var endpoint: URL?
-}
-
-struct cartChangeRequest: NetworkRequest {
-    var endpoint: URL?
-    var httpMethod: HttpMethod = .put
-    var dto: [String]
-}
-
-final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
+//MARK: - Cart service
+final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtocol {
     var cartVM: CartViewModel?
+    var checkoutVM: CheckoutViewModel?
 
     static var shared = OrderAndPaymentService()
-    private(set) var currentOrderItems: [ItemNFT] = [] {
-        didSet {
-            if currentOrder?.nfts.count == currentOrderItems.count {
-                cartVM?.setOrder(currentOrderItems)
-            }
-        }
-    }
     private var networkClient: NetworkClient
     private var currentOrder: Order? = nil {
         didSet {
             getOrderItems()
         }
     }
+    private(set) var currentOrderItems: [ItemNFT] = [] {
+        didSet {
+            cartVM?.setOrder(currentOrderItems)
+        }
+    }
+    private(set) var currencyList: [Currency] = [] {
+        didSet {
+            checkoutVM?.setCurrencyList(to: currencyList)
+        }
+    }
     
     //MARK: - URL paths
-    
     private let orderPathString = "orders/1"
     private let getAllCurrenciesPathString = "currencies"
     private let paymentPathString = "/payment/"
     private let getNFTByIDString = "nft/"
     
+    //MARK: - Lifecycle
     private init(networkClient: NetworkClient = DefaultNetworkClient()) {
         self.networkClient = networkClient
     }
     
-    private func getNFTbyID(_ id: String) {
-        let urlString = Config.baseUrl + getNFTByIDString + id
-        let request = cartRequest(endpoint: URL(string: urlString))
-        networkClient.send(request: request, type: ItemNFT.self, onResponse: { [weak self] result in
+    //MARK: - Helper methods
+    private func getOrderItems() {
+        var newOrderItems: [ItemNFT] = []
+        let cartGroup = DispatchGroup()
+        
+        if let nfts = currentOrder?.nfts {
+            for nft in nfts {
+                cartGroup.enter()
+                
+                let urlString = Config.baseUrl + getNFTByIDString + nft
+                let request = cartRequest(endpoint: URL(string: urlString))
+                networkClient.send(request: request,
+                                   type: ItemNFT.self,
+                                   onResponse: { result in
+                    switch result {
+                    case .success(let item):
+                        newOrderItems.append(item)
+                        cartGroup.leave()
+                    case .failure(let error):
+                        assertionFailure(error.localizedDescription)
+                        cartGroup.leave()
+                    }
+                })
+            }
+        }
+        
+        cartGroup.notify(queue: .main) { [weak self] in
+            self?.currentOrderItems = newOrderItems
+        }
+    }
+    
+    private func replaceOrder(with newOrder: Order) {
+        let url = Config.baseUrl + orderPathString
+        let request = cartChangeRequest(endpoint: URL(string: url)!,
+                                        dto: newOrder.nfts)
+        networkClient.send(request: request, onResponse: { [weak self] result in
             switch result {
-            case .success(let item):
-                self?.currentOrderItems.append(item)
+            case .success(_):
+                self?.cartVM?.orderUpdated()
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
+                //TODO: Handle network error
             }
         })
     }
     
+    //MARK: - Cart protocol methods
     func getOrder() {
         let urlString = Config.baseUrl + orderPathString
         let request = cartRequest(endpoint: URL(string: urlString))
@@ -85,50 +121,44 @@ final class OrderAndPaymentService: OrderAndPaymentServiceProtocol {
                 self.currentOrder = nil
                 self.currentOrderItems = []
                 assertionFailure(error.localizedDescription)
+                
+                //TODO: Network error alert
             }
         })
     }
     
-    private func getOrderItems() {
-        currentOrderItems = []
-        
-        if let nfts = currentOrder?.nfts {
-            for nft in nfts {
-                getNFTbyID(nft)
-            }
-        }
-    }
-    
-    private func replaceOrder(with newOrder: Order) {
-        let url = Config.baseUrl + orderPathString
-        let request = cartChangeRequest(endpoint: URL(string: url)!,
-                                        dto: newOrder.nfts)
-        networkClient.send(request: request, onResponse: { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.getOrder()
-            case .failure(let error):
-                assertionFailure(error.localizedDescription)
-            }
-        })
-    }
-    
-    //MARK: - Cart protocol methods
+    func getAllCurrencies() {
+         let url = Config.baseUrl + getAllCurrenciesPathString
+         let request = cartRequest(endpoint: URL(string: url)!)
+         networkClient.send(request: request, type: [Currency].self, onResponse: { [weak self] result in
+             switch result {
+             case .success(let newCurrencylist):
+                 self?.currencyList = newCurrencylist
+             case.failure(let error):
+                 assertionFailure(error.localizedDescription)
+             }
+         })
+     }
     
     func payWith(currecyID: String) {
-        
-    }
-    
-    func getAllCurrencies() -> [Currency] {
-        return []
-    }
-    
-    func getCurrency(byID id: String) -> Currency? {
-        return nil
-    }
-    
-    func addItemToOrder(_ newItem: ItemNFT) {
-        
+        let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
+        let request = cartRequest(endpoint: URL(string: urlString))
+        networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { [weak self] result in
+             //TODO: - Handle ERRORS
+             print(result)
+             switch result {
+             case .success(let status):
+                 DispatchQueue.main.async {
+                     if status.success {
+                         self?.checkoutVM?.paymentSuccessfull()
+                     } else {
+                         self?.checkoutVM?.paymentFailed()
+                     }
+                 }
+             case .failure(let error):
+                 assertionFailure(error.localizedDescription)
+             }
+         })
     }
     
     func removeItemFromOrder(id: String) {

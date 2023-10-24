@@ -48,15 +48,23 @@
 		BC2C52AB2AD5CA080066C940 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* Fonts.swift */; };
 		BC2C52AC2AD5CA080066C940 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* Fonts.swift */; };
 		BC2C84D02ADC7917006C4E91 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84CF2ADC7917006C4E91 /* Observable.swift */; };
+		BC2C84D22ADDA32B006C4E91 /* DeleteConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */; };
+		BC2C84D42ADEF2E3006C4E91 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */; };
+		BC2C84D62ADF1503006C4E91 /* MakePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */; };
+		BC2C84D82ADF26A6006C4E91 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */; };
 		BC35DED12AD9B116008C252D /* OrderAndPaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */; };
 		BC4C6CBF2AD5C45700693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */; };
 		BC6257712ADC4B0B00E3E0F9 /* CartFlowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */; };
+		BC9405512AE82E8400786D84 /* PaymentSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9405502AE82E8400786D84 /* PaymentSuccessViewController.swift */; };
+		BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */; };
+		BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */; };
+		BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */; };
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
 		BCB1DDFD2AD70867002ED041 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */; };
 		BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */; };
-		BCB1DE012AD70B37002ED041 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE002AD70B37002ED041 /* CheckoutView.swift */; };
+		BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE002AD70B37002ED041 /* CartTotalView.swift */; };
 		BCB1DE032AD7108A002ED041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE022AD7108A002ED041 /* RatingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,13 +121,21 @@
 		BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
 		BC2C52A02AD5C9CE0066C940 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		BC2C84CF2ADC7917006C4E91 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationViewController.swift; sourceTree = "<group>"; };
+		BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePaymentView.swift; sourceTree = "<group>"; };
+		BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentService.swift; sourceTree = "<group>"; };
 		BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowRouter.swift; sourceTree = "<group>"; };
+		BC9405502AE82E8400786D84 /* PaymentSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessViewController.swift; sourceTree = "<group>"; };
+		BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentRequests.swift; sourceTree = "<group>"; };
+		BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
+		BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
-		BCB1DE002AD70B37002ED041 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		BCB1DE002AD70B37002ED041 /* CartTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTotalView.swift; sourceTree = "<group>"; };
 		BCB1DE022AD7108A002ED041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +180,8 @@
 				BC2C52AA2AD5C9E40066C940 /* Fonts */,
 				3F478ECE29DB474E00F6D39E /* Colors.swift */,
 				BCB1DE022AD7108A002ED041 /* RatingView.swift */,
+				BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */,
+				BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -298,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				3FC8C39029D2453B0081F015 /* ExampleRequest.swift */,
+				BC986C022AE57DB200E17267 /* OrderAndPaymentRequests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -316,9 +335,11 @@
 		BC2C84CD2ADC78A3006C4E91 /* CartView */ = {
 			isa = PBXGroup;
 			children = (
+				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */,
 				BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */,
-				BCB1DE002AD70B37002ED041 /* CheckoutView.swift */,
+				BCB1DE002AD70B37002ED041 /* CartTotalView.swift */,
+				BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */,
 			);
 			path = CartView;
 			sourceTree = "<group>";
@@ -327,6 +348,10 @@
 			isa = PBXGroup;
 			children = (
 				BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */,
+				BC2C84D32ADEF2E3006C4E91 /* CurrencyCell.swift */,
+				BC2C84D52ADF1503006C4E91 /* MakePaymentView.swift */,
+				BC2C84D72ADF26A6006C4E91 /* CheckoutViewModel.swift */,
+				BC9405502AE82E8400786D84 /* PaymentSuccessViewController.swift */,
 			);
 			path = CheckoutView;
 			sourceTree = "<group>";
@@ -335,7 +360,6 @@
 			isa = PBXGroup;
 			children = (
 				BC2C84CF2ADC7917006C4E91 /* Observable.swift */,
-				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */,
 				BC2C84CE2ADC78AE006C4E91 /* CheckoutView */,
 				BC2C84CD2ADC78A3006C4E91 /* CartView */,
@@ -493,27 +517,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2C84D82ADF26A6006C4E91 /* CheckoutViewModel.swift in Sources */,
 				3FC8C38B29D242E90081F015 /* ProductDetailsTableViewCell.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
+				BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,
 				BCB1DE032AD7108A002ED041 /* RatingView.swift in Sources */,
 				31994AAA2AD545D400B57E7B /* OrderPaymentStatus.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
+				BC2C84D42ADEF2E3006C4E91 /* CurrencyCell.swift in Sources */,
 				31994AA42AD53E8700B57E7B /* ItemNFT.swift in Sources */,
 				BC35DED12AD9B116008C252D /* OrderAndPaymentService.swift in Sources */,
 				31994A962AD486B800B57E7B /* Config.swift in Sources */,
-				BCB1DE012AD70B37002ED041 /* CheckoutView.swift in Sources */,
+				BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */,
 				BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
 				31994A982AD487AB00B57E7B /* Collection.swift in Sources */,
+				BC2C84D62ADF1503006C4E91 /* MakePaymentView.swift in Sources */,
 				31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */,
 				BC6257712ADC4B0B00E3E0F9 /* CartFlowRouter.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				BCB1DDFD2AD70867002ED041 /* CartItemCell.swift in Sources */,
+				BC9405512AE82E8400786D84 /* PaymentSuccessViewController.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */,
+				BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
@@ -521,7 +551,9 @@
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				BC2C84D02ADC7917006C4E91 /* Observable.swift in Sources */,
+				BC2C84D22ADDA32B006C4E91 /* DeleteConfirmationViewController.swift in Sources */,
 				31994AA02AD53AAA00B57E7B /* UIBlockingProgressHUD.swift in Sources */,
+				BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */,
 				BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 			);
