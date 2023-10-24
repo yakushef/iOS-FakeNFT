@@ -19,9 +19,7 @@ final class WebView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .whiteUniversal
-        
         addSubviews()
         setupConstraints()
         setupNavBar()
@@ -62,8 +60,10 @@ final class WebView: UIViewController {
             navBar.tintColor = .whiteUniversal
         }
     }
-    
+        
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+        tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isTranslucent = false
     }
 }

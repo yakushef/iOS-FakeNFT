@@ -53,6 +53,15 @@ final class CatalogViewController: UIViewController {
         viewModel.loadingStarted = self.loadIndicatorStartAnimating
         viewModel.loadingFinished = self.loadIndicatorStopAnimating
         viewModel.updateData()
+        
+        viewModel.onError = { [weak self] error, retryAction in
+            let alert = UIAlertController(title: "Не удалось получить данные", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { _ in
+                retryAction()
+            }))
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func addSubviews() {

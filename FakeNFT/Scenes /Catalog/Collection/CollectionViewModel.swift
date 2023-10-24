@@ -15,6 +15,8 @@ final class CollectionViewModel: NSObject {
     var profile: Profile?
     var order: OrderCollection?
     
+    var onError: ((_ error: Error, _ retryAction: @escaping () -> Void) -> Void)?
+    
     var reloadData: (() -> Void)?
     
     init(collection: Collection) {
@@ -36,7 +38,9 @@ final class CollectionViewModel: NSObject {
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    print("fetch user data error status - \(error)")
+                    self?.onError?(error) { [weak self] in
+                        self?.fetchUserData(by: id)
+                    }
                 }
             }
         }
@@ -53,7 +57,9 @@ final class CollectionViewModel: NSObject {
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        print("fetch nft data error status - \(error)")
+                        self?.onError?(error) { [weak self] in
+                            self?.fetchNFTData()
+                        }
                     }
                 }
             }
@@ -71,7 +77,9 @@ final class CollectionViewModel: NSObject {
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        print("fetch order data error status - \(error)")
+                        self?.onError?(error) { [weak self] in
+                            self?.fetchOrderData()
+                        }
                     }
                 }
             }
@@ -88,7 +96,9 @@ final class CollectionViewModel: NSObject {
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        print("fetch profile data error status - \(error)")
+                        self?.onError?(error) { [weak self] in
+                            self?.fetchProfileData()
+                        }
                     }
                 }
             }
@@ -120,7 +130,9 @@ final class CollectionViewModel: NSObject {
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        print("update order data error status \(error)")
+                        self?.onError?(error) { [weak self] in
+                            self?.updateProfileData(with: dto)
+                        }
                     }
                 }
             }
@@ -152,7 +164,9 @@ final class CollectionViewModel: NSObject {
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        print("update order data status error - \(error)")
+                        self?.onError?(error) { [weak self] in
+                            self?.updateOrderData(with: dto)
+                        }
                     }
                 }
             }

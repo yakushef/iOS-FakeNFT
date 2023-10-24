@@ -61,6 +61,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .ypBlack
         return button
     }()
     
@@ -135,7 +136,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         imageAction?()
     }
-    
     
     func configure(
         nftImage: URL,

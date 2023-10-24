@@ -37,6 +37,15 @@ final class CollectionViewController: UIViewController {
         setupConstraints()
         setupNavBar()
         setupCollectionView()
+        
+        viewModel.onError = { [weak self] error, retryAction in
+            let alert = UIAlertController(title: "Не удалось получить данные", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { _ in
+                retryAction()
+            }))
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
         
     private func addSubviews() {
@@ -95,6 +104,8 @@ final class CollectionViewController: UIViewController {
         guard let url = URL(string: viewModel.user?.website ?? "") else { return }
         webViewVC.url = url
         self.navigationController?.pushViewController(webViewVC, animated: true)
+        tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isTranslucent = true
     }
     
     private func showCollectionItemView() {
