@@ -76,7 +76,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         setupContainerView()
         setupProfileImageView()
         setupProfileNameLabel()
-        setupBioTextField()
+        setupBioLabel()
         setupSiteLabel()
         setupProfileTableView()
         
@@ -170,7 +170,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         ])
     }
     
-    private func setupBioTextField() {
+    private func setupBioLabel() {
         containerView.addSubview(profileBioLabel)
         
         NSLayoutConstraint.activate([
