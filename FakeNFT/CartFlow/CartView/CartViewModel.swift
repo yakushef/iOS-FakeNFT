@@ -47,7 +47,7 @@ final class CartViewModel {
     }
     
     func orderUpdated() {
-        CartFlowRouter.shared.dismiss()
+        router.dismiss()
         getOrder()
     }
     
