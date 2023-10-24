@@ -12,8 +12,6 @@ protocol ProfileViewControllerProtocol {
 }
 
 final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
-    private let containerView = UIView()
-    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Userpic_Placeholder")
@@ -73,7 +71,6 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         setupView()
         setupNavigationBar()
-        setupContainerView()
         setupProfileImageView()
         setupProfileNameLabel()
         setupBioLabel()
@@ -123,7 +120,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     private func setupView() {
-        [containerView, profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
+        [profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -137,47 +134,34 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         )
     }
     
-    private func setupContainerView() {
-        view.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.heightAnchor.constraint(equalToConstant: 162),
-            containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
-    
     private func setupProfileImageView() {
-        containerView.addSubview(profileImageView)
+        view.addSubview(profileImageView)
         
         NSLayoutConstraint.activate([
             profileImageView.widthAnchor.constraint(equalToConstant: 70),
             profileImageView.heightAnchor.constraint(equalToConstant: 70),
-            profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            profileImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16)
+            profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            profileImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
     private func setupProfileNameLabel() {
-        containerView.addSubview(profileNameLabel)
+        view.addSubview(profileNameLabel)
         
         NSLayoutConstraint.activate([
-            profileNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 21),
-            profileNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -113),
+            profileNameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
             profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            profileNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            profileNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
     
     private func setupBioLabel() {
-        containerView.addSubview(profileBioLabel)
+        view.addSubview(profileBioLabel)
         
         NSLayoutConstraint.activate([
-            profileBioLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 90),
-            profileBioLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            profileBioLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            profileBioLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -18)
+            profileBioLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 20),
+            profileBioLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            profileBioLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18)
         ])
     }
     
@@ -185,7 +169,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         view.addSubview(siteLabel)
         
         NSLayoutConstraint.activate([
-            siteLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 12),
+            siteLabel.topAnchor.constraint(equalTo: profileBioLabel.bottomAnchor, constant: 12),
             siteLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             siteLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
