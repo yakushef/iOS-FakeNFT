@@ -77,6 +77,13 @@ final class CartFlowRouter {
         cartVC?.show(checkout, sender: nil)
     }
     
+    // Метод для перехода на экран подтверждения оплаты
+    func paymentSuccessfull() {
+        let success = PaymentSuccessViewController()
+        success.modalPresentationStyle = .fullScreen
+        checkoutVC?.present(success, animated: true)
+    }
+    
     // Метод для отображения полноэкранного алерта при удалении товара
     func showDeleteConfirmationForNFT(_ nft: ItemNFT?, removalAction: @escaping () -> Void) {
         let vc = DeleteConfirmationViewController()

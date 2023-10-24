@@ -8,6 +8,7 @@
 import Foundation
 
 final class CheckoutViewModel {
+    private var router = CartFlowRouter.shared
     private var orderService: CheckoutServiceProtocol
     private var currencyID: String?
     @Observable private(set) var currencyList: [Currency] = []
