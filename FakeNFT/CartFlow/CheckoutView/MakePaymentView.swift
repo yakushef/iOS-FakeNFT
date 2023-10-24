@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MakePaymentView: UIView {
+final class MakePaymentView: UIView {
     private let insets = UIEdgeInsets(top: 16,
                                       left: 16,
                                       bottom: 16,

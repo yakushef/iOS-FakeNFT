@@ -163,13 +163,13 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
 extension CartItemCell {
     func removeItem() {
         delegate?.removeItem(id: nft?.id ?? "")
-        DispatchQueue.main.async {
-            self.isUserInteractionEnabled = false
+        DispatchQueue.main.async { [weak self] in
+            self?.isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.25, delay: 0, animations: {
-                self.alpha = 0.2
+                self?.alpha = 0.2
             }, completion: { _ in
                 UIView.animate(withDuration: 0.55, delay: 0, options: [.autoreverse, .repeat], animations: {
-                    self.alpha = 0.5
+                    self?.alpha = 0.5
                 })
             })
         }

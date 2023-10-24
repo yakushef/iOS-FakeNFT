@@ -8,6 +8,7 @@
 import Foundation
 
 final class CheckoutViewModel {
+    private var router = CartFlowRouter.shared
     private var orderService: CheckoutServiceProtocol
     private var currencyID: String?
     @Observable private(set) var currencyList: [Currency] = []
@@ -38,9 +39,11 @@ final class CheckoutViewModel {
     
     func paymentSuccessfull() {
         //TODO: - Handle successfull payment
+        router.paymentSuccessfull()
     }
     
     func paymentFailed() {
         //TODO: - Handle payment failure
+        router.showPaymentError()
     }
 }

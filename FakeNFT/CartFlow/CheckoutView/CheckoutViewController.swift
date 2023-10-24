@@ -10,12 +10,15 @@ import UIKit
 
 final class CheckoutViewController: UIViewController {
     private var router = CartFlowRouter.shared
+    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
     private var viewModel: CheckoutViewModel?
+    
     private lazy var paymentView: MakePaymentView = {
         let paymentView = MakePaymentView()
         paymentView.translatesAutoresizingMaskIntoConstraints = false
         return paymentView
     }()
+    
     private lazy var currencyCollection: UICollectionView = {
        let currencyCollection = UICollectionView(frame: CGRect(),
                                                  collectionViewLayout: UICollectionViewLayout())

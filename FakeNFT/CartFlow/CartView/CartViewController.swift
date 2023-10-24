@@ -15,10 +15,9 @@ enum CartSortOrder: String {
 }
 
 final class CartViewController: UIViewController {
-    
-    var viewModel: CartViewModel? = CartViewModel()
+    var viewModel: CartViewModel = CartViewModel()
+    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
     var router: CartFlowRouter? = CartFlowRouter.shared
-    private var orderItems: [ItemNFT] = []
     
     //MARK: - UI elements
     private let formatter: NumberFormatter = {
@@ -57,7 +56,7 @@ final class CartViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.$currentOrderSorted.makeBinding { [weak self] _ in
+        viewModel.$currentOrderSorted.makeBinding { [weak self] _ in
             DispatchQueue.main.async {
                 self?.orderUpdated()
             }
@@ -73,7 +72,7 @@ final class CartViewController: UIViewController {
     private func initialSetup() {
         setupUI()
         checkIfEmpty()
-        viewModel?.getOrder()
+        viewModel.getOrder()
         showProgressView()
     }
     
@@ -82,7 +81,7 @@ final class CartViewController: UIViewController {
         ProgressHUD.animationType = .systemActivityIndicator
         
         [emptyCartLabel,
-        paymentView,
+         paymentView,
          cartTable].forEach{
             view.addSubview($0)
         }
@@ -130,9 +129,8 @@ final class CartViewController: UIViewController {
     
     //MARK: - Order updated
     func orderUpdated() {
-        orderItems = viewModel?.currentOrderSorted ?? []
-        paymentView.setQuantity(orderItems.count)
-        paymentView.setTotalprice(orderItems.reduce(0) {$0 + $1.price})
+        paymentView.setQuantity(viewModel.currentOrderSorted.count)
+        paymentView.setTotalprice(viewModel.currentOrderSorted.reduce(0) {$0 + $1.price})
         cartTable.reloadData()
         checkIfEmpty()
         hideProgressView()
@@ -140,9 +138,9 @@ final class CartViewController: UIViewController {
     
     //MARK: - Helper methods
     private func checkIfEmpty() {
-        paymentView.isHidden = orderItems.isEmpty
-        cartTable.isHidden = orderItems.isEmpty
-        emptyCartLabel.isHidden = !orderItems.isEmpty
+        paymentView.isHidden = viewModel.currentOrderSorted.isEmpty
+        cartTable.isHidden = viewModel.currentOrderSorted.isEmpty
+        emptyCartLabel.isHidden = !viewModel.currentOrderSorted.isEmpty
     }
     
     private func hideProgressView() {
@@ -156,7 +154,7 @@ final class CartViewController: UIViewController {
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {
-        viewModel?.setSortingStyle(to: newSortingStyle)
+        viewModel.setSortingStyle(to: newSortingStyle)
     }
 }
 
@@ -172,7 +170,7 @@ extension CartViewController: UITableViewDelegate {
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        orderItems.count
+        viewModel.currentOrderSorted.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -180,7 +178,7 @@ extension CartViewController: UITableViewDataSource {
         let cell: CartItemCell = tableView.dequeueReusableCell()
         cell.setupCellUI()
         cell.delegate = viewModel
-        cell.configureCellFor(nft: orderItems[indexPath.row])
+        cell.configureCellFor(nft: viewModel.currentOrderSorted[indexPath.row])
         return cell
     }
 }
