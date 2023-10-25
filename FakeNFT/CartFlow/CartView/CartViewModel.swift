@@ -8,7 +8,7 @@
 import Foundation
 
 final class CartViewModel {
-    private var router = CartFlowRouter.shared
+    private var router: CartFlowRouterProtocol
     private var orderService: OrderServiceProtocol
     private var currentOrder: [ItemNFT] = [] {
         didSet {
@@ -23,18 +23,17 @@ final class CartViewModel {
     }
     @Observable private(set) var currentOrderSorted: [ItemNFT] = []
     
-    init(orderService: OrderServiceProtocol = OrderAndPaymentService.shared) {
+    init(orderService: OrderServiceProtocol = OrderAndPaymentService.shared, router: CartFlowRouterProtocol = CartFlowRouter.shared) {
+        self.router = router
         self.orderService = orderService
         self.orderService.cartVM = self
         getSortingStyle()
     }
     
     func networkError() {
-        DispatchQueue.main.async { [weak self] in
-            self?.router.showNetworkError(action: {
+            self.router.showNetworkError(action: { [weak self] in
                 self?.orderService.retry()
             })
-        }
     }
     
     //MARK: - Order

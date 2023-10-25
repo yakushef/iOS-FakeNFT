@@ -6,3 +6,44 @@
 //
 
 import Foundation
+@testable import FakeNFT
+
+protocol SpyOrderServiceProtocol {
+    var removedID: String { get }
+    var isGetOrderCalled: Bool { get }
+    var isRretryCalled: Bool { get }
+    func reset()
+}
+
+final class SpyOrderService: OrderServiceProtocol {
+    var cartVM: FakeNFT.CartViewModel?
+    var currentOrderItems: [FakeNFT.ItemNFT] = []
+    
+    private(set) var removedID: String = "0"
+    private(set) var isGetOrderCalled: Bool = false
+    private(set) var isRretryCalled: Bool = false
+    
+    init(viewModel: FakeNFT.CartViewModel? = nil) {
+        self.cartVM = viewModel
+    }
+    
+    func getOrder() {
+        isGetOrderCalled = true
+    }
+    
+    func removeItemFromOrder(id: String) {
+        removedID = id
+    }
+    
+    func retry() {
+        isRretryCalled = true
+    }
+}
+
+extension SpyOrderService: SpyOrderServiceProtocol {
+    func reset() {
+        removedID = "0"
+        isGetOrderCalled = false
+        isRretryCalled = false
+    }
+}

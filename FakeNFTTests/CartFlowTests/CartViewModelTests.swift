@@ -8,69 +8,18 @@
 @testable import FakeNFT
 import XCTest
 
-//TODO: test vc methods
-//TODO: test vm methods
-
-//MARK: - Mock order
-struct MockOrder {
-    static let testItem1 = ItemNFT(createdAt: "",
-                            name: "A",
-                            images: [],
-                            rating: 1,
-                            description: "",
-                            price: 100,
-                            author: "",
-                            id: "1")
-    static let testItem2 = ItemNFT(createdAt: "",
-                            name: "B",
-                            images: [],
-                            rating: 3,
-                            description: "",
-                            price: 50,
-                            author: "",
-                            id: "2")
-    static let testItem3 = ItemNFT(createdAt: "",
-                            name: "C",
-                            images: [],
-                            rating: 5,
-                            description: "",
-                            price: 80,
-                            author: "",
-                            id: "3")
-    static let testItem4 = ItemNFT(createdAt: "",
-                            name: "D",
-                            images: [],
-                            rating: 4,
-                            description: "",
-                            price: 60,
-                            author: "",
-                            id: "4")
-    static let testItem5 = ItemNFT(createdAt: "",
-                            name: "E",
-                            images: [],
-                            rating: 2,
-                            description: "",
-                            price: 110,
-                            author: "",
-                            id: "5")
-
-    static let testItems: [ItemNFT] = { [testItem1,
-                                         testItem2,
-                                         testItem3,
-                                         testItem4,
-                                         testItem5] }()
-}
-
 final class CartViewModelTests: XCTestCase {
     var spyOrderService: OrderServiceProtocol & SpyOrderServiceProtocol = SpyOrderService()
-    lazy var cartViewModel = CartViewModel(orderService: spyOrderService)
-    
+    var router: CartFlowRouterProtocol & CartFlowRouterSpyProtocol = CartFlowRouterSpy()
+    lazy var cartViewModel = CartViewModel(orderService: spyOrderService, router: router)
+
     override func setUpWithError() throws {
         spyOrderService.cartVM = cartViewModel
     }
     
     override func tearDownWithError() throws {
         spyOrderService.reset()
+//        router.reset()
         cartViewModel.setSortingStyle(to: .title)
     }
     
@@ -81,22 +30,28 @@ final class CartViewModelTests: XCTestCase {
     }
     
     func testGetOrder() {
-        
+        cartViewModel.getOrder()
+        XCTAssertTrue(spyOrderService.isGetOrderCalled)
     }
     
     func testOrderUpdated() {
-        
+        cartViewModel.orderUpdated()
+        XCTAssertTrue(router.isDismissCalled)
+        XCTAssertTrue(spyOrderService.isGetOrderCalled)
     }
     
     func testRemoveItem() {
-        
+        let id = String(Int.random(in: 0...100))
+        cartViewModel.removeItem(id: id)
+        XCTAssertEqual(spyOrderService.removedID, id)
     }
     
     func testNetworkError() {
-        
+        cartViewModel.networkError()
+        XCTAssertTrue(router.isNetworkErrorCalled)
     }
     
-    //MARK: - SORTING
+    //MARK: - Sorting
     
     func testSortNFT() {
         let items = MockOrder.testItems.shuffled()
@@ -132,44 +87,10 @@ final class CartViewModelTests: XCTestCase {
         
         XCTAssertEqual(cartViewModel.sortingStyle, style)
     }
-}
-
-protocol SpyOrderServiceProtocol {
-    var removedID: String { get }
-    var getOrderCalled: Bool { get }
-    var retryCalled: Bool { get }
-    func reset()
-}
-
-final class SpyOrderService: OrderServiceProtocol {
-    var cartVM: FakeNFT.CartViewModel?
-    var currentOrderItems: [FakeNFT.ItemNFT] = []
     
-    private(set) var removedID: String = "0"
-    private(set) var getOrderCalled: Bool = false
-    private(set) var retryCalled: Bool = false
-    
-    init(viewModel: FakeNFT.CartViewModel? = nil) {
-        self.cartVM = viewModel
-    }
-    
-    func getOrder() {
-        getOrderCalled = true
-    }
-    
-    func removeItemFromOrder(id: String) {
-        removedID = id
-    }
-    
-    func retry() {
-        retryCalled = true
+    func testSortOrder() {
+        cartViewModel.setOrder(MockOrder.testItems.shuffled())
+        XCTAssertEqual(cartViewModel.currentOrderSorted, MockOrder.testItems)
     }
 }
 
-extension SpyOrderService: SpyOrderServiceProtocol {
-    func reset() {
-        removedID = "0"
-        getOrderCalled = false
-        retryCalled = false
-    }
-}

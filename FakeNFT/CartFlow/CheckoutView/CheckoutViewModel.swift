@@ -8,7 +8,7 @@
 import Foundation
 
 final class CheckoutViewModel {
-    private var router = CartFlowRouter.shared
+    private var router: CartFlowRouter = CartFlowRouter.shared
     private var orderService: CheckoutServiceProtocol
     private var currencyID: String?
     @Observable private(set) var currencyList: [Currency] = []
@@ -38,18 +38,16 @@ final class CheckoutViewModel {
     }
     
     func paymentSuccessfull() {
-        CartFlowRouter.shared.paymentSuccessfull()
+        router.paymentSuccessfull()
     }
     
     func paymentFailed() {
-        CartFlowRouter.shared.showPaymentError()
+        router.showPaymentError()
     }
     
     func networkError() {
-        DispatchQueue.main.async { [weak self] in
-            self?.router.showNetworkError(action: {
-                self?.orderService.retry()
-            })
-        }
+        self.router.showNetworkError(action: { [weak self] in
+            self?.orderService.retry()
+        })
     }
 }
