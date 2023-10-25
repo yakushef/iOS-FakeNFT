@@ -32,7 +32,7 @@ final class CartViewModel {
     func networkError() {
         DispatchQueue.main.async { [weak self] in
             self?.router.showNetworkError(action: {
-                self?.getOrder()
+                self?.orderService.retry()
             })
         }
     }

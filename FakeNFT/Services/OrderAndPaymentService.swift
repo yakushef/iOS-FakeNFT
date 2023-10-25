@@ -14,6 +14,7 @@ protocol CheckoutServiceProtocol {
     
     func payWith(currecyID: String)
     func getAllCurrencies()
+    func retry()
 }
 
 //MARK: - Order service
@@ -24,6 +25,7 @@ protocol OrderServiceProtocol {
 
     func getOrder()
     func removeItemFromOrder(id: String)
+    func retry()
 }
 
 //MARK: - Cart service
@@ -48,6 +50,7 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
             checkoutVM?.setCurrencyList(to: currencyList)
         }
     }
+    private lazy var lastRequest: () -> Void = { }
     
     //MARK: - URL paths
     private let orderPathString = "orders/1"
@@ -58,6 +61,7 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
     //MARK: - Lifecycle
     private init(networkClient: NetworkClient = DefaultNetworkClient()) {
         self.networkClient = networkClient
+        self.lastRequest = self.getOrder
     }
     
     //MARK: - Helper methods
@@ -73,14 +77,14 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
                 let request = cartRequest(endpoint: URL(string: urlString))
                 networkClient.send(request: request,
                                    type: ItemNFT.self,
-                                   onResponse: { result in
+                                   onResponse: { [weak self] result in
                     switch result {
                     case .success(let item):
                         newOrderItems.append(item)
                         cartGroup.leave()
-                    case .failure(let error):
-                        assertionFailure(error.localizedDescription)
+                    case .failure(_):
                         cartGroup.leave()
+                        self?.cartVM?.networkError()
                     }
                 })
             }
@@ -99,14 +103,20 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
             switch result {
             case .success(_):
                 self?.cartVM?.orderUpdated()
-            case .failure(let error):
+            case .failure(_):
                 self?.cartVM?.networkError()
             }
         })
     }
     
     //MARK: - Cart protocol methods
+    func retry() {
+        lastRequest()
+    }
+    
     func getOrder() {
+        lastRequest = getOrder
+        
         let urlString = Config.baseUrl + orderPathString
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: Order.self, onResponse: { [weak self] result in
@@ -116,7 +126,7 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
             switch result {
             case .success(let order):
                 self.currentOrder = order
-            case .failure(let error):
+            case .failure(_):
                 self.currentOrder = nil
                 self.currentOrderItems = []
                 self.cartVM?.networkError()
@@ -125,19 +135,24 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
     }
     
     func getAllCurrencies() {
+        lastRequest = getAllCurrencies
+        
          let url = Config.baseUrl + getAllCurrenciesPathString
          let request = cartRequest(endpoint: URL(string: url)!)
          networkClient.send(request: request, type: [Currency].self, onResponse: { [weak self] result in
              switch result {
              case .success(let newCurrencylist):
                  self?.currencyList = newCurrencylist
-             case.failure(let error):
-                 assertionFailure(error.localizedDescription)
+             case.failure(_):
+                 self?.checkoutVM?.networkError()
              }
          })
      }
     
     func payWith(currecyID: String) {
+        lastRequest = { [weak self] in
+            self?.payWith(currecyID: currecyID)
+        }
         let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { [weak self] result in
@@ -152,13 +167,17 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
                         self?.checkoutVM?.paymentFailed()
                     }
                 }
-            case .failure(let error):
-                assertionFailure(error.localizedDescription)
+            case .failure(_):
+                self?.checkoutVM?.networkError()
             }
         })
     }
     
     func removeItemFromOrder(id: String) {
+        lastRequest = { [weak self] in
+            self?.removeItemFromOrder(id: id)
+        }
+        
         let newNFTs = currentOrder?.nfts.filter { $0 != id } ?? []
         let newOrder = Order(nfts: newNFTs,
                              id: currentOrder?.id ?? "1")

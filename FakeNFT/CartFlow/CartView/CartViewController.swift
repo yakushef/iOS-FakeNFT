@@ -74,7 +74,7 @@ final class CartViewController: UIViewController {
             let currentIndex = tabBarController.selectedIndex
             if 2 != currentIndex {
                 // The view controller is appearing after switching tabs
-                viewModel?.getOrder()
+                viewModel.getOrder()
                 showProgressView()
             }
         }

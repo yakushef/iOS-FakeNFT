@@ -44,4 +44,12 @@ final class CheckoutViewModel {
     func paymentFailed() {
         CartFlowRouter.shared.showPaymentError()
     }
+    
+    func networkError() {
+        DispatchQueue.main.async { [weak self] in
+            self?.router.showNetworkError(action: {
+                self?.orderService.retry()
+            })
+        }
+    }
 }
