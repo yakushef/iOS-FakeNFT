@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CatalogTableView: UITableViewCell {
+final class CatalogTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "catalogCell"
     
@@ -24,7 +24,7 @@ final class CatalogTableView: UITableViewCell {
     var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.textColor = .black
+        label.textColor = .blackUniversal
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

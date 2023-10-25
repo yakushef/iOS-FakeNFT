@@ -14,6 +14,9 @@ final class CatalogViewModel: NSObject {
     var reloadData: (() -> Void)?
     var loadingStarted: (() -> Void)?
     var loadingFinished: (() -> Void)?
+    
+    var onError: ((_ error: Error, _ retryAction: @escaping () -> Void) -> Void)?
+    
     private let sorter = SortNFTsCollections()
     
     override init() {
@@ -36,7 +39,9 @@ final class CatalogViewModel: NSObject {
                 }
             case.failure(let error):
                 DispatchQueue.main.async {
-                    print(error)
+                    self?.onError?(error) { [weak self] in
+                        self?.fetchData()
+                    }
                 }
             }
         }

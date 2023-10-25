@@ -31,7 +31,7 @@ final class DescriptionCollectionViewCell: UICollectionViewCell {
     private lazy var authorNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = UIColor(named: "ypBlue")
+        label.textColor = .blueUniversal
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,9 +47,9 @@ final class DescriptionCollectionViewCell: UICollectionViewCell {
     
     private lazy var authorNameButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor(named: "ypBlue"), for: .normal)
+        button.setTitleColor(.blueUniversal, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        button.titleLabel?.tintColor = UIColor(named: "ypBlue")
+        button.titleLabel?.tintColor = .blueUniversal
         button.addTarget(self, action: #selector(authorNameButtonTapped), for: .touchUpInside)
         button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -115,4 +115,3 @@ final class DescriptionCollectionViewCell: UICollectionViewCell {
         authorButtonTapped = authorNameButtonAction
     }
 }
-

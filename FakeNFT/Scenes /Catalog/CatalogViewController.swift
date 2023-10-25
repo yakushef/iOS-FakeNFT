@@ -17,7 +17,7 @@ final class CatalogViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(CatalogTableView.self, forCellReuseIdentifier: CatalogTableView.reuseIdentifier)
+        tableView.register(CatalogTableViewCell.self, forCellReuseIdentifier: CatalogTableViewCell.reuseIdentifier)
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 8, right: 0)
         tableView.backgroundColor = .white
         tableView.separatorColor = .white
@@ -53,6 +53,15 @@ final class CatalogViewController: UIViewController {
         viewModel.loadingStarted = self.loadIndicatorStartAnimating
         viewModel.loadingFinished = self.loadIndicatorStopAnimating
         viewModel.updateData()
+        
+        viewModel.onError = { [weak self] error, retryAction in
+            let alert = UIAlertController(title: "Не удалось получить данные", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { _ in
+                retryAction()
+            }))
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func addSubviews() {
@@ -114,7 +123,7 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CatalogTableView.reuseIdentifier, for: indexPath) as? CatalogTableView else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CatalogTableViewCell.reuseIdentifier, for: indexPath) as? CatalogTableViewCell else { return UITableViewCell()}
         let collection = collections[indexPath.row]
         if let imageURLString = collection.cover,
            let imageURL = URL(string: imageURLString.encodeURL) {

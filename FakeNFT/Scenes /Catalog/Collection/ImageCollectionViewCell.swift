@@ -11,6 +11,8 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ImageCell"
     
+    var collectionImageTapped: (() -> Void)?
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -45,5 +47,16 @@ final class ImageCollectionViewCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    
+    @objc private func collectionCellTapped() {
+        collectionImageTapped?()
+    }
+    
+    func configure(
+        collectionImageAction: @escaping() -> Void
+    ) {
+        collectionImageTapped = collectionImageAction
+    }
 }
+
 
