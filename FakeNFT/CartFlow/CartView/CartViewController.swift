@@ -125,11 +125,22 @@ final class CartViewController: UIViewController {
             cartTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cartTable.bottomAnchor.constraint(equalTo: paymentView.topAnchor)
         ])
+        cartTable.refreshControl = {
+            let control = UIRefreshControl()
+            control.addTarget(self,
+                              action: #selector(pullToRefresh),
+                              for: .valueChanged)
+            return control
+        }()
     }
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
         router?.showSortSheet()
+    }
+    
+    @objc private func pullToRefresh() {
+        viewModel.getOrder()
     }
     
     private func payButtonTapped() {
@@ -141,6 +152,7 @@ final class CartViewController: UIViewController {
         paymentView.setQuantity(viewModel.currentOrderSorted.count)
         paymentView.setTotalprice(viewModel.currentOrderSorted.reduce(0) {$0 + $1.price})
         cartTable.reloadData()
+        cartTable.refreshControl?.endRefreshing()
         checkIfEmpty()
         hideProgressView()
     }

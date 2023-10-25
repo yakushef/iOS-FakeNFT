@@ -9,9 +9,13 @@
 import XCTest
 
 final class CheckoutViewModelTests: XCTestCase {
+    var router: CartFlowRouterSpyProtocol & CartFlowRouterProtocol = CartFlowRouterSpy()
+    
     override func setUpWithError() throws {
         
     }
+    
+    //MARK: - Currency
     
     func testGetCurrencyList() {
         
@@ -22,6 +26,24 @@ final class CheckoutViewModelTests: XCTestCase {
     }
     
     func testSetCurrency() {
+        
+    }
+    
+    //MARK: - Payment
+    
+    func testMakePayment() {
+        
+    }
+    
+    func testSuccessfulPayment() {
+        
+    }
+    
+    func testFailedPayment() {
+        
+    }
+    
+    func testNetworkError() {
         
     }
 }
