@@ -1,7 +1,7 @@
 import Foundation
 
 final class UserCardViewModel {
-    private let model: UserCardModel
+    private let model: UserCardService
     
     var onChange: (() -> Void)?
     var onError: ((_ error: Error, _ retryAction: @escaping () -> Void) -> Void)?
@@ -12,7 +12,7 @@ final class UserCardViewModel {
         }
     }
     
-    init(model: UserCardModel) {
+    init(model: UserCardService) {
         self.model = model
     }
     

@@ -1,7 +1,6 @@
 import Foundation
-import Kingfisher
 
-final class UserCardModel {
+final class UserCardService {
     private let defaultNetworkClient = DefaultNetworkClient()
     
     func getUser(userId: String, completion: @escaping (Result<User, Error>) -> Void) {

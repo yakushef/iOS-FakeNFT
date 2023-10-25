@@ -121,7 +121,7 @@ final class UserCardViewController: UIViewController {
         //TODO: - Switching to the screen Users Collection
     }
     
-    func configure() {
+    private func configure() {
         guard let user = viewModel.user else {return}
         guard  let validUrl = URL(string: user.avatar) else {return}
         let imageSize = CGSize(width: 70, height: 70)
@@ -170,7 +170,7 @@ final class UserCardViewController: UIViewController {
     func setup() {
         UINavigationBar.appearance().tintColor = .ypBlack
         view.tintColor = .ypBlack
-        let model = UserCardModel()
+        let model = UserCardService()
         viewModel = UserCardViewModel(model: model)
         viewModel.onChange = { [weak self] in
             self?.configure()

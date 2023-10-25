@@ -1,7 +1,7 @@
 import Foundation
 
 final class StatisticsViewModel {
-    private let model: StatisticsModel
+    private let model: StatisticsService
     
     var onChange: (() -> Void)?
     var onError: ((_ error: Error, _ retryAction: @escaping () -> Void) -> Void)?
@@ -20,7 +20,7 @@ final class StatisticsViewModel {
         }
     }
     
-    init(model: StatisticsModel) {
+    init(model: StatisticsService) {
         self.model = model
         self.sortType = loadSortType()
     }

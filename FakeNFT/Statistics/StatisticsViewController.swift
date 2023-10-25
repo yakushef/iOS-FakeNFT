@@ -96,7 +96,7 @@ final class StatisticsViewController: UIViewController {
         backButton.title = ""
         navigationItem.backBarButtonItem = backButton
         navigationItem.rightBarButtonItem = menuButton
-        let model = StatisticsModel()
+        let model = StatisticsService()
         
         viewModel = StatisticsViewModel(model: model)
         
