@@ -15,7 +15,7 @@ final class CartViewModel {
             sortCurrentOrder()
         }
     }
-    private var sortingStyle: CartSortOrder = .title {
+    private (set)var sortingStyle: CartSortOrder = .title {
         didSet {
             setSortingStyle()
             sortCurrentOrder()
@@ -54,7 +54,7 @@ final class CartViewModel {
     //MARK: - Sorting
     func sortNFT(_ items: [ItemNFT], by style: CartSortOrder) -> [ItemNFT] {
         var newItems = items
-        switch sortingStyle {
+        switch style {
         case .price:
             newItems.sort { item1, item2 in
                 item1.price > item2.price
@@ -65,7 +65,7 @@ final class CartViewModel {
             }
         case .title:
             newItems.sort { item1, item2 in
-                item1.name > item2.name
+                item1.name < item2.name
             }
         }
         return newItems
