@@ -8,12 +8,15 @@
 import Foundation
 
 final class CheckoutViewModel {
-    private var router: CartFlowRouter = CartFlowRouter.shared
+    private var router: CartFlowRouterProtocol
     private var orderService: CheckoutServiceProtocol
-    private var currencyID: String?
+    private(set) var currencyID: String?
     @Observable private(set) var currencyList: [Currency] = []
     
-    init(orderService: CheckoutServiceProtocol = OrderAndPaymentService.shared, currency: Currency? = nil) {
+    init(orderService: CheckoutServiceProtocol = OrderAndPaymentService.shared,
+         currency: Currency? = nil,
+         router: CartFlowRouterProtocol = CartFlowRouter.shared) {
+        self.router = router
         self.orderService = orderService
         self.orderService.checkoutVM = self
         self.currencyID = currency?.id
@@ -46,7 +49,7 @@ final class CheckoutViewModel {
     }
     
     func networkError() {
-        self.router.showNetworkError(action: { [weak self] in
+        router.showNetworkError(action: { [weak self] in
             self?.orderService.retry()
         })
     }

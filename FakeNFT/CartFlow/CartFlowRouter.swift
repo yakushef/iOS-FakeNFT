@@ -17,6 +17,7 @@ protocol CartFlowRouterProtocol {
     func showAgreementWebView()
     func showPaymentScreen()
     func showDeleteConfirmationForNFT(_ nft: ItemNFT?, removalAction: @escaping () -> Void)
+    func paymentSuccessfull()
     func dismiss()
     func pop(vc: UIViewController)
     func backToCatalog()

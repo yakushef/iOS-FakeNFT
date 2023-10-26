@@ -9,7 +9,7 @@
 import XCTest
 
 final class CartViewModelTests: XCTestCase {
-    var spyOrderService: OrderServiceProtocol & SpyOrderServiceProtocol = SpyOrderService()
+    var spyOrderService: OrderServiceProtocol & OrderServiceSpyProtocol = OrderServiceSpy()
     var router: CartFlowRouterProtocol & CartFlowRouterSpyProtocol = CartFlowRouterSpy()
     lazy var cartViewModel = CartViewModel(orderService: spyOrderService, router: router)
 

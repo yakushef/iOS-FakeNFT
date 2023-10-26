@@ -8,14 +8,14 @@
 import Foundation
 @testable import FakeNFT
 
-protocol SpyOrderServiceProtocol {
+protocol OrderServiceSpyProtocol {
     var removedID: String { get }
     var isGetOrderCalled: Bool { get }
     var isRretryCalled: Bool { get }
     func reset()
 }
 
-final class SpyOrderService: OrderServiceProtocol {
+final class OrderServiceSpy: OrderServiceProtocol {
     var cartVM: FakeNFT.CartViewModel?
     var currentOrderItems: [FakeNFT.ItemNFT] = []
     
@@ -40,7 +40,7 @@ final class SpyOrderService: OrderServiceProtocol {
     }
 }
 
-extension SpyOrderService: SpyOrderServiceProtocol {
+extension OrderServiceSpy: OrderServiceSpyProtocol {
     func reset() {
         removedID = "0"
         isGetOrderCalled = false
