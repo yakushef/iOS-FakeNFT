@@ -102,8 +102,6 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         let attributedString = NSMutableAttributedString(string: website)
         attributedString.addAttribute(.link, value: website, range: NSMakeRange(0, attributedString.length))
         siteLabel.attributedText = attributedString
-        
-        view.layoutIfNeeded()
     }
     
     private func addGesture() {
