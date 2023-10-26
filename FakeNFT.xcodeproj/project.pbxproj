@@ -53,6 +53,7 @@
 		CB30AB242AE04D4600001D8B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB30AB232AE04D4600001D8B /* WebViewController.swift */; };
 		CB3153DE2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */; };
 		CB3153E02AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */; };
+		CB3DEADB2AEAA5EF008C9427 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */; };
 		CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */; };
 		CB85C9AF2AE4069C00B2C5B9 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */; };
 		CB85C9B12AE4077C00B2C5B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */; };
@@ -118,6 +119,7 @@
 		CB30AB232AE04D4600001D8B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CB3153DD2AE2C351006970C5 /* FavoritesNFTsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNFTsCollectionViewController.swift; sourceTree = "<group>"; };
 		CB3153DF2AE2C6F2006970C5 /* FavoritesNFTsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNFTsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingViewController.swift; sourceTree = "<group>"; };
 		CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */,
 				CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */,
 				CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */,
+				CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				BCB1DE052AD71E11002ED041 /* RatingView.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
+				CB3DEADB2AEAA5EF008C9427 /* ProfileInfo.swift in Sources */,
 				31994A982AD487AB00B57E7B /* Collection.swift in Sources */,
 				31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,

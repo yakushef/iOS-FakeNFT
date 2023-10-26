@@ -148,6 +148,7 @@ final class ProfileEditingViewController: UIViewController {
     }
     
     private func setupTextView(_ textView: UITextView, under topView: UIView) {
+        textView.delegate = self
         textView.isScrollEnabled = false
         textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
         textView.font = UIFont.systemFont(ofSize: 17)
@@ -173,6 +174,7 @@ final class ProfileEditingViewController: UIViewController {
     
     @objc
     private func closeButtonDidTap() {
+        profileViewModel?.updateProfileInfo()
         dismiss(animated: true)
     }
     
@@ -183,6 +185,27 @@ final class ProfileEditingViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             UIBlockingProgressHUD.dismiss()
+        }
+    }
+}
+
+extension ProfileEditingViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        print(textView.text)
+        
+        var info: ProfileInfo? = switch textView {
+        case nameTextView:
+            .name
+        case bioTextView:
+            .description
+        case siteTextView:
+            .website
+        default:
+            nil
+        }
+        
+        if let info {
+            profileViewModel?.changeProfileInfo(for: info, textView.text)
         }
     }
 }
