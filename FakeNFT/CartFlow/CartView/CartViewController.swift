@@ -62,9 +62,6 @@ final class CartViewController: UIViewController {
         }
         CartFlowRouter.shared.cartVC = self
         
-        //временное решение до объединения эпиков с единым TabBarController в коде
-        parent?.tabBarItem.image = UIImage(named: "Tab_Cart")
-        
         initialSetup()
     }
     

@@ -156,8 +156,6 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
         let urlString = Config.baseUrl + orderPathString + paymentPathString + currecyID
         let request = cartRequest(endpoint: URL(string: urlString))
         networkClient.send(request: request, type: OrderPaymentStatus.self, onResponse: { [weak self] result in
-            //TODO: - Handle ERRORS
-            print(result)
             switch result {
             case .success(let status):
                 DispatchQueue.main.async {
