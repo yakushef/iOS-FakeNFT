@@ -30,6 +30,7 @@ final class CartTotalView: UIView {
         button.layer.cornerRadius = CornerRadius.big.cgFloat()
         button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "pay_button"
         return button
     }()
     

@@ -28,6 +28,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         button.tintColor = .ypBlack
         button.adjustsImageWhenHighlighted = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "remove_item_button"
         return button
     }()
     
@@ -72,6 +73,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         selectionStyle = .none
         isUserInteractionEnabled = true
         contentView.isHidden = true
+        accessibilityIdentifier = "cart_item_cell"
         
         [nftPreview,
          removeButton,

@@ -67,6 +67,8 @@ final class CurrencyCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     private func setupUI() {
+        accessibilityIdentifier = "currency_cell"
+        
         backgroundView = UIView(frame: frame)
         backgroundView?.layer.borderColor = UIColor.ypBlack.cgColor
         backgroundView?.backgroundColor = .ypLightGrey

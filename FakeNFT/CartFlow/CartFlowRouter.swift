@@ -139,19 +139,25 @@ final class CartFlowRouter: CartFlowRouterProtocol {
     //MARK: - Helper methods
     private func createAlertAction(type: CartSortOrder) -> UIAlertAction {
         var title: String?
+        var identifier: String = ""
         switch type {
             case .price:
                 title = "По цене"
+                identifier = "price_button"
             case .rating:
                 title = "По рейтингу"
+                identifier = "rating_button"
             case .title:
                 title = "По названию"
+                identifier = "title_button"
         }
-        return UIAlertAction(
+        let action = UIAlertAction(
             title: title,
             style: .default
         ) { [weak self] _ in
             self?.cartVC?.setSorting(to: type)
         }
+        action.accessibilityIdentifier = identifier
+        return action
     }
 }

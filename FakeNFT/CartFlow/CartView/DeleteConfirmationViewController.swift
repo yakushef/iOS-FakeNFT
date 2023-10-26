@@ -40,6 +40,7 @@ final class DeleteConfirmationViewController: UIViewController {
         alertText.textAlignment = .center
         alertText.textColor = .ypBlack
         alertText.translatesAutoresizingMaskIntoConstraints = false
+        alertText.accessibilityIdentifier = "remove_item_alert"
         return alertText
     }()
     
@@ -62,19 +63,21 @@ final class DeleteConfirmationViewController: UIViewController {
         cancelButton.titleLabel?.font = .Regular.large
         cancelButton.setTitle("Вернуться", for: .normal)
         cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
+        cancelButton.accessibilityIdentifier = "remove_item_cancel"
         return cancelButton
     }()
     
     private lazy var removeButton: UIButton = {
-        let cancelButton = GenericButton(type: .system)
-        cancelButton.addTarget(self,
+        let removeButton = GenericButton(type: .system)
+        removeButton.addTarget(self,
                                action: #selector(removeButtonTapped),
                                for: .touchUpInside)
-        cancelButton.titleLabel?.font = .Regular.large
-        cancelButton.setTitleColor(.redUniversal, for: .normal)
-        cancelButton.setTitle("Удалить", for: .normal)
-        cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
-        return cancelButton
+        removeButton.titleLabel?.font = .Regular.large
+        removeButton.setTitleColor(.redUniversal, for: .normal)
+        removeButton.setTitle("Удалить", for: .normal)
+        removeButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
+        removeButton.accessibilityIdentifier = "remove_item_proceed"
+        return removeButton
     }()
     
     override var prefersStatusBarHidden: Bool {

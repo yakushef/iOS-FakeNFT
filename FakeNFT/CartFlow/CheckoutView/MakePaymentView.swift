@@ -40,6 +40,7 @@ final class MakePaymentView: UIView {
         agreementButton.backgroundColor = .clear
         agreementButton.contentHorizontalAlignment = .left
         agreementButton.translatesAutoresizingMaskIntoConstraints = false
+        agreementButton.accessibilityIdentifier = "agreement"
         return agreementButton
     }()
     

@@ -12,7 +12,9 @@ import WebKit
 class WebViewController: UIViewController {
     var model: WebViewModel?
     private let webView: WKWebView = {
-        WKWebView()
+        let webView = WKWebView()
+        webView.accessibilityIdentifier = "web_view"
+        return webView
     }()
 
     override func viewDidLoad() {
