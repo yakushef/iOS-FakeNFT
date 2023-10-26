@@ -318,6 +318,18 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		CB3DEADC2AEAA89C008C9427 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
+				CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */,
+				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
+				CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */,
+				CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CB6F168A2AD84E630070D0E3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,14 +368,10 @@
 			isa = PBXGroup;
 			children = (
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
-				CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */,
-				CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */,
-				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
+				CB3DEADC2AEAA89C008C9427 /* Profile */,
 				CB85C9AD2AE4036200B2C5B9 /* WebView */,
 				CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */,
 				CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */,
-				CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */,
-				CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
