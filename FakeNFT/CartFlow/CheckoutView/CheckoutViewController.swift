@@ -8,9 +8,8 @@
 import UIKit
 
 final class CheckoutViewController: UIViewController {
-    private var router = CartFlowRouter.shared
-    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
-    private var viewModel: CheckoutViewModel?
+    private let viewModel: CheckoutViewModel
+    private var router: CartFlowRouterProtocol
     
     private lazy var paymentView: MakePaymentView = {
         let paymentView = MakePaymentView()
@@ -25,15 +24,24 @@ final class CheckoutViewController: UIViewController {
     }()
     
     //MARK: - Lifecycle
+    init(viewModel: CheckoutViewModel = CheckoutViewModel(), router: CartFlowRouterProtocol = CartFlowRouter.shared) {
+        self.viewModel = viewModel
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+        self.router.checkoutVC = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = CheckoutViewModel()
-        viewModel?.$currencyList.makeBinding(action: { [weak self] _ in
+        viewModel.$currencyList.makeBinding(action: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.currencyListUpdated()
             }
         })
-        router.checkoutVC = self
         
         initialSetup()
     }
@@ -41,7 +49,7 @@ final class CheckoutViewController: UIViewController {
     //MARK: - Initial setup
     private func initialSetup() {
         setupUI()
-        viewModel?.getCurrencyList()
+        viewModel.getCurrencyList()
         UIBlockingProgressHUD.show()
     }
     
@@ -102,7 +110,7 @@ final class CheckoutViewController: UIViewController {
     //MARK: - Navigation
     
     private func payButtonTapped() {
-        viewModel?.makePayment()
+        viewModel.makePayment()
     }
     
     private func agreementButtonTapped() {
@@ -118,10 +126,9 @@ final class CheckoutViewController: UIViewController {
 extension CheckoutViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        if let currency = viewModel?.currencyList[indexPath.row] {
-            viewModel?.setCurrencyTo(id: currency.id)
-            paymentView.switchPayButtonState(isActive: true)
-        }
+        let currency = viewModel.currencyList[indexPath.row]
+        viewModel.setCurrencyTo(id: currency.id)
+        paymentView.switchPayButtonState(isActive: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -150,13 +157,13 @@ extension CheckoutViewController: UICollectionViewDelegateFlowLayout {
 extension CheckoutViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        viewModel?.currencyList.count ?? 0
+        viewModel.currencyList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CurrencyCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        let currency = viewModel?.currencyList[indexPath.row]
+        let currency = viewModel.currencyList[indexPath.row]
         cell.configureCell(for: currency)
         return cell
     }

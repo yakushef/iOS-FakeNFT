@@ -14,9 +14,8 @@ enum CartSortOrder: String {
 }
 
 final class CartViewController: UIViewController {
-    var viewModel: CartViewModel = CartViewModel()
-    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
-    var router: CartFlowRouter? = CartFlowRouter.shared
+    private let viewModel: CartViewModel
+    private var router: CartFlowRouterProtocol
     
     //MARK: - UI elements
     private let formatter: NumberFormatter = {
@@ -53,6 +52,17 @@ final class CartViewController: UIViewController {
     }()
 
     //MARK: - Lifecycle
+    init(viewModel: CartViewModel = CartViewModel(), router: CartFlowRouterProtocol = CartFlowRouter.shared) {
+        self.viewModel = viewModel
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+        self.router.cartVC = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.$currentOrderSorted.makeBinding { [weak self] _ in
@@ -60,7 +70,6 @@ final class CartViewController: UIViewController {
                 self?.orderUpdated()
             }
         }
-        CartFlowRouter.shared.cartVC = self
         
         initialSetup()
     }
@@ -133,7 +142,7 @@ final class CartViewController: UIViewController {
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
-        router?.showSortSheet()
+        router.showSortSheet()
     }
     
     @objc private func pullToRefresh() {
@@ -141,7 +150,7 @@ final class CartViewController: UIViewController {
     }
     
     private func payButtonTapped() {
-        router?.showPaymentScreen()
+        router.showPaymentScreen()
     }
     
     //MARK: - Order updated
