@@ -1,6 +1,6 @@
 import Foundation
 
-final class StatisticsModel {
+final class StatisticsService {
     private let networkClient = DefaultNetworkClient()
     
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {

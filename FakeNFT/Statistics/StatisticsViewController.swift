@@ -96,7 +96,7 @@ final class StatisticsViewController: UIViewController {
         backButton.title = ""
         navigationItem.backBarButtonItem = backButton
         navigationItem.rightBarButtonItem = menuButton
-        let model = StatisticsModel()
+        let model = StatisticsService()
         
         viewModel = StatisticsViewModel(model: model)
         
@@ -120,6 +120,12 @@ extension StatisticsViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
+            let user = viewModel.users[indexPath.row]
+            
+            let viewController = UserCardViewController(userId: user.id)
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(viewController, animated: true)
         }
 }
 
