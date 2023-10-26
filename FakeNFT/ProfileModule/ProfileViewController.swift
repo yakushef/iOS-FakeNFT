@@ -24,6 +24,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     private let profileNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Bold.medium
+        label.numberOfLines = 0
         return label
     }()
     
