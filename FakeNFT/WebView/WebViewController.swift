@@ -9,7 +9,7 @@ import ProgressHUD
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController {
+final class WebViewController: UIViewController {
     var model: WebViewModel?
     private let webView: WKWebView = {
         let webView = WKWebView()

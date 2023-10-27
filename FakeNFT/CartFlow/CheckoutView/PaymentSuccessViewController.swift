@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaymentSuccessViewController: UIViewController {
+final class PaymentSuccessViewController: UIViewController {
     var router = CartFlowRouter.shared
     
     private let insets = UIEdgeInsets(top: 16,
