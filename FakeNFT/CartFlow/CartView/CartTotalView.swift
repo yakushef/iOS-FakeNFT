@@ -25,11 +25,15 @@ final class CartTotalView: UIView {
     
     lazy var payButton: GenericButton = {
         let button = GenericButton(type: .system)
+        let title = NSLocalizedString("cart.checkout",
+                                      tableName: "CartFlow",
+                                      comment: "К оплате")
         button.setTitle("К оплате", for: .normal)
         button.titleLabel?.font = .Bold.small
         button.layer.cornerRadius = CornerRadius.big.cgFloat()
         button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "pay_button"
         return button
     }()
     

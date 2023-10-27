@@ -5,7 +5,6 @@
 //  Created by Aleksey Yakushev on 11.10.2023.
 //
 
-import ProgressHUD
 import UIKit
 
 enum CartSortOrder: String {
@@ -15,9 +14,8 @@ enum CartSortOrder: String {
 }
 
 final class CartViewController: UIViewController {
-    var viewModel: CartViewModel = CartViewModel()
-    //TODO: перенести вьюмодель в init после переезда на верстку таб бара кодом
-    var router: CartFlowRouter? = CartFlowRouter.shared
+    private let viewModel: CartViewModel
+    private var router: CartFlowRouterProtocol
     
     //MARK: - UI elements
     private let formatter: NumberFormatter = {
@@ -48,12 +46,25 @@ final class CartViewController: UIViewController {
        let label = UILabel()
         label.textColor = .ypBlack
         label.font = .Bold.small
-        label.text = "Корзина пуста"
+        label.text = NSLocalizedString("cart.empty",
+                                       tableName: "CartFlow",
+                                       comment: "Корзина пуста")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     //MARK: - Lifecycle
+    init(viewModel: CartViewModel = CartViewModel(), router: CartFlowRouterProtocol = CartFlowRouter.shared) {
+        self.viewModel = viewModel
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+        self.router.cartVC = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.$currentOrderSorted.makeBinding { [weak self] _ in
@@ -61,12 +72,20 @@ final class CartViewController: UIViewController {
                 self?.orderUpdated()
             }
         }
-        CartFlowRouter.shared.cartVC = self
-        
-        //временное решение до объединения эпиков с единым TabBarController в коде
-        parent?.tabBarItem.image = UIImage(named: "Tab_Cart")
         
         initialSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let tabBarController = self.tabBarController {
+            let currentIndex = tabBarController.selectedIndex
+            if 2 != currentIndex {
+                // The view controller is appearing after switching tabs
+                viewModel.getOrder()
+                showProgressView()
+            }
+        }
     }
     
     private func initialSetup() {
@@ -78,8 +97,6 @@ final class CartViewController: UIViewController {
     
     //MARK: - UI setup
     private func setupUI() {
-        ProgressHUD.animationType = .systemActivityIndicator
-        
         [emptyCartLabel,
          paymentView,
          cartTable].forEach{
@@ -95,6 +112,7 @@ final class CartViewController: UIViewController {
         //MARK: Sort button
         let sortButton = UIBarButtonItem(image: UIImage(named: "Sort"), style: .plain, target: self, action: #selector(sortButtonTapped))
         sortButton.tintColor = .ypBlack
+        sortButton.accessibilityIdentifier = "sort_button"
         navigationItem.rightBarButtonItem = sortButton
         
         //MARK: Payment view
@@ -116,15 +134,26 @@ final class CartViewController: UIViewController {
             cartTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cartTable.bottomAnchor.constraint(equalTo: paymentView.topAnchor)
         ])
+        cartTable.refreshControl = {
+            let control = UIRefreshControl()
+            control.addTarget(self,
+                              action: #selector(pullToRefresh),
+                              for: .valueChanged)
+            return control
+        }()
     }
     
     //MARK: - Navigation
     @objc private func sortButtonTapped() {
-        router?.showSortSheet()
+        router.showSortSheet()
+    }
+    
+    @objc private func pullToRefresh() {
+        viewModel.getOrder()
     }
     
     private func payButtonTapped() {
-        router?.showPaymentScreen()
+        router.showPaymentScreen()
     }
     
     //MARK: - Order updated
@@ -132,6 +161,7 @@ final class CartViewController: UIViewController {
         paymentView.setQuantity(viewModel.currentOrderSorted.count)
         paymentView.setTotalprice(viewModel.currentOrderSorted.reduce(0) {$0 + $1.price})
         cartTable.reloadData()
+        cartTable.refreshControl?.endRefreshing()
         checkIfEmpty()
         hideProgressView()
     }
@@ -144,13 +174,11 @@ final class CartViewController: UIViewController {
     }
     
     private func hideProgressView() {
-        ProgressHUD.dismiss()
-        view.isUserInteractionEnabled = true
+        UIBlockingProgressHUD.dismiss()
     }
     
-    private func showProgressView() {
-        ProgressHUD.show()
-        view.isUserInteractionEnabled = false
+    func showProgressView() {
+        UIBlockingProgressHUD.show()
     }
     
     func setSorting(to newSortingStyle: CartSortOrder) {

@@ -36,10 +36,14 @@ final class DeleteConfirmationViewController: UIViewController {
         let alertText = UILabel()
         alertText.font = .Regular.small
         alertText.numberOfLines = 2
-        alertText.text = "Вы уверены, что хотите\nудалить объект из корзины?"
+        let text = NSLocalizedString("deleteConfirmation.label",
+                                     tableName: "CartFlow",
+                                     comment: "Подтверждение удаления")
+        alertText.text = text
         alertText.textAlignment = .center
         alertText.textColor = .ypBlack
         alertText.translatesAutoresizingMaskIntoConstraints = false
+        alertText.accessibilityIdentifier = "remove_item_alert"
         return alertText
     }()
     
@@ -60,22 +64,34 @@ final class DeleteConfirmationViewController: UIViewController {
                                action: #selector(cancelButtonTapped),
                                for: .touchUpInside)
         cancelButton.titleLabel?.font = .Regular.large
-        cancelButton.setTitle("Вернуться", for: .normal)
+        let title = NSLocalizedString("deleteConfirmation.cancel",
+                                      tableName: "CartFlow",
+                                      comment: "Вернуться")
+        cancelButton.setTitle(title, for: .normal)
         cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
+        cancelButton.accessibilityIdentifier = "remove_item_cancel"
         return cancelButton
     }()
     
     private lazy var removeButton: UIButton = {
-        let cancelButton = GenericButton(type: .system)
-        cancelButton.addTarget(self,
+        let removeButton = GenericButton(type: .system)
+        removeButton.addTarget(self,
                                action: #selector(removeButtonTapped),
                                for: .touchUpInside)
-        cancelButton.titleLabel?.font = .Regular.large
-        cancelButton.setTitleColor(.redUniversal, for: .normal)
-        cancelButton.setTitle("Удалить", for: .normal)
-        cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
-        return cancelButton
+        removeButton.titleLabel?.font = .Regular.large
+        removeButton.setTitleColor(.redUniversal, for: .normal)
+        let title = NSLocalizedString("deleteConfirmation.proceed",
+                                      tableName: "CartFlow",
+                                      comment: "Удалить")
+        removeButton.setTitle(title, for: .normal)
+        removeButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
+        removeButton.accessibilityIdentifier = "remove_item_proceed"
+        return removeButton
     }()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     //MARK: - Lifecycle
     override func viewDidLoad(){
@@ -87,6 +103,7 @@ final class DeleteConfirmationViewController: UIViewController {
     //MARK: - UI setup
     private func setupUI() {
         view.backgroundColor = .clear
+        setNeedsStatusBarAppearanceUpdate()
         
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

@@ -28,6 +28,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         button.tintColor = .ypBlack
         button.adjustsImageWhenHighlighted = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "remove_item_button"
         return button
     }()
     
@@ -54,7 +55,9 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
         let priceHeader = UILabel()
         priceHeader.textColor = .ypBlack
         priceHeader.font = .Regular.small
-        priceHeader.text = "Цена"
+        priceHeader.text = NSLocalizedString("cartItem.priceLabel",
+                                             tableName: "CartFlow",
+                                             comment: "Цена")
         priceHeader.translatesAutoresizingMaskIntoConstraints = false
         return priceHeader
     }()
@@ -70,8 +73,10 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     //MARK: - UI setup
     func setupCellUI() {
         selectionStyle = .none
+        backgroundColor = .clear
         isUserInteractionEnabled = true
         contentView.isHidden = true
+        accessibilityIdentifier = "cart_item_cell"
         
         [nftPreview,
          removeButton,
