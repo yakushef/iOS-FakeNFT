@@ -68,7 +68,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             self?.updateProfileInfo()
         }
         
-        profileViewModel?.getProfile()
+        profileViewModel?.getProfile(id: "1")
         
         setupView()
         setupNavigationBar()
@@ -233,6 +233,7 @@ extension ProfileViewController: UITableViewDelegate {
         case 0:
             let myNFTsTableViewController = MyNFTsTableViewController()
             myNFTsTableViewController.navTitle = cells[indexPath.row]
+            myNFTsTableViewController.profileViewModel = profileViewModel
             navigationController?.pushViewController(myNFTsTableViewController, animated: true)
         case 1:
             let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController()

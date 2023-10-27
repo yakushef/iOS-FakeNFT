@@ -59,7 +59,7 @@
 		CB85C9B12AE4077C00B2C5B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */; };
 		CBA8DF522AD6E8A1006A2601 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */; };
 		CBDC4B022AE1472E007D39C5 /* MyNFTsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */; };
-		CBDC4B042AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */; };
+		CBDC4B042AE1570C007D39C5 /* MyNFTsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC4B032AE1570C007D39C5 /* MyNFTsTableViewCell.swift */; };
 		CBFDA1902ADAEB8C00D2B6F9 /* UILablel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,7 +125,7 @@
 		CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CBA8DF512AD6E8A1006A2601 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTsTableViewController.swift; sourceTree = "<group>"; };
-		CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBDC4B032AE1570C007D39C5 /* MyNFTsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTsTableViewCell.swift; sourceTree = "<group>"; };
 		CBFDA18F2ADAEB8C00D2B6F9 /* UILablel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILablel+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -342,7 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				CBDC4B012AE1472E007D39C5 /* MyNFTsTableViewController.swift */,
-				CBDC4B032AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift */,
+				CBDC4B032AE1570C007D39C5 /* MyNFTsTableViewCell.swift */,
 			);
 			path = MyNFTs;
 			sourceTree = "<group>";
@@ -553,7 +553,7 @@
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
-				CBDC4B042AE1570C007D39C5 /* MyNFTsCollectionViewCell.swift in Sources */,
+				CBDC4B042AE1570C007D39C5 /* MyNFTsTableViewCell.swift in Sources */,
 				CB4186A32AD99055003974A8 /* ProfileEditingViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				CB85C9B12AE4077C00B2C5B9 /* ProfileViewModel.swift in Sources */,

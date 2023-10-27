@@ -1,5 +1,5 @@
 //
-//  MyNFTsCollectionViewCell.swift
+//  MyNFTsTableViewCell.swift
 //  FakeNFT
 //
 //  Created by Антон Кашников on 19/10/2023.
@@ -77,6 +77,26 @@ final class MyNFTsTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public methods
+    
+    func updateNameLabel(_ string: String) {
+        nftNameLabel.text = string
+    }
+    
+    func updateRating(_ int: Int) {
+        ratingView.setRating(to: UInt(int))
+    }
+    
+    func updatePrice(_ price: Double) {
+        priceLabel.text = "\(price) ETH"
+    }
+    
+    func updateAuthor(_ author: String) {
+        nftAuthorLabel.text = "от \(author)"
+    }
+    
+    // MARK: - Private methods
     
     private func setupView() {
         [

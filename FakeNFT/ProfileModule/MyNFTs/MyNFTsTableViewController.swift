@@ -8,7 +8,10 @@
 import UIKit
 
 final class MyNFTsTableViewController: UITableViewController {
+    var profileViewModel: ProfileViewModel?
     var navTitle: String?
+    
+    private var profileObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +19,20 @@ final class MyNFTsTableViewController: UITableViewController {
         tabBarController?.tabBar.isHidden = true
         title = navTitle
         
+        profileViewModel?.getMyNFTList()
+        
         setupNavigationBar()
         setupTableView()
+        
+        profileObserver = NotificationCenter.default.addObserver(
+            forName: ProfileViewModel.nftsDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.tableView.reloadData()
+            print(self?.profileViewModel?.nfts?.count)
+            print(self?.profileViewModel?.nfts)
+        }
     }
     
     private func setupNavigationBar() {
@@ -67,14 +82,22 @@ final class MyNFTsTableViewController: UITableViewController {
 
 extension MyNFTsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        profileViewModel?.nfts?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MyNFTsTableViewCell.reuseIdentifier,
             for: indexPath
-        )
+        ) as? MyNFTsTableViewCell else { return UITableViewCell() }
+        
+        guard let nft = profileViewModel?.nfts?[indexPath.row] else { return UITableViewCell() }
+        
+        cell.updateNameLabel(nft.name)
+        cell.updateRating(nft.rating)
+        cell.updatePrice(nft.price)
+        cell.updateAuthor(profileViewModel?.authors?[indexPath.row].name ?? "")
+        
         return cell
     }
 }
