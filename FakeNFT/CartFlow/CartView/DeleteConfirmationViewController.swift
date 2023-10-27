@@ -36,7 +36,10 @@ final class DeleteConfirmationViewController: UIViewController {
         let alertText = UILabel()
         alertText.font = .Regular.small
         alertText.numberOfLines = 2
-        alertText.text = "Вы уверены, что хотите\nудалить объект из корзины?"
+        let text = NSLocalizedString("deleteConfirmation.label",
+                                     tableName: "CartFlow",
+                                     comment: "Подтверждение удаления")
+        alertText.text = text
         alertText.textAlignment = .center
         alertText.textColor = .ypBlack
         alertText.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +64,10 @@ final class DeleteConfirmationViewController: UIViewController {
                                action: #selector(cancelButtonTapped),
                                for: .touchUpInside)
         cancelButton.titleLabel?.font = .Regular.large
-        cancelButton.setTitle("Вернуться", for: .normal)
+        let title = NSLocalizedString("deleteConfirmation.cancel",
+                                      tableName: "CartFlow",
+                                      comment: "Вернуться")
+        cancelButton.setTitle(title, for: .normal)
         cancelButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
         cancelButton.accessibilityIdentifier = "remove_item_cancel"
         return cancelButton
@@ -74,7 +80,10 @@ final class DeleteConfirmationViewController: UIViewController {
                                for: .touchUpInside)
         removeButton.titleLabel?.font = .Regular.large
         removeButton.setTitleColor(.redUniversal, for: .normal)
-        removeButton.setTitle("Удалить", for: .normal)
+        let title = NSLocalizedString("deleteConfirmation.proceed",
+                                      tableName: "CartFlow",
+                                      comment: "Удалить")
+        removeButton.setTitle(title, for: .normal)
         removeButton.layer.cornerRadius = CornerRadius.medium.cgFloat()
         removeButton.accessibilityIdentifier = "remove_item_proceed"
         return removeButton

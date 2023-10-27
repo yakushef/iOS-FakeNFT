@@ -46,7 +46,9 @@ final class CartViewController: UIViewController {
        let label = UILabel()
         label.textColor = .ypBlack
         label.font = .Bold.small
-        label.text = "Корзина пуста"
+        label.text = NSLocalizedString("cart.empty",
+                                       tableName: "CartFlow",
+                                       comment: "Корзина пуста")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

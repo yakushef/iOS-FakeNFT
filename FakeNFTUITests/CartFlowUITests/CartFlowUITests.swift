@@ -109,6 +109,6 @@ final class CartFlowUITests: XCTestCase {
         let webView = app.webViews["web_view"]
         
         XCTAssertTrue(webView.exists)
-        XCTAssertEqual(webView.frame.intersects (app.frame), true)
+                XCTAssertEqual(webView.frame.intersects (app.frame), true)
     }
 }

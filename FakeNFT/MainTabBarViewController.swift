@@ -12,14 +12,10 @@ final class MainTabBarViewController: UITabBarController {
     let catalogVC = UINavigationController(rootViewController: CatalogViewController())
     
     func setupTabBar() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .ypWhite
-        appearance.selectionIndicatorTintColor = .blueUniversal
-        tabBar.standardAppearance = appearance
-        if #available(iOS 15.0, *) {
-            tabBar.scrollEdgeAppearance = appearance
-        }
+        tabBar.unselectedItemTintColor = .ypBlack
+        tabBar.backgroundColor = .ypWhite
+        tabBar.tintColor = .blueUniversal
+        tabBar.isOpaque = true
 
         statisticVC.tabBarItem = UITabBarItem(
             title: "Статистика",
@@ -28,7 +24,7 @@ final class MainTabBarViewController: UITabBarController {
         )
         
         cartVC.tabBarItem = UITabBarItem(
-            title: "Корзина",
+            title: NSLocalizedString("cartPage.title", tableName: "CartFlow", comment: "Корзина"),
             image: UIImage(named: "Tab_Cart"),
             selectedImage: nil
         )

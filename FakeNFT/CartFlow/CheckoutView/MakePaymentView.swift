@@ -16,7 +16,10 @@ final class MakePaymentView: UIView {
     //MARK: - UI elements
     private lazy var payButton: GenericButton = {
         let payButton = GenericButton(type: .system)
-        payButton.setTitle("Оплатить",
+        let title = NSLocalizedString("paymentView.payButton",
+                                      tableName: "CartFlow",
+                                      comment: "Оплатить")
+        payButton.setTitle(title,
                            for: .normal)
         payButton.titleLabel?.font = .Bold.small
         payButton.layer.cornerRadius = CornerRadius.big.cgFloat()
@@ -31,7 +34,10 @@ final class MakePaymentView: UIView {
     private lazy var userAgreementButton: UIButton = {
         let agreementButton = UIButton(type: .system)
         agreementButton.tintColor = .blueUniversal
-        agreementButton.setTitle("Пользовательского соглашения",
+        let title = NSLocalizedString("paymentView.userAgreementButton",
+                                      tableName: "CartFlow",
+                                      comment: "Пользовательского соглашения")
+        agreementButton.setTitle(title,
                                  for: .normal)
         agreementButton.addTarget(self, action:
                                     #selector(agreementButtonTapped),
@@ -46,7 +52,10 @@ final class MakePaymentView: UIView {
     
     private lazy var disclaimerLabel: UILabel = {
         let disclaimerLabel = UILabel()
-        disclaimerLabel.text = "Совершая покупку, вы соглашаетесь с условиями"
+        let text = NSLocalizedString("paymentView.disclaimerLabel",
+                                     tableName: "CartFlow",
+                                     comment: "Совершая покупку, вы соглашаетесь с условиями")
+        disclaimerLabel.text = text
         disclaimerLabel.textColor = .ypBlack
         disclaimerLabel.font = .Regular.small
         disclaimerLabel.backgroundColor = .clear

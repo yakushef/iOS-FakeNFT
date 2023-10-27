@@ -18,9 +18,9 @@ final class CheckoutViewController: UIViewController {
     }()
     
     private lazy var currencyCollection: UICollectionView = {
-       let currencyCollection = UICollectionView(frame: CGRect(),
-                                                 collectionViewLayout: UICollectionViewLayout())
-       return currencyCollection
+        let currencyCollection = UICollectionView(frame: CGRect(),
+                                                  collectionViewLayout: UICollectionViewLayout())
+        return currencyCollection
     }()
     
     //MARK: - Lifecycle
@@ -56,7 +56,9 @@ final class CheckoutViewController: UIViewController {
     //MARK: - UI setup
     private func setupUI() {
         view.backgroundColor = .ypWhite
-        navigationItem.title = "Выберете способ оплаты"
+        navigationItem.title = NSLocalizedString("checkoutView.paymentMethod",
+                                                 tableName: "CartFlow",
+                                                 comment: "Выберете способ оплаты")
         let backButton = UIBarButtonItem(image: UIImage(named: "Backward"),
                                          style: .plain,
                                          target: self,
@@ -83,7 +85,7 @@ final class CheckoutViewController: UIViewController {
     private func setupCollection() {
         let layout = UICollectionViewFlowLayout()
         currencyCollection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        
+        currencyCollection.backgroundColor = .clear
         currencyCollection.dataSource = self
         currencyCollection.delegate = self
         currencyCollection.contentInset = UIEdgeInsets(top: 20,

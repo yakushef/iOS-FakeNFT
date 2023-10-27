@@ -28,15 +28,31 @@ final class CartFlowRouter: CartFlowRouterProtocol {
     weak var cartVC: CartViewController?
     weak var checkoutVC: CheckoutViewController?
     
+    private let titleString = NSLocalizedString("alert.title",
+                                                tableName: "CartFlow",
+                                                comment: "Ошибка")
+    private let messageString = NSLocalizedString("alert.message",
+                                                  tableName: "CartFlow",
+                                                  comment: "Сообщение")
+    private let okString = NSLocalizedString("alert.ok",
+                                             tableName: "CartFlow",
+                                             comment: "OK")
+    private let cancelString = NSLocalizedString("alert.cancel",
+                                                 tableName: "CartFlow",
+                                                 comment: "Отмена")
+    private let retryString = NSLocalizedString("alert.retry",
+                                                tableName: "CartFlow",
+                                                comment: "Повторить")
+    
     private init() { }
     
     // Метод для отображения алерта с ошибкой оплаты
     func showPaymentError() {
-        let alert = UIAlertController(title: "Упс! Что-то пошло не так :(",
-                                      message: "Попробуйте ещё раз!",
+        let alert = UIAlertController(title: titleString,
+                                      message: messageString,
                                       preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        let okAction = UIAlertAction(title: okString, style: .cancel)
         alert.addAction(okAction)
         
         checkoutVC?.present(alert, animated: true)
@@ -45,29 +61,33 @@ final class CartFlowRouter: CartFlowRouterProtocol {
     // Метод для отображения алерта с ошибкой получения данных
     func showNetworkError(action: @escaping () -> Void) {
         DispatchQueue.main.async { [weak self] in
-            let alert = UIAlertController(title: "Упс! Что-то пошло не так :(",
-                                          message: "Попробуйте ещё раз!",
+            guard let self else { return }
+            let alert = UIAlertController(title: self.titleString,
+                                          message: self.messageString,
                                           preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: "Отмена", style: .default) { _ in
-                self?.cartVC?.dismiss(animated: true)
+            let okAction = UIAlertAction(title: cancelString, style: .default) { _ in
+                self.cartVC?.dismiss(animated: true)
             }
             
-            let retryAction = UIAlertAction(title: "Повторить", style: .cancel) { _ in
+            let retryAction = UIAlertAction(title: retryString, style: .cancel) { _ in
                 action()
-                self?.cartVC?.dismiss(animated: true)
-                self?.cartVC?.showProgressView()
+                self.cartVC?.dismiss(animated: true)
+                self.cartVC?.showProgressView()
             }
             alert.addAction(retryAction)
             alert.addAction(okAction)
             
-            self?.cartVC?.present(alert, animated: true)
+            self.cartVC?.present(alert, animated: true)
         }
     }
     
     // Метод вызова алеррта выбора типа сортировки товаров в корзине
     func showSortSheet() {
-        let sortSheet = UIAlertController(title: "Сортировка",
+        let titleString = NSLocalizedString("sortSheet.title",
+                                      tableName: "CartFlow",
+                                      comment: "Сортировка")
+        let sortSheet = UIAlertController(title: titleString,
                                           message: nil,
                                           preferredStyle: .actionSheet)
 
@@ -75,7 +95,10 @@ final class CartFlowRouter: CartFlowRouterProtocol {
         sortSheet.addAction(createAlertAction(type: .rating))
         sortSheet.addAction(createAlertAction(type: .title))
 
-        let close = UIAlertAction(title: "Закрыть", style: .cancel)
+        let closeString = NSLocalizedString("sortSheet.close",
+                                            tableName: "CartFlow",
+                                            comment: "Закрыть")
+        let close = UIAlertAction(title: closeString, style: .cancel)
         sortSheet.addAction(close)
         
         cartVC?.present(sortSheet, animated: true)
@@ -141,15 +164,21 @@ final class CartFlowRouter: CartFlowRouterProtocol {
         var title: String?
         var identifier: String = ""
         switch type {
-            case .price:
-                title = "По цене"
-                identifier = "price_button"
-            case .rating:
-                title = "По рейтингу"
-                identifier = "rating_button"
-            case .title:
-                title = "По названию"
-                identifier = "title_button"
+        case .price:
+            title = NSLocalizedString("sortSheet.byPrice",
+                                      tableName: "CartFlow",
+                                      comment: "По цене")
+            identifier = "price_button"
+        case .rating:
+            title = NSLocalizedString("sortSheet.byRating",
+                                      tableName: "CartFlow",
+                                      comment: "По рейтингу")
+            identifier = "rating_button"
+        case .title:
+            title = NSLocalizedString("sortSheet.byName",
+                                      tableName: "CartFlow",
+                                      comment: "По названию")
+            identifier = "title_button"
         }
         let action = UIAlertAction(
             title: title,

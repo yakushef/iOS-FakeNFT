@@ -70,6 +70,7 @@
 		BC986C0B2AE5986000E17267 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C092AE5986000E17267 /* WebViewController.swift */; };
 		BC986C0C2AE5986000E17267 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C0A2AE5986000E17267 /* WebViewModel.swift */; };
 		BC986C162AE5A02D00E17267 /* PaymentSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC986C152AE5A02D00E17267 /* PaymentSuccessViewController.swift */; };
+		BCA4A6192AEB952000B31E14 /* CartFlow.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCA4A6182AEB952000B31E14 /* CartFlow.strings */; };
 		BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */; };
 		BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */; };
 		BCB1DDFB2AD7080D002ED041 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */; };
@@ -152,6 +153,7 @@
 		BC986C092AE5986000E17267 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		BC986C0A2AE5986000E17267 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		BC986C152AE5A02D00E17267 /* PaymentSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessViewController.swift; sourceTree = "<group>"; };
+		BCA4A6182AEB952000B31E14 /* CartFlow.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = CartFlow.strings; sourceTree = "<group>"; };
 		BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				3F6806C729CBBC5B00B4F915 /* Scenes  */,
 				3F6806C629CBBC4E00B4F915 /* Services */,
 				3F68069F29CBBAF200B4F915 /* Assets.xcassets */,
+				BCA4A6182AEB952000B31E14 /* CartFlow.strings */,
 				3F6806A129CBBAF200B4F915 /* LaunchScreen.storyboard */,
 				3F6806A429CBBAF200B4F915 /* Info.plist */,
 			);
@@ -369,8 +372,8 @@
 		BC2C84CD2ADC78A3006C4E91 /* CartView */ = {
 			isa = PBXGroup;
 			children = (
-				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BCB1DDFA2AD7080D002ED041 /* CartViewController.swift */,
+				BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */,
 				BCB1DDFC2AD70867002ED041 /* CartItemCell.swift */,
 				BCB1DE002AD70B37002ED041 /* CartTotalView.swift */,
 				BC2C84D12ADDA32B006C4E91 /* DeleteConfirmationViewController.swift */,
@@ -545,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6806A329CBBAF200B4F915 /* LaunchScreen.storyboard in Resources */,
+				BCA4A6192AEB952000B31E14 /* CartFlow.strings in Resources */,
 				BC2C52A42AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf in Resources */,
 				3F6806A029CBBAF200B4F915 /* Assets.xcassets in Resources */,
 				BC2C52A12AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */,

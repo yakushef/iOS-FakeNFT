@@ -28,7 +28,10 @@ class PaymentSuccessViewController: UIViewController {
        let label = UILabel()
         label.textColor = .ypBlack
         label.font = .Bold.medium
-        label.text = "Успех! Оплата прошла,\nпоздравляем с покупкой!"
+        let text =  NSLocalizedString("successView.label",
+                                      tableName: "CartFlow",
+                                      comment: "Успех")
+        label.text = text
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -45,7 +48,10 @@ class PaymentSuccessViewController: UIViewController {
     
     private lazy var returnButton: UIButton = {
         let button = GenericButton(type: .system)
-        button.setTitle("Вернуться в каталог", for: .normal)
+        let title = NSLocalizedString("successView.back",
+                                      tableName: "CartFlow",
+                                      comment: "Вернуться в каталог")
+        button.setTitle(title, for: .normal)
         button.titleLabel?.font = .Bold.small
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self,
