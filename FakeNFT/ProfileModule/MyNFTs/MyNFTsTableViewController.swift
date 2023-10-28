@@ -15,6 +15,7 @@ final class MyNFTsTableViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .ypWhite
         tableView.rowHeight = 140
         tableView.separatorStyle = .none
         tableView.register(MyNFTsTableViewCell.self, forCellReuseIdentifier: MyNFTsTableViewCell.reuseIdentifier)
@@ -24,6 +25,7 @@ final class MyNFTsTableViewController: UIViewController {
     
     private let label: UILabel = {
         let label = UILabel(text: "У Вас ещё нет NFT")
+        label.textColor = .ypWhite
         label.font = UIFont.Bold.small
         label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -165,6 +167,8 @@ extension MyNFTsTableViewController: UITableViewDataSource {
             withIdentifier: MyNFTsTableViewCell.reuseIdentifier,
             for: indexPath
         ) as? MyNFTsTableViewCell else { return UITableViewCell() }
+        
+        cell.backgroundColor = .ypWhite
         
         guard
             let nft = profileViewModel?.nfts?[indexPath.row],

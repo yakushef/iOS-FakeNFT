@@ -42,6 +42,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private let profileTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .ypWhite
         tableView.isScrollEnabled = false
         tableView.rowHeight = 54
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileCell")
@@ -215,6 +216,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
+        cell.backgroundColor = .ypWhite
         cell.accessoryView = UIImageView(image: UIImage(named: "chevron.forward"))
         cell.selectionStyle = .none
         
