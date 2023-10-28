@@ -60,6 +60,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileViewModel = ProfileViewModel(viewController: self)
         
+        UserDefaults.standard.set(1, forKey: "indexOfFilter")
+        
         profileObserver = NotificationCenter.default.addObserver(
             forName: ProfileViewModel.didChangeNotification,
             object: nil,

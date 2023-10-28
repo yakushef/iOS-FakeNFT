@@ -34,8 +34,7 @@ final class MyNFTsTableViewController: UITableViewController {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.tableView.reloadData()
-            UIBlockingProgressHUD.dismiss()
+            self?.reloadData()
         }
     }
     
@@ -66,6 +65,32 @@ final class MyNFTsTableViewController: UITableViewController {
         tableView.register(MyNFTsTableViewCell.self, forCellReuseIdentifier: MyNFTsTableViewCell.reuseIdentifier)
     }
     
+    private func reloadData() {
+        let filterStatus = UserDefaults.standard.integer(forKey: "indexOfFilter")
+        
+        switch filterStatus {
+        case 0:
+            print(0)
+            profileViewModel?.nfts?.sort { $0.price < $1.price }
+        case 1:
+            print(1)
+            profileViewModel?.nfts?.sort { $0.rating < $1.rating }
+        case 2:
+            print(2)
+            profileViewModel?.nfts?.sort { $0.name < $1.name }
+        default:
+            break
+        }
+        
+        tableView.reloadData()
+        UIBlockingProgressHUD.dismiss()
+    }
+    
+    private func setFilterType(_ type: Int) {
+        UserDefaults.standard.set(type, forKey: "indexOfFilter")
+        reloadData()
+    }
+    
     @objc
     private func backButtonDidTap() {
         navigationController?.popViewController(animated: true)
@@ -74,9 +99,15 @@ final class MyNFTsTableViewController: UITableViewController {
     @objc
     private func sortButtonDidTap() {
         let alertController = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "По цене", style: .default, handler: nil))
-        alertController.addAction(UIAlertAction(title: "По рейтингу", style: .default, handler: nil))
-        alertController.addAction(UIAlertAction(title: "По названию", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "По цене", style: .default) { [weak self] _ in
+            self?.setFilterType(0)
+        })
+        alertController.addAction(UIAlertAction(title: "По рейтингу", style: .default) { [weak self] _ in
+            self?.setFilterType(1)
+        })
+        alertController.addAction(UIAlertAction(title: "По названию", style: .default) { [weak self] _ in
+            self?.setFilterType(2)
+        })
         alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
         present(alertController, animated: true)
     }
