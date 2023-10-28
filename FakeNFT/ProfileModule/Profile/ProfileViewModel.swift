@@ -77,7 +77,7 @@ final class ProfileViewModel {
     
     func getMyNFTList() {
         profile?.nfts.forEach { nft in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.profileService?.makeGetNFTListRequest(id: nft) { [weak self] itemNFT in
                     if let self, let itemNFT = itemNFT as? ItemNFT {
                         self.nfts?.append(itemNFT)
@@ -92,7 +92,7 @@ final class ProfileViewModel {
     
     func getAuthors() {
         nfts?.forEach { nft in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.getUser(id: nft.author) { [weak self] user in
                     self?.authors?.append(user)
                     if self?.authors?.count == self?.profile?.nfts.count {

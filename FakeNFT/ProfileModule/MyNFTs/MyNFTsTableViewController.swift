@@ -141,6 +141,9 @@ final class MyNFTsTableViewController: UIViewController {
     @objc
     private func sortButtonDidTap() {
         let alertController = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        
+        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .alertColor
+        
         alertController.addAction(UIAlertAction(title: "По цене", style: .default) { [weak self] _ in
             self?.setFilterType(0)
         })
