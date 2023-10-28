@@ -50,8 +50,6 @@ final class CatalogViewController: UIViewController {
         setupConstraints()
         setupNavBar()
         
-        viewModel.loadingStarted = self.loadIndicatorStartAnimating
-        viewModel.loadingFinished = self.loadIndicatorStopAnimating
         viewModel.updateData()
         
         viewModel.onError = { [weak self] error, retryAction in

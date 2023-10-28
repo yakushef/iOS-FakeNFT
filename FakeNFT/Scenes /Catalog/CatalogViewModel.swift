@@ -12,8 +12,6 @@ final class CatalogViewModel: NSObject {
     private (set) var collections: [Collection] = []
     
     var reloadData: (() -> Void)?
-    var loadingStarted: (() -> Void)?
-    var loadingFinished: (() -> Void)?
     
     var onError: ((_ error: Error, _ retryAction: @escaping () -> Void) -> Void)?
     
@@ -28,19 +26,20 @@ final class CatalogViewModel: NSObject {
     }
     
     private func fetchData() {
-        loadingStarted?()
+        UIBlockingProgressHUD.show()
         DefaultNetworkClient().send(request: CollectionRequests.collection, type: [Collection].self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.collections = data
                 DispatchQueue.main.async {
-                    self?.loadingFinished?()
                     self?.reloadData?()
+                    UIBlockingProgressHUD.dismiss()
                 }
             case.failure(let error):
                 DispatchQueue.main.async {
                     self?.onError?(error) { [weak self] in
                         self?.fetchData()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 }
             }

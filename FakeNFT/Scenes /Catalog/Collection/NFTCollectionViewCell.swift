@@ -12,8 +12,8 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "NFTCell"
     
-    var likeButtonAction:(() -> Void)?
-    var cartButtonAction:(() -> Void)?
+    var likeButtonTap: String?
+    var cartButtonTap: String?
     var imageAction:(() -> Void)?
     
     private lazy var nftImageView: UIImageView = {
@@ -125,12 +125,26 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @objc private func likeButtonTapped() {
-        likeButtonAction?()
+    @objc func likeButtonTapped() {
+        if (likeButtonTap == "dislike") {
+            likeButton.setImage(UIImage(named: "like"), for: .normal)
+            likeButtonTap = "like"
+        } else {
+            likeButton.setImage(UIImage(named: "dislike"), for: .normal)
+            likeButtonTap = "dislike"
+        }
+        
     }
     
     @objc private func cartButtonTapped() {
-        cartButtonAction?()
+        
+        if (cartButtonTap == "inCart") {
+            cartButton.setImage(UIImage(named: "cart"), for: .normal)
+            cartButtonTap = "cart"
+        } else {
+            cartButton.setImage(UIImage(named: "inCart"), for: .normal)
+            cartButtonTap = "inCart"
+        }
     }
     
     @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -142,21 +156,20 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         likeOrDislike: String,
         rating: Int,
         nftName: String,
-        pirce: String,
+        price: String,
         cartImage: String,
-        likeButtonInteraction: @escaping () -> Void,
-        cartButtonInteraction: @escaping () -> Void,
         collectionImageAction: @escaping () -> Void
     ) {
-        nftImageView.kf.setImage(with: nftImage)
+        nftImageView.kf.setImage(with: nftImage, options: [.cacheMemoryOnly])
         likeButton.setImage(UIImage(named: likeOrDislike), for: .normal)
+        likeButtonTap = likeOrDislike
         fillRatingStackView(by: rating)
         nftNameLabel.text = nftName
-        priceLabel.text = pirce
+        priceLabel.text = price
         cartButton.setImage(UIImage(named: cartImage), for: .normal)
-        likeButtonAction = likeButtonInteraction
-        cartButtonAction = cartButtonInteraction
+        cartButtonTap = cartImage
         imageAction = collectionImageAction
+        
     }
     
     func fillRatingStackView(by rating: Int) {
@@ -165,7 +178,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        for i in 0..<rating {
+        for i in 0...rating {
             if let starImage = ratingStackView.subviews[i] as? UIImageView {
                 starImage.image = UIImage(named: "Star_Active")
             }

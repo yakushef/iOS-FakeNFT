@@ -29,17 +29,20 @@ final class CollectionViewModel: NSObject {
     }
     
     func fetchUserData(by id: String) {
+        UIBlockingProgressHUD.show()
         DefaultNetworkClient().send(request: CollectionRequests.userId(userId: id), type: User.self) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.user = UserCollection(with: data)
                 DispatchQueue.main.async {
                     self?.reloadData?()
+                    UIBlockingProgressHUD.dismiss()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.onError?(error) { [weak self] in
                         self?.fetchUserData(by: id)
+                        UIBlockingProgressHUD.dismiss()
                     }
                 }
             }
@@ -47,6 +50,7 @@ final class CollectionViewModel: NSObject {
     }
     
     func fetchNFTData() {
+        UIBlockingProgressHUD.show()
         DispatchQueue.global(qos: .background).async {
             DefaultNetworkClient().send(request: CollectionRequests.nft, type: [ItemNFT].self) { [weak self] result in
                 switch result {
@@ -54,11 +58,13 @@ final class CollectionViewModel: NSObject {
                     self?.nft = data.map { $0 }
                     DispatchQueue.main.async { [weak self] in
                         self?.reloadData?()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.onError?(error) { [weak self] in
                             self?.fetchNFTData()
+                            UIBlockingProgressHUD.dismiss()
                         }
                     }
                 }
@@ -67,6 +73,7 @@ final class CollectionViewModel: NSObject {
     }
     
     private func fetchOrderData() {
+        UIBlockingProgressHUD.show()
         DispatchQueue.global(qos: .background).async {
             DefaultNetworkClient().send(request: CollectionRequests.order, type: Order.self) { [weak self] result in
                 switch result {
@@ -74,11 +81,13 @@ final class CollectionViewModel: NSObject {
                     self?.order = OrderCollection(with: data)
                     DispatchQueue.main.async { [weak self] in
                         self?.reloadData?()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.onError?(error) { [weak self] in
                             self?.fetchOrderData()
+                            UIBlockingProgressHUD.dismiss()
                         }
                     }
                 }
@@ -87,17 +96,20 @@ final class CollectionViewModel: NSObject {
     }
     
     private func fetchProfileData() {
+        UIBlockingProgressHUD.show()
         DispatchQueue.global(qos: .background).async {
             DefaultNetworkClient().send(request: CollectionRequests.profile, type: Profile.self) { [weak self] result in
                 switch result {
                 case .success(let data):
                     self?.profile = data
                     DispatchQueue.main.async { [weak self] in self?.reloadData?()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.onError?(error) { [weak self] in
                             self?.fetchProfileData()
+                            UIBlockingProgressHUD.dismiss()
                         }
                     }
                 }
@@ -120,6 +132,7 @@ final class CollectionViewModel: NSObject {
     }
     
     private func updateProfileData(with dto: ProfileUpdateDTO) {
+        UIBlockingProgressHUD.show()
         DispatchQueue.global(qos: .background).async {
             DefaultNetworkClient().send(request: ProfileUpdateRequest(profileUpdateDTO: dto), type: Profile.self) { [weak self] result in
                 switch result {
@@ -127,11 +140,13 @@ final class CollectionViewModel: NSObject {
                     self?.profile = data
                     DispatchQueue.main.async {
                         self?.reloadData?()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.onError?(error) { [weak self] in
                             self?.updateProfileData(with: dto)
+                            UIBlockingProgressHUD.dismiss()
                         }
                     }
                 }
@@ -154,6 +169,7 @@ final class CollectionViewModel: NSObject {
     }
     
     private func updateOrderData(with dto: OrderUpdateDTO) {
+        UIBlockingProgressHUD.show()
         DispatchQueue.global(qos: .background).async {
             DefaultNetworkClient().send(request: OrderUpdateRequest(orderUpdateDTO: dto), type: Order.self) { [weak self] result in
                 switch result {
@@ -161,11 +177,13 @@ final class CollectionViewModel: NSObject {
                     self?.order = OrderCollection(with: data)
                     DispatchQueue.main.async { [weak self] in
                         self?.reloadData?()
+                        UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self?.onError?(error) { [weak self] in
                             self?.updateOrderData(with: dto)
+                            UIBlockingProgressHUD.dismiss()
                         }
                     }
                 }
