@@ -7,15 +7,33 @@
 
 import UIKit
 
-final class MyNFTsTableViewController: UITableViewController {
+final class MyNFTsTableViewController: UIViewController {
     var profileViewModel: ProfileViewModel?
     var navTitle: String?
     
     private var profileObserver: NSObjectProtocol?
     
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.rowHeight = 140
+        tableView.separatorStyle = .none
+        tableView.register(MyNFTsTableViewCell.self, forCellReuseIdentifier: MyNFTsTableViewCell.reuseIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel(text: "У Вас ещё нет NFT")
+        label.font = UIFont.Bold.small
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .ypWhite
         tabBarController?.tabBar.isHidden = true
         title = navTitle
         
@@ -28,6 +46,7 @@ final class MyNFTsTableViewController: UITableViewController {
         
         setupNavigationBar()
         setupTableView()
+        setupLabel()
         
         profileObserver = NotificationCenter.default.addObserver(
             forName: ProfileViewModel.nftsDidChangeNotification,
@@ -54,15 +73,24 @@ final class MyNFTsTableViewController: UITableViewController {
     }
     
     private func setupTableView() {
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-
-        tableView.contentInset = insets
-        tableView.scrollIndicatorInsets = insets
+        tableView.dataSource = self
+        view.addSubview(tableView)
         
-        tableView.rowHeight = 140
-        tableView.separatorStyle = .none
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+    
+    private func setupLabel() {
+        view.addSubview(label)
         
-        tableView.register(MyNFTsTableViewCell.self, forCellReuseIdentifier: MyNFTsTableViewCell.reuseIdentifier)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
     
     private func reloadData() {
@@ -84,6 +112,18 @@ final class MyNFTsTableViewController: UITableViewController {
         
         tableView.reloadData()
         UIBlockingProgressHUD.dismiss()
+        reloadPlaceholderView()
+    }
+    
+    private func reloadPlaceholderView() {
+        if let nfts = profileViewModel?.nfts {
+            if nfts.isEmpty {
+                tableView.isHidden = true
+                
+                view.backgroundColor = .ypWhite
+                label.isHidden = false
+            }
+        }
     }
     
     private func setFilterType(_ type: Int) {
@@ -115,12 +155,12 @@ final class MyNFTsTableViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension MyNFTsTableViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MyNFTsTableViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         profileViewModel?.nfts?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MyNFTsTableViewCell.reuseIdentifier,
             for: indexPath
