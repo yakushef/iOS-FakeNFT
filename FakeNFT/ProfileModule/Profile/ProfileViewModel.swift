@@ -77,19 +77,17 @@ final class ProfileViewModel {
     
     func getMyNFTList() {
         profile?.nfts.forEach { nft in
-            profileService?.makeGetNFTListRequest(id: nft) { [weak self] itemNFT in
-                if let self, let itemNFT = itemNFT as? ItemNFT {
-                    self.nfts?.append(itemNFT)
-                    
-                    // TODO: надо придумать как сделать так, чтобы уведомление отправлялось только когда все NFT загрузились а не после каждого запроса на новую NFT
-                    if self.nfts?.count == self.profile?.nfts.count {
-                        getAuthors()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.profileService?.makeGetNFTListRequest(id: nft) { [weak self] itemNFT in
+                    if let self, let itemNFT = itemNFT as? ItemNFT {
+                        self.nfts?.append(itemNFT)
+                        if self.nfts?.count == self.profile?.nfts.count {
+                            getAuthors()
+                        }
                     }
                 }
             }
         }
-        
-
     }
     
     func getAuthors() {
@@ -97,9 +95,6 @@ final class ProfileViewModel {
             getUser(id: nft.author) { [weak self] user in
                 self?.authors?.append(user)
                 if self?.authors?.count == self?.profile?.nfts.count {
-                    print("PRINT AUTHORS")
-                    print(self?.authors?.count)
-                    print(self?.authors)
                     NotificationCenter.default.post(name: ProfileViewModel.nftsDidChangeNotification, object: self)
                 }
             }
