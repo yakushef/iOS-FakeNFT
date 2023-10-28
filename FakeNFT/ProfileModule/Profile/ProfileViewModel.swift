@@ -92,10 +92,12 @@ final class ProfileViewModel {
     
     func getAuthors() {
         nfts?.forEach { nft in
-            getUser(id: nft.author) { [weak self] user in
-                self?.authors?.append(user)
-                if self?.authors?.count == self?.profile?.nfts.count {
-                    NotificationCenter.default.post(name: ProfileViewModel.nftsDidChangeNotification, object: self)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.getUser(id: nft.author) { [weak self] user in
+                    self?.authors?.append(user)
+                    if self?.authors?.count == self?.profile?.nfts.count {
+                        NotificationCenter.default.post(name: ProfileViewModel.nftsDidChangeNotification, object: self)
+                    }
                 }
             }
         }

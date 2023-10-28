@@ -32,7 +32,10 @@ final class MyNFTsTableViewController: UITableViewController {
             self?.tableView.reloadData()
             print(self?.profileViewModel?.nfts?.count)
             print(self?.profileViewModel?.nfts)
+            UIBlockingProgressHUD.dismiss()
         }
+        
+        UIBlockingProgressHUD.show()
     }
     
     private func setupNavigationBar() {

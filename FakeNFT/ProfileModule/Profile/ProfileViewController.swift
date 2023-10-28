@@ -66,6 +66,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             queue: .main
         ) { [weak self] _ in
             self?.updateProfileInfo()
+            UIBlockingProgressHUD.dismiss()
         }
         
         profileViewModel?.getProfile(id: "1")
@@ -79,6 +80,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         setupProfileTableView()
         
         addGesture()
+        
+        UIBlockingProgressHUD.show()
     }
     
     private func updateProfileInfo() {
