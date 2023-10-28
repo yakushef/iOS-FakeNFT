@@ -19,7 +19,12 @@ final class MyNFTsTableViewController: UITableViewController {
         tabBarController?.tabBar.isHidden = true
         title = navTitle
         
-        profileViewModel?.getMyNFTList()
+        if let nfts = profileViewModel?.nfts {
+            if nfts.isEmpty {
+                UIBlockingProgressHUD.show()
+                profileViewModel?.getMyNFTList()
+            }
+        }
         
         setupNavigationBar()
         setupTableView()
@@ -30,12 +35,8 @@ final class MyNFTsTableViewController: UITableViewController {
             queue: .main
         ) { [weak self] _ in
             self?.tableView.reloadData()
-            print(self?.profileViewModel?.nfts?.count)
-            print(self?.profileViewModel?.nfts)
             UIBlockingProgressHUD.dismiss()
         }
-        
-        UIBlockingProgressHUD.show()
     }
     
     private func setupNavigationBar() {
