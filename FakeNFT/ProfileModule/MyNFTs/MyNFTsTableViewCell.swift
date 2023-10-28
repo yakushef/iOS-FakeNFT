@@ -10,7 +10,7 @@ import UIKit
 final class MyNFTsTableViewCell: UITableViewCell {
     static let reuseIdentifier = "NFTCell"
 
-    private let nftImageView: UIImageView = {
+    let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12

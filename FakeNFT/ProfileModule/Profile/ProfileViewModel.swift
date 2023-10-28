@@ -105,4 +105,13 @@ final class ProfileViewModel {
             }
         }
     }
+    
+    func getPhoto(imageView: UIImageView, index: Int) {
+        guard let nft = nfts?[index] else { return }
+        
+        imageView.kf.setImage(
+            with: URL(string: nft.images[0]),
+            options: [.processor(RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .ypBlack))]
+        )
+    }
 }

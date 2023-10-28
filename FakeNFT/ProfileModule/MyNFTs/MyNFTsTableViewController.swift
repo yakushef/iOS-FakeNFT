@@ -91,12 +91,18 @@ extension MyNFTsTableViewController {
             for: indexPath
         ) as? MyNFTsTableViewCell else { return UITableViewCell() }
         
-        guard let nft = profileViewModel?.nfts?[indexPath.row] else { return UITableViewCell() }
+        guard
+            let nft = profileViewModel?.nfts?[indexPath.row],
+            let authorName = profileViewModel?.authors?[indexPath.row].name
+        else {
+            return UITableViewCell()
+        }
         
         cell.updateNameLabel(nft.name)
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
-        cell.updateAuthor(profileViewModel?.authors?[indexPath.row].name ?? "")
+        cell.updateAuthor(authorName)
+        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row)
         
         return cell
     }
