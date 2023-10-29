@@ -64,6 +64,22 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    
+    func updateNameLabel(_ string: String) {
+        nftNameLabel.text = string
+    }
+    
+    func updateRating(_ int: Int) {
+        ratingView.setRating(to: UInt(int))
+    }
+    
+    func updatePrice(_ price: Double) {
+        priceLabel.text = "\(price) ETH"
+    }
+    
+    // MARK: - Private methods
+    
     private func setupNFTImageView() {
         contentView.addSubview(nftImageView)
         

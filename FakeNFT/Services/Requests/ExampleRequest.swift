@@ -1,37 +1,30 @@
 import Foundation
 
-struct ExampleRequest: NetworkRequest {
+struct ProfileRequest: NetworkRequest {
     var endpoint: URL?
     var id: String
     var httpMethod: HttpMethod
     var dto: Encodable?
     
-    init(id: String, httpMethod: HttpMethod = .get) {
+    init(id: String, httpMethod: HttpMethod = .get, dto: Encodable? = nil) {
         self.id = id
         self.httpMethod = httpMethod
         endpoint = URL(string: "\(Config.baseUrl)profile/\(self.id)")
     }
 }
 
-struct SecondExampleRequest: NetworkRequest {
-    var endpoint: URL?
-    var id: String
-    var httpMethod: HttpMethod = .get
-    
-    init(id: String) {
-        self.id = id
-        endpoint = URL(string: "\(Config.baseUrl)nft/\(self.id)")
+struct NFTsExampleRequest: NetworkRequest {
+    var endpoint: URL? {
+        URL(string: "\(Config.baseUrl)nft")
     }
+    
+    var httpMethod: HttpMethod = .get
 }
 
-struct ThirdExampleRequest: NetworkRequest {
-    var endpoint: URL?
-    var id: String
-    var httpMethod: HttpMethod = .get
-    var dto: Encodable?
-    
-    init(id: String) {
-        self.id = id
-        endpoint = URL(string: "\(Config.baseUrl)users/\(self.id)")
+struct UsersExampleRequest: NetworkRequest {
+    var endpoint: URL? {
+        URL(string: "\(Config.baseUrl)users")
     }
+    
+    var httpMethod: HttpMethod = .get
 }

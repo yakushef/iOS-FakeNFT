@@ -10,11 +10,13 @@ import Kingfisher
 
 final class ProfileViewModel {
     static let didChangeNotification = Notification.Name(rawValue: "ProfileInfoDidChange")
-    static let nftsDidChangeNotification = Notification.Name(rawValue: "NFTsDidChange")
+    static let nftsChangedNotification = Notification.Name(rawValue: "NFTsInfoDidChange")
     
     var profile: Profile?
-    var nfts: [ItemNFT]?
+    var myNFTs: [ItemNFT]?
     var authors: [User]?
+    var favoritesNFTs: [ItemNFT]?
+    var nfts: [ItemNFT]?
     
     let profileService: ProfileServiceProtocol?
     let viewController: ProfileViewControllerProtocol?
@@ -22,8 +24,10 @@ final class ProfileViewModel {
     init(viewController: ProfileViewControllerProtocol) {
         self.viewController = viewController
         profileService = ProfileService()
-        nfts = [ItemNFT]()
+        myNFTs = [ItemNFT]()
         authors = [User]()
+        favoritesNFTs = [ItemNFT]()
+        nfts = [ItemNFT]()
     }
     
     func getProfile(id: String) {
@@ -35,19 +39,11 @@ final class ProfileViewModel {
         }
     }
     
-    func getUser(id: String, _ handler: @escaping (User) -> Void) {
-        profileService?.makeGetUserRequest(id: id) { user in
-            if let user = user as? User {
-                handler(user)
-            }
-        }
-    }
-    
     func updatePhoto(_ imageView: UIImageView) {
         guard let profileImagePath = profile?.avatar else {
             return
         }
-
+        
         let processor = RoundCornerImageProcessor(cornerRadius: 35, backgroundColor: .ypBlack)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: URL(string: profileImagePath), options: [.processor(processor)])
@@ -75,43 +71,47 @@ final class ProfileViewModel {
         }
     }
     
-    func getMyNFTList() {
-        profile?.nfts.forEach { nft in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.profileService?.makeGetNFTListRequest(id: nft) { [weak self] itemNFT in
-                    if let self, let itemNFT = itemNFT as? ItemNFT {
-                        self.nfts?.append(itemNFT)
-                        if self.nfts?.count == self.profile?.nfts.count {
-                            getAuthors()
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func getAuthors() {
-        nfts?.forEach { nft in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.getUser(id: nft.author) { [weak self] user in
-                    self?.authors?.append(user)
-                    if self?.authors?.count == self?.profile?.nfts.count {
-                        NotificationCenter.default.post(
-                            name: ProfileViewModel.nftsDidChangeNotification,
-                            object: self
-                        )
-                    }
-                }
-            }
-        }
-    }
-    
     func getPhoto(imageView: UIImageView, index: Int) {
-        guard let nft = nfts?[index] else { return }
+        guard let nft = myNFTs?[index] else { return }
         
         imageView.kf.setImage(
             with: URL(string: nft.images[0]),
             options: [.processor(RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .ypBlack))]
         )
+    }
+    
+    func getAllNFTs() {
+        profileService?.makeGetAllNFTsRequest { [weak self] nfts in
+            if let nfts = nfts as? [ItemNFT] {
+                self?.nfts = nfts
+                self?.getAllAuthors()
+            }
+        }
+    }
+    
+    func getAllAuthors() {
+        profileService?.makeGetAllAuthorsRequest { [weak self] authors in
+            if let authors = authors as? [User] {
+                self?.authors = authors
+                NotificationCenter.default.post(
+                    name: ProfileViewModel.nftsChangedNotification,
+                    object: self
+                )
+            }
+        }
+    }
+    
+    func sortNFTs() {
+        guard let profile else { return }
+        
+        nfts?.forEach { nft in
+            if profile.nfts.contains(nft.id) {
+                myNFTs?.append(nft)
+            }
+            
+            if profile.likes.contains(nft.id) {
+                favoritesNFTs?.append(nft)
+            }
+        }
     }
 }

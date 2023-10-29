@@ -59,6 +59,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private var profileViewModel: ProfileViewModel?
     private var profileObserver: NSObjectProtocol?
+    private var nftsObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +79,16 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             self?.activityIndicator.stopAnimating()
         }
         
+        nftsObserver = NotificationCenter.default.addObserver(
+            forName: ProfileViewModel.nftsChangedNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.profileViewModel?.sortNFTs()
+        }
+        
         profileViewModel?.getProfile(id: "1")
+        profileViewModel?.getAllNFTs()
         
         setupView()
         setupNavigationBar()
@@ -261,6 +271,7 @@ extension ProfileViewController: UITableViewDelegate {
         case 1:
             let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController()
             favoritesNFTsCollectionViewController.navTitle = cells[indexPath.row]
+            favoritesNFTsCollectionViewController.profileViewModel = profileViewModel
             navigationController?.pushViewController(favoritesNFTsCollectionViewController, animated: true)
         case 2:
             openWebView()

@@ -30,7 +30,7 @@ final class MyNFTsTableViewController: UIViewController {
     
     private let label: UILabel = {
         let label = UILabel(text: "У Вас ещё нет NFT")
-        label.textColor = .ypWhite
+        label.textColor = .ypBlack
         label.font = UIFont.Bold.small
         label.isHidden = true
         return label
@@ -41,31 +41,19 @@ final class MyNFTsTableViewController: UIViewController {
         
         view.backgroundColor = .ypWhite
         tabBarController?.tabBar.isHidden = true
-        title = navTitle
-        
-        if let nfts = profileViewModel?.nfts {
-            if nfts.isEmpty {
-                activityIndicator.startAnimating()
-                profileViewModel?.getMyNFTList()
-            }
-        }
         
         setupView()
         setupNavigationBar()
         setupTableView()
         setupLabel()
         setupActivityIndicator()
-        
-        profileObserver = NotificationCenter.default.addObserver(
-            forName: ProfileViewModel.nftsDidChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            self?.reloadData()
-        }
+
+        reloadData()
     }
     
     private func setupNavigationBar() {
+        title = navTitle
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "Backward"),
             style: .plain,
@@ -122,13 +110,13 @@ final class MyNFTsTableViewController: UIViewController {
         switch filterStatus {
         case 0:
             print(0)
-            profileViewModel?.nfts?.sort { $0.price < $1.price }
+            profileViewModel?.myNFTs?.sort { $0.price < $1.price }
         case 1:
             print(1)
-            profileViewModel?.nfts?.sort { $0.rating < $1.rating }
+            profileViewModel?.myNFTs?.sort { $0.rating < $1.rating }
         case 2:
             print(2)
-            profileViewModel?.nfts?.sort { $0.name < $1.name }
+            profileViewModel?.myNFTs?.sort { $0.name < $1.name }
         default:
             break
         }
@@ -139,8 +127,9 @@ final class MyNFTsTableViewController: UIViewController {
     }
     
     private func reloadPlaceholderView() {
-        if let nfts = profileViewModel?.nfts {
+        if let nfts = profileViewModel?.myNFTs {
             if nfts.isEmpty {
+                title = ""
                 tableView.isHidden = true
                 
                 view.backgroundColor = .ypWhite
@@ -183,7 +172,7 @@ final class MyNFTsTableViewController: UIViewController {
 
 extension MyNFTsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profileViewModel?.nfts?.count ?? 0
+        profileViewModel?.myNFTs?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,7 +184,7 @@ extension MyNFTsTableViewController: UITableViewDataSource {
         cell.backgroundColor = .ypWhite
         
         guard
-            let nft = profileViewModel?.nfts?[indexPath.row],
+            let nft = profileViewModel?.myNFTs?[indexPath.row],
             let authorName = profileViewModel?.authors?[indexPath.row].name
         else {
             return UITableViewCell()

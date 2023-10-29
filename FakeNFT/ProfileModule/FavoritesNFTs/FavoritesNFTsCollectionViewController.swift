@@ -7,15 +7,42 @@
 
 import UIKit
 
-final class FavoritesNFTsCollectionViewController: UICollectionViewController {
+final class FavoritesNFTsCollectionViewController: UIViewController {
+    var profileViewModel: ProfileViewModel?
     var navTitle: String?
     
-    override func loadView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    }
+    private var profileObserver: NSObjectProtocol?
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        activitiIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activitiIndicator
+    }()
+    
+    private let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .ypWhite
+        collectionView.register(
+            FavoritesNFTsCollectionViewCell.self,
+            forCellWithReuseIdentifier: FavoritesNFTsCollectionViewCell.reuseIdentifier
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel(text: "У Вас ещё нет избранных NFT")
+        label.textColor = .ypBlack
+        label.font = UIFont.Bold.small
+        label.isHidden = true
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .ypWhite
         
         tabBarController?.tabBar.isHidden = true
         title = navTitle
@@ -27,18 +54,62 @@ final class FavoritesNFTsCollectionViewController: UICollectionViewController {
         )
         
         setupCollectionView()
+        setupLabel()
+        setupActivityIndicator()
+        
+        reloadData()
     }
     
     private func setupCollectionView() {
-        let insets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
-
-        collectionView.contentInset = insets
-        collectionView.scrollIndicatorInsets = insets
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        view.addSubview(collectionView)
         
-        collectionView?.register(
-            FavoritesNFTsCollectionViewCell.self,
-            forCellWithReuseIdentifier: FavoritesNFTsCollectionViewCell.reuseIdentifier
-        )
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            collectionView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -16
+            ),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func setupLabel() {
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+    }
+    
+    private func reloadData() {
+        collectionView.reloadData()
+        activityIndicator.stopAnimating()
+        reloadPlaceholderView()
+    }
+    
+    private func reloadPlaceholderView() {
+        if let nfts = profileViewModel?.favoritesNFTs {
+            if nfts.isEmpty {
+                title = ""
+                collectionView.isHidden = true
+                
+                view.backgroundColor = .ypWhite
+                label.isHidden = false
+            }
+        }
     }
     
     @objc
@@ -49,19 +120,29 @@ final class FavoritesNFTsCollectionViewController: UICollectionViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension FavoritesNFTsCollectionViewController {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        profileViewModel?.favoritesNFTs?.count ?? 0
     }
 
-    override func collectionView(
+    func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: FavoritesNFTsCollectionViewCell.reuseIdentifier,
             for: indexPath
-        )
+        ) as? FavoritesNFTsCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.backgroundColor = .ypWhite
+        
+        guard let nft = profileViewModel?.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
+        
+        cell.updateNameLabel(nft.name)
+        cell.updateRating(nft.rating)
+        cell.updatePrice(nft.price)
     
         return cell
     }
