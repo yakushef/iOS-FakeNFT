@@ -194,7 +194,7 @@ extension MyNFTsTableViewController: UITableViewDataSource {
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
         cell.updateAuthor(authorName)
-        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row)
+        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .my)
         
         return cell
     }

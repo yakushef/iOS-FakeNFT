@@ -143,6 +143,7 @@ extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
         cell.updateNameLabel(nft.name)
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
+        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .favorites)
     
         return cell
     }

@@ -10,7 +10,7 @@ import UIKit
 final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "NFTCell"
     
-    private let nftImageView: UIImageView = {
+    let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.frame.size = CGSize(width: 80, height: 80)
         imageView.image = UIImage(named: "NFT_Placeholder")

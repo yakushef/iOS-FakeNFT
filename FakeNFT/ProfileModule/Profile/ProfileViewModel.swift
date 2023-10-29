@@ -71,8 +71,17 @@ final class ProfileViewModel {
         }
     }
     
-    func getPhoto(imageView: UIImageView, index: Int) {
-        guard let nft = myNFTs?[index] else { return }
+    func getPhoto(imageView: UIImageView, index: Int, list: NFTListType) {
+        var nft: ItemNFT?
+        
+        switch list {
+        case .my:
+            nft = myNFTs?[index]
+        case .favorites:
+            nft = favoritesNFTs?[index]
+        }
+        
+        guard let nft else { return }
         
         imageView.kf.setImage(
             with: URL(string: nft.images[0]),
