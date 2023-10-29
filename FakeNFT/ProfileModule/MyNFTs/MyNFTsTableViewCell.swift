@@ -96,6 +96,10 @@ final class MyNFTsTableViewCell: UITableViewCell {
         nftAuthorLabel.text = "от \(author)"
     }
     
+    func updateLike() {
+        nftLikeView.image = UIImage(named: "Favorites_Active")
+    }
+    
     // MARK: - Private methods
     
     private func setupView() {

@@ -110,17 +110,10 @@ final class MyNFTsTableViewController: UIViewController {
         let filterStatus = UserDefaults.standard.integer(forKey: "indexOfFilter")
         
         switch filterStatus {
-        case 0:
-            print(0)
-            profileViewModel?.myNFTs?.sort { $0.price < $1.price }
-        case 1:
-            print(1)
-            profileViewModel?.myNFTs?.sort { $0.rating < $1.rating }
-        case 2:
-            print(2)
-            profileViewModel?.myNFTs?.sort { $0.name < $1.name }
-        default:
-            break
+        case 0: profileViewModel?.myNFTs?.sort { $0.price < $1.price }
+        case 1: profileViewModel?.myNFTs?.sort { $0.rating < $1.rating }
+        case 2: profileViewModel?.myNFTs?.sort { $0.name < $1.name }
+        default: break
         }
         
         tableView.reloadData()
@@ -186,8 +179,9 @@ extension MyNFTsTableViewController: UITableViewDataSource {
         cell.backgroundColor = .ypWhite
         
         guard
-            let nft = profileViewModel?.myNFTs?[indexPath.row],
-            let authorName = profileViewModel?.authors?[indexPath.row].name
+            let profileViewModel,
+            let nft = profileViewModel.myNFTs?[indexPath.row],
+            let authorName = profileViewModel.authors?[indexPath.row].name
         else {
             return UITableViewCell()
         }
@@ -196,7 +190,11 @@ extension MyNFTsTableViewController: UITableViewDataSource {
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
         cell.updateAuthor(authorName)
-        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .my)
+        profileViewModel.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .my)
+        
+        if profileViewModel.isLiked(nft) {
+            cell.updateLike()
+        }
         
         return cell
     }

@@ -123,4 +123,14 @@ final class ProfileViewModel {
             }
         }
     }
+    
+    func isLiked(_ nft: ItemNFT) -> Bool {
+        guard let profile else { return false }
+        
+        if profile.likes.contains(nft.id) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
