@@ -14,6 +14,8 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     
     var likeButtonTap: String?
     var cartButtonTap: String?
+    var cartButtonAction:(() -> Void)?
+    var likeButtonAction:(() -> Void)?
     var imageAction:(() -> Void)?
     
     private lazy var nftImageView: UIImageView = {
@@ -126,25 +128,11 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func likeButtonTapped() {
-        if (likeButtonTap == "dislike") {
-            likeButton.setImage(UIImage(named: "like"), for: .normal)
-            likeButtonTap = "like"
-        } else {
-            likeButton.setImage(UIImage(named: "dislike"), for: .normal)
-            likeButtonTap = "dislike"
-        }
-        
+        likeButtonAction?()
     }
     
     @objc private func cartButtonTapped() {
-        
-        if (cartButtonTap == "inCart") {
-            cartButton.setImage(UIImage(named: "cart"), for: .normal)
-            cartButtonTap = "cart"
-        } else {
-            cartButton.setImage(UIImage(named: "inCart"), for: .normal)
-            cartButtonTap = "inCart"
-        }
+        cartButtonAction?()
     }
     
     @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -154,7 +142,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     func configure(
         nftImage: URL,
         likeOrDislike: String,
-        rating: Int,
         nftName: String,
         price: String,
         cartImage: String,
@@ -162,17 +149,28 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     ) {
         nftImageView.kf.setImage(with: nftImage, options: [.cacheMemoryOnly])
         likeButton.setImage(UIImage(named: likeOrDislike), for: .normal)
-        likeButtonTap = likeOrDislike
-        fillRatingStackView(by: rating)
         nftNameLabel.text = nftName
         priceLabel.text = price
         cartButton.setImage(UIImage(named: cartImage), for: .normal)
-        cartButtonTap = cartImage
         imageAction = collectionImageAction
-        
     }
     
-    func fillRatingStackView(by rating: Int) {
+    func collectLikesAndCart(
+        likeButtonInteraction: @escaping () -> Void,
+        cartButtonInteraction: @escaping () -> Void
+    ) {
+        likeButtonAction = likeButtonInteraction
+        cartButtonAction = cartButtonInteraction
+    }
+    
+    func collectRating(
+        rating: Int
+    ) {
+        fillRatingStackView(by: rating)
+        print(nftNameLabel.text, rating)
+    }
+    
+    private func fillRatingStackView(by rating: Int) {
         guard rating >= 0 && rating <= 5 else {
             assertionFailure("Invalid rating!")
             return

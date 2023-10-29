@@ -7,16 +7,23 @@
 
 import UIKit
 
-final class CollectionItemViewController: UIViewController {
-    
-    // TO DO СОГЛАСНО ТЗ:
-    // Экран частично реализуется наставником в ходе life coding. Реализация экрана студентами не требуется.
-    
+final class ProductDetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavBar()
-        view.backgroundColor = .white
-        
+
+        tableView.register(ProductDetailsTableViewCell.self)
+    }
+
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return 10
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ProductDetailsTableViewCell = tableView.dequeueReusableCell()
+
+        cell.textLabel?.text = "Ячейка номер \(indexPath.row)"
+
+        return cell
     }
     
     private func setupNavBar() {

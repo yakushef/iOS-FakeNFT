@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		314558222AEEA3070014DB0A /* ProductDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314558212AEEA3070014DB0A /* ProductDetailsTableViewCell.swift */; };
 		318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */; };
 		318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA42AE57BF700FF0270 /* WebViewView.swift */; };
 		318C0CA82AE584DB00FF0270 /* CollectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		314558212AEEA3070014DB0A /* ProductDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionShortModel.swift; sourceTree = "<group>"; };
 		318C0CA42AE57BF700FF0270 /* WebViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewView.swift; sourceTree = "<group>"; };
 		318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItemViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */,
+				314558212AEEA3070014DB0A /* ProductDetailsTableViewCell.swift */,
 			);
 			path = CollectionItem;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				31994AD42ADAAB7700B57E7B /* CollectionRequest.swift in Sources */,
 				31958C1F2ADF0A5D00824EA4 /* Float+Extensions.swift in Sources */,
+				314558222AEEA3070014DB0A /* ProductDetailsTableViewCell.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,

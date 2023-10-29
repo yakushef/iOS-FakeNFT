@@ -101,7 +101,7 @@ final class CollectionViewController: UIViewController {
     
     private func showWebViewAboutAuthor() {
         let webViewVC = WebView()
-        guard let url = URL(string: viewModel.user?.website ?? "") else { return }
+        guard let url = URL(string: self.viewModel.user?.website ?? "") else { return }
         webViewVC.url = url
         self.navigationController?.pushViewController(webViewVC, animated: true)
         tabBarController?.tabBar.isHidden = true
@@ -109,7 +109,7 @@ final class CollectionViewController: UIViewController {
     }
     
     private func showCollectionItemView() {
-        let collectionItemVC = CollectionItemViewController()
+        let collectionItemVC = ProductDetailsTableViewController()
         self.navigationController?.pushViewController(collectionItemVC, animated: true)
     }
 }
@@ -127,7 +127,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         case .description:
             return 1
         case .nft:
-            return viewModel.collection.nfts.count
+            return self.viewModel.collection.nfts.count
         }
     }
     
@@ -136,11 +136,16 @@ extension CollectionViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let section = CollectionNFTSection(rawValue: indexPath.section) else { return UICollectionViewCell() }
+        guard let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+        guard let descriptionCell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionCollectionViewCell.identifier, for: indexPath) as? DescriptionCollectionViewCell else { return UICollectionViewCell() }
+        guard let nftCell = collectionView.dequeueReusableCell(withReuseIdentifier: NFTCollectionViewCell.identifier, for: indexPath) as? NFTCollectionViewCell else { return UICollectionViewCell() }
+        
+        let predictViewModel = self.viewModel
         switch section {
             
         case .image:
-            guard let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-            if let imageURLString = viewModel.collection.cover,
+           
+            if let imageURLString = predictViewModel.collection.cover,
                let imageURl = URL(string: imageURLString.encodeURL) {
                 imageCell.imageView.kf.setImage(with: imageURl)
             }
@@ -148,12 +153,12 @@ extension CollectionViewController: UICollectionViewDataSource {
             return imageCell
             
         case .description:
-            guard let descriptionCell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionCollectionViewCell.identifier, for: indexPath) as? DescriptionCollectionViewCell else { return UICollectionViewCell() }
+            
             descriptionCell.configure(
-                collectionName: viewModel.collection.name,
+                collectionName: predictViewModel.collection.name,
                 subTitle: "Автор коллекции:",
-                authorName: viewModel.user?.name ?? "",
-                description: viewModel.collection.description,
+                authorName: predictViewModel.user?.name ?? "",
+                description: predictViewModel.collection.description,
                 authorNameButtonAction: showWebViewAboutAuthor)
             return descriptionCell
             
@@ -161,32 +166,35 @@ extension CollectionViewController: UICollectionViewDataSource {
             var likeButton: String
             var cartButton: String
             
-            guard let nftCell = collectionView.dequeueReusableCell(withReuseIdentifier: NFTCollectionViewCell.identifier, for: indexPath) as? NFTCollectionViewCell else { return UICollectionViewCell() }
             
-            let nftIndex = viewModel.collection.nfts[indexPath.row]
+            let nftIndex = self.viewModel.collection.nfts[indexPath.row]
             
-            if let imageURLString = viewModel.nfts(by: nftIndex)?.images.first,
+            if let imageURLString = predictViewModel.nfts(by: nftIndex)?.images.first,
                let imageURL = URL(string: imageURLString.encodeURL),
-               let price = viewModel.nfts(by: nftIndex)?.price.ethCurrency,
-               let nftName = viewModel.nfts(by: nftIndex)?.name,
-               let rating = viewModel.nfts(by: nftIndex)?.rating {
-                let isNFTLiked = viewModel.isNFTLiked(with: nftIndex)
-                let isNFTInOrder = viewModel.isNFTInOrder(with: nftIndex)
+               let price = predictViewModel.nfts(by: nftIndex)?.price.ethCurrency,
+               let nftName = predictViewModel.nfts(by: nftIndex)?.name {
+                let isNFTLiked = predictViewModel.isNFTLiked(with: nftIndex)
+                let isNFTInOrder = predictViewModel.isNFTInOrder(with: nftIndex)
                 
                 likeButton = isNFTLiked ? "like" : "dislike"
                 cartButton = isNFTInOrder ? "inCart" : "cart"
                 
                 nftCell.configure(nftImage: imageURL, 
-                                  likeOrDislike: likeButton, 
-                                  rating: rating,
+                                  likeOrDislike: likeButton,
                                   nftName: nftName,
                                   price: price,
                                   cartImage: cartButton,
                                   collectionImageAction: showCollectionItemView
                 )
+                print(nftIndex, nftName, price)
                 
-                print(nftIndex, nftName, rating, price)
             }
+            
+            nftCell.collectLikesAndCart(likeButtonInteraction: { [weak self] in self?.likeButtonTapped(nftIndex: nftIndex)},
+                                        cartButtonInteraction: { [weak self] in self?.cartButtonTapped(nftIndex: nftIndex)})
+                        
+            nftCell.collectRating(rating: predictViewModel.rateCollection(by: nftIndex)?.rating ?? 0)
+            
             return nftCell
         }
     }
@@ -204,15 +212,17 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         guard let section = CollectionNFTSection(rawValue: indexPath.section) else { return .zero }
+        let bounds = UIScreen.main.bounds
+        let width = (bounds.width - 50) / 3
+        let cgSize = CGSize(width: width, height: 200)
+        
         switch section {
         case .image:
             return CGSize(width: self.collectionView.bounds.width, height: 310)
         case .description:
             return CGSize(width: self.collectionView.bounds.width, height: 160)
         case .nft:
-            let bounds = UIScreen.main.bounds
-            let width = (bounds.width - 50) / 3
-            return CGSize(width: width, height: 200)
+            return cgSize
         }
     }
     
@@ -248,4 +258,3 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
-

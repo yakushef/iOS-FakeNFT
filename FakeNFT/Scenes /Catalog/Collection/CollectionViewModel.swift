@@ -30,19 +30,25 @@ final class CollectionViewModel: NSObject {
     
     func fetchUserData(by id: String) {
         UIBlockingProgressHUD.show()
-        DefaultNetworkClient().send(request: CollectionRequests.userId(userId: id), type: User.self) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.user = UserCollection(with: data)
-                DispatchQueue.main.async {
-                    self?.reloadData?()
-                    UIBlockingProgressHUD.dismiss()
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.onError?(error) { [weak self] in
-                        self?.fetchUserData(by: id)
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: .background).async {
+            DefaultNetworkClient().send(request: CollectionRequests.userId(userId: id), type: User.self) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.user = UserCollection(with: data)
+                    DispatchQueue.main.async {
+                        self?.reloadData?()
+                        group.leave()
                         UIBlockingProgressHUD.dismiss()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.onError?(error) { [weak self] in
+                            self?.fetchUserData(by: id)
+                            group.leave()
+                            UIBlockingProgressHUD.dismiss()
+                        }
                     }
                 }
             }
@@ -51,21 +57,23 @@ final class CollectionViewModel: NSObject {
     
     func fetchNFTData() {
         UIBlockingProgressHUD.show()
-        DispatchQueue.global(qos: .background).async {
-            DefaultNetworkClient().send(request: CollectionRequests.nft, type: [ItemNFT].self) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    self?.nft = data.map { $0 }
-                    DispatchQueue.main.async { [weak self] in
-                        self?.reloadData?()
+        let group = DispatchGroup()
+        group.enter()
+        DefaultNetworkClient().send(request: CollectionRequests.nft, type: [ItemNFT].self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.nft = data.map { $0 }
+                DispatchQueue.main.async { [weak self] in
+                    self?.reloadData?()
+                    group.leave()
+                    UIBlockingProgressHUD.dismiss()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.onError?(error) { [weak self] in
+                        self?.fetchNFTData()
+                        group.leave()
                         UIBlockingProgressHUD.dismiss()
-                    }
-                case .failure(let error):
-                    DispatchQueue.main.async {
-                        self?.onError?(error) { [weak self] in
-                            self?.fetchNFTData()
-                            UIBlockingProgressHUD.dismiss()
-                        }
                     }
                 }
             }
@@ -192,7 +200,11 @@ final class CollectionViewModel: NSObject {
     }
     
     func nfts(by id: String) -> ItemNFT? {
-        nft?.first { $0.id == id }
+        return nft?.first { $0.id == id }
+    }
+    
+    func rateCollection(by id: String) -> ItemNFT? {
+        return nft?.first { $0.id == id }
     }
     
     func isNFTLiked(with nftId: String) -> Bool {
