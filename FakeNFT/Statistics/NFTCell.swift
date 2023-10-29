@@ -20,7 +20,7 @@ final class NFTCell: UICollectionViewCell {
         return button
     }()
     
-    private var imageBackground: UIImageView = {
+    private lazy var imageBackground: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 12
@@ -46,7 +46,7 @@ final class NFTCell: UICollectionViewCell {
         return label
     }()
     
-    let ratingView = RatingStackView()
+    private let ratingView = RatingStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
