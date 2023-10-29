@@ -96,7 +96,10 @@ final class ProfileViewModel {
                 self.getUser(id: nft.author) { [weak self] user in
                     self?.authors?.append(user)
                     if self?.authors?.count == self?.profile?.nfts.count {
-                        NotificationCenter.default.post(name: ProfileViewModel.nftsDidChangeNotification, object: self)
+                        NotificationCenter.default.post(
+                            name: ProfileViewModel.nftsDidChangeNotification,
+                            object: self
+                        )
                     }
                 }
             }

@@ -13,13 +13,18 @@ final class MyNFTsTableViewController: UIViewController {
     
     private var profileObserver: NSObjectProtocol?
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        return activitiIndicator
+    }()
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .ypWhite
         tableView.rowHeight = 140
         tableView.separatorStyle = .none
         tableView.register(MyNFTsTableViewCell.self, forCellReuseIdentifier: MyNFTsTableViewCell.reuseIdentifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -28,7 +33,6 @@ final class MyNFTsTableViewController: UIViewController {
         label.textColor = .ypWhite
         label.font = UIFont.Bold.small
         label.isHidden = true
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -41,14 +45,16 @@ final class MyNFTsTableViewController: UIViewController {
         
         if let nfts = profileViewModel?.nfts {
             if nfts.isEmpty {
-                UIBlockingProgressHUD.show()
+                activityIndicator.startAnimating()
                 profileViewModel?.getMyNFTList()
             }
         }
         
+        setupView()
         setupNavigationBar()
         setupTableView()
         setupLabel()
+        setupActivityIndicator()
         
         profileObserver = NotificationCenter.default.addObserver(
             forName: ProfileViewModel.nftsDidChangeNotification,
@@ -72,6 +78,21 @@ final class MyNFTsTableViewController: UIViewController {
             target: self,
             action: #selector(sortButtonDidTap)
         )
+    }
+    
+    private func setupView() {
+        [activityIndicator, tableView, label].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
     
     private func setupTableView() {
@@ -113,7 +134,7 @@ final class MyNFTsTableViewController: UIViewController {
         }
         
         tableView.reloadData()
-        UIBlockingProgressHUD.dismiss()
+        activityIndicator.stopAnimating()
         reloadPlaceholderView()
     }
     

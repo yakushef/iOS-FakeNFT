@@ -21,6 +21,12 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         return imageView
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        return activitiIndicator
+    }()
+    
     private let profileNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Bold.medium
@@ -69,7 +75,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             queue: .main
         ) { [weak self] _ in
             self?.updateProfileInfo()
-            UIBlockingProgressHUD.dismiss()
+            self?.activityIndicator.stopAnimating()
         }
         
         profileViewModel?.getProfile(id: "1")
@@ -81,10 +87,11 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         setupBioLabel()
         setupSiteLabel()
         setupProfileTableView()
+        setupActivityIndicator()
         
         addGesture()
         
-        UIBlockingProgressHUD.show()
+        activityIndicator.startAnimating()
     }
     
     private func updateProfileInfo() {
@@ -125,9 +132,18 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     private func setupView() {
-        [profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
+        [activityIndicator, profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
     
     private func setupNavigationBar() {
