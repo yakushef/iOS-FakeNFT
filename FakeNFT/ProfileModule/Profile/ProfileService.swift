@@ -31,7 +31,7 @@ final class ProfileService: ProfileServiceProtocol {
     }
     
     func makePutRequest(id: String, profile: Encodable, _ handler: @escaping (Codable) -> Void) {
-        var networkRequest = ProfileRequest(id: id, httpMethod: .put, dto: profile)
+        let networkRequest = ProfileRequest(id: id, httpMethod: .put, dto: profile)
         
         networkClient.send(request: networkRequest, type: Profile.self) { result in
             switch result {

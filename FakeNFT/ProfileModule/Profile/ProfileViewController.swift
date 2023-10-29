@@ -136,8 +136,10 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     private func openWebView() {
+        guard let url = profileViewModel?.profile?.website else { return }
+        
         let webViewController = WebViewController()
-        webViewController.selectedWebSite = profileViewModel?.profile?.website
+        webViewController.model = WebViewModel(url: url)
         navigationController?.pushViewController(webViewController, animated: true)
     }
     
