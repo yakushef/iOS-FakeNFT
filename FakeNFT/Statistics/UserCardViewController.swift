@@ -118,7 +118,18 @@ final class UserCardViewController: UIViewController {
     
     @objc
     private func getUsersCollection() {
-        //TODO: - Switching to the screen Users Collection
+        let collectionModel = UsersCollectionService()
+        let collectionViewModel = UsersCollectionViewModel(model: collectionModel, ids: viewModel.user?.nfts.compactMap({ Int($0) }))
+        let viewController = UsersCollectionViewController(viewModel: collectionViewModel)
+        viewController.title = "Коллекция NFT"
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = .ypBlack
+        navigationItem.backBarButtonItem = backButton
+        navigationItem.titleView?.backgroundColor = .ypBlack
+        navigationController?.navigationBar.tintColor = .ypBlack
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func configure() {
