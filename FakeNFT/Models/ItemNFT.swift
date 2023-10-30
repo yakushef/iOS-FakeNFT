@@ -7,13 +7,28 @@
 
 import Foundation
 
-struct ItemNFT: Codable, Equatable {
+enum StatSortType: String {
+    case byName = "BYNAME"
+    case byRating = "BYRATING"
+}
+
+struct ItemNFT: Codable {
     let createdAt: String
     let name: String
     let images: [String]
     let rating: Int
     let description: String
     let price: Double
-    let author: String
     let id: String
+}
+
+struct Request: NetworkRequest {
+    var endpoint: URL?
+    var queryParameters: [String: String]?
+    var httpMethod: HttpMethod
+}
+
+enum SortAttribute {
+    case name
+    case nftCount
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 //MARK: - временные классы до объединения эпиков
-final class StatisticsViewController: UIViewController { }
+
 final class ProfileViewController: UIViewController { }
 
 extension UITabBar {
