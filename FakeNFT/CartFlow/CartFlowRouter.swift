@@ -149,10 +149,10 @@ final class CartFlowRouter: CartFlowRouterProtocol {
         if let checkoutVC {
             pop(vc: checkoutVC)
         }
-        if let tabBar = cartVC?.parent?.tabBarController {
+        if let tabBar = cartVC?.parent?.tabBarController as? MainTabBarViewController {
             guard let window = UIApplication.shared.windows.first else { return }
             window.rootViewController = nil
-            tabBar.selectedIndex = 1
+            tabBar.setupTabBar()
             UIView.transition(with: window, duration: 0.25, options: .transitionCrossDissolve, animations: {
                 window.rootViewController = tabBar
             }, completion: nil)

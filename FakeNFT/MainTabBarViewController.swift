@@ -4,6 +4,17 @@ import UIKit
 final class StatisticsViewController: UIViewController { }
 final class ProfileViewController: UIViewController { }
 
+extension UITabBar {
+    open override func didAddSubview(_ subview: UIView) {
+        super.didAddSubview(subview)
+        
+        let subviewClass = String(describing: type(of: subview))
+        if subviewClass == "UIBarBackgroundShadowContentImageView" {
+            subview.isHidden = true
+        }
+    }
+}
+
 final class MainTabBarViewController: UITabBarController {
     let statisticVC = UINavigationController(rootViewController: StatisticsViewController())
     let cartVC = UINavigationController(rootViewController: CartViewController())
@@ -14,7 +25,7 @@ final class MainTabBarViewController: UITabBarController {
         tabBar.unselectedItemTintColor = .ypBlack
         tabBar.backgroundColor = .ypWhite
         tabBar.tintColor = .blueUniversal
-        tabBar.isOpaque = true
+        tabBar.barTintColor = .ypWhite
 
         statisticVC.tabBarItem = UITabBarItem(
             title: "Статистика",
@@ -42,6 +53,7 @@ final class MainTabBarViewController: UITabBarController {
         )
         
         setViewControllers([profileVC, catalogVC, cartVC, statisticVC], animated: true)
+        self.selectedIndex = 1
     }
 }
 

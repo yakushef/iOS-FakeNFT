@@ -110,7 +110,7 @@ final class CartViewController: UIViewController {
         ])
         
         //MARK: Sort button
-        let sortButton = UIBarButtonItem(image: UIImage(named: "Sort"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        let sortButton = UIBarButtonItem(image: UIImage(named: "sortButton"), style: .plain, target: self, action: #selector(sortButtonTapped))
         sortButton.tintColor = .ypBlack
         sortButton.accessibilityIdentifier = "sort_button"
         navigationItem.rightBarButtonItem = sortButton
