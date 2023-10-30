@@ -3,7 +3,6 @@ import UIKit
 //MARK: - временные классы до объединения эпиков
 final class StatisticsViewController: UIViewController { }
 final class ProfileViewController: UIViewController { }
-final class CatalogViewController: UIViewController { }
 
 final class MainTabBarViewController: UITabBarController {
     let statisticVC = UINavigationController(rootViewController: StatisticsViewController())
