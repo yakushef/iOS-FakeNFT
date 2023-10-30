@@ -18,10 +18,10 @@ final class MyNFTsTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let nftLikeView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Favorites_Inactive")
-        return imageView
+    private let nftLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
+        return button
     }()
     
     private let containerView = UIView()
@@ -65,7 +65,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
         
         setupView()
         setupNFTImageView()
-        setupNFTLikeView()
+        setupNFTLikeButton()
         setupContainerView()
         setupNFTNameLabel()
         setupRatingView()
@@ -97,7 +97,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
     }
     
     func updateLike() {
-        nftLikeView.image = UIImage(named: "Favorites_Active")
+        nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
     }
     
     // MARK: - Private methods
@@ -105,7 +105,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
     private func setupView() {
         [
             nftImageView,
-            nftLikeView,
+            nftLikeButton,
             containerView,
             nftNameLabel,
             ratingView,
@@ -128,14 +128,14 @@ final class MyNFTsTableViewCell: UITableViewCell {
         ])
     }
     
-    private func setupNFTLikeView() {
-        nftImageView.addSubview(nftLikeView)
+    private func setupNFTLikeButton() {
+        nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
-            nftLikeView.widthAnchor.constraint(equalToConstant: 42),
-            nftLikeView.heightAnchor.constraint(equalToConstant: 42),
-            nftLikeView.topAnchor.constraint(equalTo: nftImageView.topAnchor),
-            nftLikeView.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor)
+            nftLikeButton.widthAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.heightAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.topAnchor.constraint(equalTo: nftImageView.topAnchor),
+            nftLikeButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor)
         ])
     }
     

@@ -20,11 +20,11 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let nftLikeView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Favorites_Active")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private let nftLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let nftNameLabel: UILabel = {
@@ -54,7 +54,7 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupNFTImageView()
-        setupNFTLikeView()
+        setupNFTLikeButton()
         setupNFTNameLabel()
         setupRatingView()
         setupPriceLabel()
@@ -91,14 +91,14 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    private func setupNFTLikeView() {
-        nftImageView.addSubview(nftLikeView)
+    private func setupNFTLikeButton() {
+        nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
-            nftLikeView.widthAnchor.constraint(equalToConstant: 42),
-            nftLikeView.heightAnchor.constraint(equalToConstant: 42),
-            nftLikeView.topAnchor.constraint(equalTo: nftImageView.topAnchor, constant: -6.19),
-            nftLikeView.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 6.19)
+            nftLikeButton.widthAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.heightAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.topAnchor.constraint(equalTo: nftImageView.topAnchor, constant: -6.19),
+            nftLikeButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 6.19)
         ])
     }
     
