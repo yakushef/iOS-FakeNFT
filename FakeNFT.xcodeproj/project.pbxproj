@@ -77,6 +77,8 @@
 		BC4C6CC02AD5C45D00693D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */; };
 		BC6257712ADC4B0B00E3E0F9 /* CartFlowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */; };
+		BC7058812AF03BFD005C3D54 /* ExtensionUITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7058802AF03BFD005C3D54 /* ExtensionUITabBar.swift */; };
+		BC7058832AF03C76005C3D54 /* ExtensionUINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7058822AF03C76005C3D54 /* ExtensionUINavigationBar.swift */; };
 		BC94054D2AE6D2E800786D84 /* CartFlowDecomposition.md in Resources */ = {isa = PBXBuildFile; fileRef = BC94054B2AE6D2E700786D84 /* CartFlowDecomposition.md */; };
 		BC94054F2AE6E6DC00786D84 /* CartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC94054E2AE6E6DC00786D84 /* CartViewModelTests.swift */; };
 		BC9405542AE99B6400786D84 /* MockOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9405532AE99B6400786D84 /* MockOrder.swift */; };
@@ -191,6 +193,8 @@
 		BC35DED02AD9B116008C252D /* OrderAndPaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAndPaymentService.swift; sourceTree = "<group>"; };
 		BC62576E2ADC4AC100E3E0F9 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		BC6257702ADC4B0B00E3E0F9 /* CartFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowRouter.swift; sourceTree = "<group>"; };
+		BC7058802AF03BFD005C3D54 /* ExtensionUITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITabBar.swift; sourceTree = "<group>"; };
+		BC7058822AF03C76005C3D54 /* ExtensionUINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationBar.swift; sourceTree = "<group>"; };
 		BC94054B2AE6D2E700786D84 /* CartFlowDecomposition.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CartFlowDecomposition.md; sourceTree = "<group>"; };
 		BC94054E2AE6E6DC00786D84 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		BC9405532AE99B6400786D84 /* MockOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOrder.swift; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 				BCB1DE022AD7108A002ED041 /* RatingView.swift */,
 				BCABD6A62AE194FE00B1C2C4 /* GenericButton.swift */,
 				BCABD6A82AE1951500B1C2C4 /* CornerRadius.swift */,
+				BC7058802AF03BFD005C3D54 /* ExtensionUITabBar.swift */,
+				BC7058822AF03C76005C3D54 /* ExtensionUINavigationBar.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -750,6 +756,7 @@
 				BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				314558242AEEE57F0014DB0A /* CollectionRatingStackView.swift in Sources */,
+				BC7058832AF03C76005C3D54 /* ExtensionUINavigationBar.swift in Sources */,
 				31994AD42ADAAB7700B57E7B /* CollectionRequest.swift in Sources */,
 				31958C1F2ADF0A5D00824EA4 /* Float+Extensions.swift in Sources */,
 				FAF290BB2ADD978F00DA3258 /* UserCardService.swift in Sources */,
@@ -776,6 +783,7 @@
 				BCABD6A92AE1951500B1C2C4 /* CornerRadius.swift in Sources */,
 				BC62576F2ADC4AC100E3E0F9 /* CheckoutViewController.swift in Sources */,
 				BC986C0B2AE5986000E17267 /* WebViewController.swift in Sources */,
+				BC7058812AF03BFD005C3D54 /* ExtensionUITabBar.swift in Sources */,
 				31994AAC2AD5460500B57E7B /* User.swift in Sources */,
 				FAE0C0942AD6F378000AD7B3 /* StatisticsViewController.swift in Sources */,
 				FAE0C0962AD6F3BC000AD7B3 /* StatisticsViewModel.swift in Sources */,

@@ -22,7 +22,7 @@ extension UIColor {
 
     // Primary Colors
     static let ypBlack = UIColor(named: "Black") ?? .black
-    static let ypLightGrey = UIColor(named: "Light grey") ?? .lightGray
+    static let ypLightGrey = UIColor(named: "ypLightGray") ?? .lightGray
     static let ypWhite = UIColor(named: "White") ?? .white
 
     // Universal Colors
