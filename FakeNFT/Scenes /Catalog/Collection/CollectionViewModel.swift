@@ -102,7 +102,8 @@ final class CollectionViewModel: NSObject {
                 switch result {
                 case .success(let data):
                     self?.profile = data
-                    DispatchQueue.main.async { [weak self] in self?.reloadData?()
+                    DispatchQueue.main.async { [weak self] in 
+                        self?.reloadData?()
                         UIBlockingProgressHUD.dismiss()
                     }
                 case .failure(let error):

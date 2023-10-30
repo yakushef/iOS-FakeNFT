@@ -168,7 +168,6 @@ extension CollectionViewController: UICollectionViewDataSource {
             if let imageURLString = viewModel.nfts(by: nftIndex)?.images.first,
                let imageURL = URL(string: imageURLString.encodeURL),
                let price = viewModel.nfts(by: nftIndex)?.price.ethCurrency,
-               let nftName = viewModel.nfts(by: nftIndex)?.name,
                let rating = viewModel.nfts(by: nftIndex)?.rating {
                 let isNFTLiked = viewModel.isNFTLiked(with: nftIndex)
                 let isNFTInOrder = viewModel.isNFTInOrder(with: nftIndex)
@@ -176,20 +175,17 @@ extension CollectionViewController: UICollectionViewDataSource {
                 likeButton = isNFTLiked ? "like" : "dislike"
                 cartButton = isNFTInOrder ? "inCart" : "cart"
                 
-                nftCell.configure(nftImage: imageURL, 
-                                  likeOrDislike: likeButton, 
-                                  rating: rating,
-                                  nftName: nftName,
-                                  price: price,
-                                  cartImage: cartButton,
-                                  collectionImageAction: showCollectionItemView
-                )
-                
-                print(nftIndex, nftName, rating, price)
+                nftCell.configure(nftImage: imageURL, likeOrDislike: likeButton, rating: rating, nftName: viewModel.nfts(by: nftIndex)?.name ?? "", price: price, cartImage: cartButton, likeButtonInteraction: { [weak self] in
+                    self?.likeButtonTapped(nftIndex: nftIndex)
+                },
+                                  cartButtonInteraction: { [weak self] in
+                    self?.cartButtonTapped(nftIndex: nftIndex)
+                })
             }
             return nftCell
         }
     }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         CollectionNFTSection.allCases.count

@@ -12,8 +12,8 @@ final class NFTCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "NFTCell"
     
-    var likeButtonTap: String?
-    var cartButtonTap: String?
+    var likeButtonAction:(() -> Void)?
+    var cartButtonAction:(() -> Void)?
     var imageAction:(() -> Void)?
     
     private lazy var nftImageView: UIImageView = {
@@ -35,13 +35,7 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    private lazy var ratingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private lazy var ratingStackView = RatingStackView()
     
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
@@ -70,7 +64,6 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         
         addSubviews()
         setupConstraints()
-        setRating()
     }
     
     required init?(coder: NSCoder) {
@@ -117,34 +110,12 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    private func setRating() {
-        for _ in 0...5 {
-            let starImage = UIImageView()
-            starImage.image = UIImage(named: "Star_Inactive")
-            ratingStackView.addArrangedSubview(starImage)
-        }
-    }
-    
-    @objc func likeButtonTapped() {
-        if (likeButtonTap == "dislike") {
-            likeButton.setImage(UIImage(named: "like"), for: .normal)
-            likeButtonTap = "like"
-        } else {
-            likeButton.setImage(UIImage(named: "dislike"), for: .normal)
-            likeButtonTap = "dislike"
-        }
-        
+    @objc private func likeButtonTapped() {
+        likeButtonAction?()
     }
     
     @objc private func cartButtonTapped() {
-        
-        if (cartButtonTap == "inCart") {
-            cartButton.setImage(UIImage(named: "cart"), for: .normal)
-            cartButtonTap = "cart"
-        } else {
-            cartButton.setImage(UIImage(named: "inCart"), for: .normal)
-            cartButtonTap = "inCart"
-        }
+        cartButtonAction?()
     }
     
     @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -158,30 +129,22 @@ final class NFTCollectionViewCell: UICollectionViewCell {
         nftName: String,
         price: String,
         cartImage: String,
-        collectionImageAction: @escaping () -> Void
+        likeButtonInteraction: @escaping () -> Void,
+        cartButtonInteraction: @escaping () -> Void
     ) {
-        nftImageView.kf.setImage(with: nftImage, options: [.cacheMemoryOnly])
+        UIBlockingProgressHUD.dismiss()
+        nftImageView.kf.setImage(with: nftImage)
         likeButton.setImage(UIImage(named: likeOrDislike), for: .normal)
-        likeButtonTap = likeOrDislike
         fillRatingStackView(by: rating)
         nftNameLabel.text = nftName
         priceLabel.text = price
         cartButton.setImage(UIImage(named: cartImage), for: .normal)
-        cartButtonTap = cartImage
-        imageAction = collectionImageAction
-        
+        likeButtonAction = likeButtonInteraction
+        cartButtonAction = cartButtonInteraction
+        UIBlockingProgressHUD.dismiss()
     }
     
     func fillRatingStackView(by rating: Int) {
-        guard rating >= 0 && rating <= 5 else {
-            assertionFailure("Invalid rating!")
-            return
-        }
-        
-        for i in 0...rating {
-            if let starImage = ratingStackView.subviews[i] as? UIImageView {
-                starImage.image = UIImage(named: "Star_Active")
-            }
-        }
+        ratingStackView.setupRating(rating: rating)
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		314558242AEEE57F0014DB0A /* CollectionRatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314558232AEEE57F0014DB0A /* CollectionRatingStackView.swift */; };
 		318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */; };
 		318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA42AE57BF700FF0270 /* WebViewView.swift */; };
 		318C0CA82AE584DB00FF0270 /* CollectionItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		314558232AEEE57F0014DB0A /* CollectionRatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRatingStackView.swift; sourceTree = "<group>"; };
 		318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionShortModel.swift; sourceTree = "<group>"; };
 		318C0CA42AE57BF700FF0270 /* WebViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewView.swift; sourceTree = "<group>"; };
 		318C0CA72AE584DB00FF0270 /* CollectionItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItemViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				31994ACD2ADA8FC800B57E7B /* CollectionNFTSection.swift */,
 				318C0CA22AE0082300FF0270 /* CollectionShortModel.swift */,
 				318C0CA42AE57BF700FF0270 /* WebViewView.swift */,
+				314558232AEEE57F0014DB0A /* CollectionRatingStackView.swift */,
 				318C0CA62AE584A700FF0270 /* CollectionItem */,
 			);
 			path = Collection;
@@ -551,6 +554,7 @@
 				31994ABB2AD597B100B57E7B /* CartViewController.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
+				314558242AEEE57F0014DB0A /* CollectionRatingStackView.swift in Sources */,
 				31994AD42ADAAB7700B57E7B /* CollectionRequest.swift in Sources */,
 				31958C1F2ADF0A5D00824EA4 /* Float+Extensions.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
