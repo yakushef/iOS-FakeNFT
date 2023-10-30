@@ -323,6 +323,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		BC986C102AE59CA600E17267 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				BC986C112AE59CA600E17267 /* WebViewController.swift */,
+				BC986C122AE59CA600E17267 /* WebViewModel.swift */,
+			);
+			name = WebView;
+			path = FakeNFT/WebView;
+			sourceTree = "<group>";
+		};
 		CB3DEADC2AEAA89C008C9427 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,16 +381,6 @@
 				CB3C32C82AEEA92E00D1C793 /* NFTListType.swift */,
 			);
 			path = ProfileModule;
-			sourceTree = "<group>";
-		};
-		BC986C102AE59CA600E17267 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				BC986C112AE59CA600E17267 /* WebViewController.swift */,
-				BC986C122AE59CA600E17267 /* WebViewModel.swift */,
-			);
-			name = WebView;
-			path = FakeNFT/WebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -748,6 +748,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BBQWCP2Q36;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FakeNFT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -761,7 +762,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.practicum.FakeNFT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kashnikov.FakeNFT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -779,6 +780,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BBQWCP2Q36;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FakeNFT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -792,7 +794,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.practicum.FakeNFT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kashnikov.FakeNFT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -137,6 +137,10 @@ extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
         
         cell.backgroundColor = .ypWhite
         
+        cell.buttonTappedHandler = {
+            print("Something")
+        }
+        
         guard let nft = profileViewModel?.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
         
         cell.updateNameLabel(nft.name)

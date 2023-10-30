@@ -50,6 +50,8 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    var buttonTappedHandler: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -92,6 +94,7 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupNFTLikeButton() {
+        nftLikeButton.addTarget(self, action: #selector(likeButtonDidTap(_:)), for: .touchUpInside)
         nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
@@ -129,5 +132,10 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
             priceLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: nftNameLabel.leadingAnchor)
         ])
+    }
+    
+    @objc
+    private func likeButtonDidTap(_ sender: UIButton) {
+        buttonTappedHandler?()
     }
 }
