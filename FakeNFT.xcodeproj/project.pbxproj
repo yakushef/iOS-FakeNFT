@@ -26,10 +26,7 @@
 		31994AB32AD57B6B00B57E7B /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */; };
 		31994AB52AD57B8800B57E7B /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB42AD57B8800B57E7B /* CatalogViewController.swift */; };
 		31994AB72AD57BB100B57E7B /* CatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */; };
-		31994AB92AD596A400B57E7B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB82AD596A400B57E7B /* TabBarViewController.swift */; };
-		31994ABB2AD597B100B57E7B /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994ABA2AD597B100B57E7B /* CartViewController.swift */; };
-		31994ABD2AD597E000B57E7B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994ABC2AD597E000B57E7B /* ProfileViewController.swift */; };
-		31994ABF2AD5980800B57E7B /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994ABE2AD5980800B57E7B /* StatisticViewController.swift */; };
+		31994AB92AD596A400B57E7B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AB82AD596A400B57E7B /* MainTabBarViewController.swift */; };
 		31994AC22AD67AC200B57E7B /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AC12AD67AC200B57E7B /* CollectionViewController.swift */; };
 		31994AC42AD67ADA00B57E7B /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AC32AD67ADA00B57E7B /* CollectionViewModel.swift */; };
 		31994AC62AD6818D00B57E7B /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31994AC52AD6818D00B57E7B /* ImageCollectionViewCell.swift */; };
@@ -110,10 +107,7 @@
 		31994AB22AD57B6B00B57E7B /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		31994AB42AD57B8800B57E7B /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		31994AB62AD57BB100B57E7B /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
-		31994AB82AD596A400B57E7B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		31994ABA2AD597B100B57E7B /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		31994ABC2AD597E000B57E7B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		31994ABE2AD5980800B57E7B /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
+		31994AB82AD596A400B57E7B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		31994AC12AD67AC200B57E7B /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		31994AC32AD67ADA00B57E7B /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		31994AC52AD6818D00B57E7B /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -260,6 +254,7 @@
 			children = (
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
 				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
+				31994AB82AD596A400B57E7B /* MainTabBarViewController.swift */,
 				3F478ECD29DB473000F6D39E /* DesignSystem */,
 				3F6806CE29CBBD1B00B4F915 /* Foundation */,
 				3F6806C929CBBCAF00B4F915 /* Models */,
@@ -301,11 +296,7 @@
 		3F6806C729CBBC5B00B4F915 /* Scenes  */ = {
 			isa = PBXGroup;
 			children = (
-				31994AB82AD596A400B57E7B /* TabBarViewController.swift */,
 				31994AB12AD57B5200B57E7B /* Catalog */,
-				31994ABA2AD597B100B57E7B /* CartViewController.swift */,
-				31994ABC2AD597E000B57E7B /* ProfileViewController.swift */,
-				31994ABE2AD5980800B57E7B /* StatisticViewController.swift */,
 			);
 			path = "Scenes ";
 			sourceTree = "<group>";
@@ -529,10 +520,9 @@
 				31994AB52AD57B8800B57E7B /* CatalogViewController.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */,
-				31994ABF2AD5980800B57E7B /* StatisticViewController.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,
 				31994AC82AD6821F00B57E7B /* DescriptionCollectionViewCell.swift in Sources */,
-				31994AB92AD596A400B57E7B /* TabBarViewController.swift in Sources */,
+				31994AB92AD596A400B57E7B /* MainTabBarViewController.swift in Sources */,
 				31994AAA2AD545D400B57E7B /* OrderPaymentStatus.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				31958C1B2ADEE8EF00824EA4 /* OrderUpdateDTO.swift in Sources */,
@@ -546,12 +536,10 @@
 				31994AC22AD67AC200B57E7B /* CollectionViewController.swift in Sources */,
 				318C0CA82AE584DB00FF0270 /* CollectionItemViewController.swift in Sources */,
 				31994A982AD487AB00B57E7B /* Collection.swift in Sources */,
-				31994ABD2AD597E000B57E7B /* ProfileViewController.swift in Sources */,
 				31994AA22AD53DBF00B57E7B /* Profile.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				31994ACA2AD6825900B57E7B /* NFTCollectionViewCell.swift in Sources */,
-				31994ABB2AD597B100B57E7B /* CartViewController.swift in Sources */,
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				314558242AEEE57F0014DB0A /* CollectionRatingStackView.swift in Sources */,
