@@ -12,7 +12,6 @@ extension UINavigationBar {
         super.didAddSubview(subview)
         
         let subviewClass = String(describing: type(of: subview))
-        print(subviewClass)
         if subviewClass.lowercased().localizedStandardContains("background") {
             subview.isHidden = true
         }
