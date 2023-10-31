@@ -14,7 +14,7 @@ final class NFTCell: UICollectionViewCell {
     
     private lazy var cartButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Cart"), for: .normal)
+        button.setImage(UIImage(named: "cart"), for: .normal)
         button.tintColor = .ypBlack
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
