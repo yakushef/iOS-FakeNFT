@@ -56,12 +56,12 @@
 - UI тесты: фильтрация и удаление ***(≈30 min; fact 100 min)***
 - Unit тесты: сервис корзины и вьюмодель ***(≈30 min; fact 60 min)***
 
-## *Интеграция эпика с общим проектом (≈120 min; fact ? min)*
+## *Интеграция эпика с общим проектом (≈120 min; fact 90 min)*
 
-*Subtotal: ≈220 min; fact ? min*
+*Subtotal: ≈220 min; fact 190 min*
 <hr>
 
-## *Total: ≈915 min; fact ? min*
+## *Total: ≈915 min; fact 722 min*
 
 
 
