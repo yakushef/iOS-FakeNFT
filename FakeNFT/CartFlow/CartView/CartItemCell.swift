@@ -23,7 +23,7 @@ final class CartItemCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var removeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "Cart_Delete"), for: .normal)
+        button.setImage(UIImage(named: "cart_delete"), for: .normal)
         button.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
         button.tintColor = .ypBlack
         button.adjustsImageWhenHighlighted = true
