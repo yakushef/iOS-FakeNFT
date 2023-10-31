@@ -1,7 +1,7 @@
 # Демонстрация работы приложения
 - Профиль
 - Каталог
-- [Корзина](https://www.loom.com/share/a67c096c2baa432fbdf45d1edc08bf80?sid=f5b0f009-65dc-4962-bb01-381ccd046868)
+- [Корзина](https://www.loom.com/share/bdfee510348b4d65a352f450489ff228?sid=d55cb93d-956d-4d34-b427-7c93919a6028)
 - Статистика
 ---
 # ТЗ мобильного приложения FakeNFT

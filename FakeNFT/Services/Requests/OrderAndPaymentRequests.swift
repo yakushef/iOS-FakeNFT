@@ -12,7 +12,10 @@ struct cartRequest: NetworkRequest {
 }
 
 struct cartChangeRequest: NetworkRequest {
+    let orderUpdateDTO: OrderUpdateDTO
     var endpoint: URL?
     var httpMethod: HttpMethod = .put
-    var dto: [String]
+    var dto: Encodable? {
+        orderUpdateDTO
+    }
 }

@@ -97,12 +97,13 @@ final class OrderAndPaymentService: OrderServiceProtocol, CheckoutServiceProtoco
     
     private func replaceOrder(with newOrder: Order) {
         let url = Config.baseUrl + orderPathString
-        let request = cartChangeRequest(endpoint: URL(string: url)!,
-                                        dto: newOrder.nfts)
-        networkClient.send(request: request, onResponse: { [weak self] result in
+        let request = cartChangeRequest(orderUpdateDTO: OrderUpdateDTO(nfts: newOrder.nfts,
+                                                            id: newOrder.id),
+                                        endpoint: URL(string: url)!)
+        networkClient.send(request: request, type: Order.self, onResponse: { [weak self] result in
             switch result {
-            case .success(_):
-                self?.cartVM?.orderUpdated()
+            case .success(let order):
+                self?.currentOrder = order
             case .failure(_):
                 self?.cartVM?.networkError()
             }

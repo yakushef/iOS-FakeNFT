@@ -40,7 +40,6 @@
 		3F603CCD29DB4A53000C43D7 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 3F603CCC29DB4A53000C43D7 /* ProgressHUD */; };
 		3F603CD029DB4A74000C43D7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3F603CCF29DB4A74000C43D7 /* Kingfisher */; };
 		3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F68069629CBBAF100B4F915 /* AppDelegate.swift */; };
-		3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F68069829CBBAF100B4F915 /* SceneDelegate.swift */; };
 		3F6806A029CBBAF200B4F915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F68069F29CBBAF200B4F915 /* Assets.xcassets */; };
 		3F6806A329CBBAF200B4F915 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F6806A129CBBAF200B4F915 /* LaunchScreen.storyboard */; };
 		3F6806AE29CBBAF200B4F915 /* ExampleUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6806AD29CBBAF200B4F915 /* ExampleUnitTests.swift */; };
@@ -54,7 +53,6 @@
 		3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */; };
 		3FC8C39729D24D9D0081F015 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		BC0710EC2AEA424D00E817EE /* MockCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0710EB2AEA424D00E817EE /* MockCurrency.swift */; };
-		BC0710EE2AEA445D00E817EE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0710ED2AEA445D00E817EE /* MainTabBarViewController.swift */; };
 		BC0710F02AEAFD3100E817EE /* CartFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0710EF2AEAFD3100E817EE /* CartFlowUITests.swift */; };
 		BC2C52A12AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */; };
 		BC2C52A22AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */; };
@@ -98,6 +96,7 @@
 		BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */; };
 		BCB1DE012AD70B37002ED041 /* CartTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE002AD70B37002ED041 /* CartTotalView.swift */; };
 		BCB1DE032AD7108A002ED041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB1DE022AD7108A002ED041 /* RatingView.swift */; };
+		BCBC66782AF1659600B44DE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC66772AF1659600B44DE9 /* SceneDelegate.swift */; };
 		FA1391432AE96A5C00EBE30A /* UsersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1391422AE96A5C00EBE30A /* UsersCollectionViewController.swift */; };
 		FA1391452AE96AA300EBE30A /* NFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1391442AE96AA300EBE30A /* NFTCell.swift */; };
 		FA1391472AE96DCC00EBE30A /* UsersCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1391462AE96DCC00EBE30A /* UsersCollectionViewModel.swift */; };
@@ -165,7 +164,6 @@
 		3F478ED029DB476500F6D39E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		3F68069329CBBAF100B4F915 /* FakeNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F68069629CBBAF100B4F915 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F68069829CBBAF100B4F915 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3F68069F29CBBAF200B4F915 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F6806A229CBBAF200B4F915 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F6806A429CBBAF200B4F915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 		3FC8C39029D2453B0081F015 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
 		BC0710EB2AEA424D00E817EE /* MockCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCurrency.swift; sourceTree = "<group>"; };
-		BC0710ED2AEA445D00E817EE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		BC0710EF2AEAFD3100E817EE /* CartFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFlowUITests.swift; sourceTree = "<group>"; };
 		BC2C529E2AD5C9CE0066C940 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		BC2C529F2AD5C9CE0066C940 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
@@ -214,6 +211,7 @@
 		BCB1DDFE2AD70B0D002ED041 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		BCB1DE002AD70B37002ED041 /* CartTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTotalView.swift; sourceTree = "<group>"; };
 		BCB1DE022AD7108A002ED041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		BCBC66772AF1659600B44DE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FA1391422AE96A5C00EBE30A /* UsersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewController.swift; sourceTree = "<group>"; };
 		FA1391442AE96AA300EBE30A /* NFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCell.swift; sourceTree = "<group>"; };
 		FA1391462AE96DCC00EBE30A /* UsersCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -343,13 +341,12 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
-				BC0710ED2AEA445D00E817EE /* MainTabBarViewController.swift */,
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
-				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
+				BCBC66772AF1659600B44DE9 /* SceneDelegate.swift */,
+				FAE0C09B2AD6FFAF000AD7B3 /* MainTabBarViewController.swift */,
 				BC9405492AE6D2E700786D84 /* Decomposition */,
 				BC986C0D2AE5986A00E17267 /* WebView */,
 				BCB1DDF92AD707DD002ED041 /* CartFlow */,
-				FAE0C09B2AD6FFAF000AD7B3 /* MainTabBarViewController.swift */,
 				3F478ECD29DB473000F6D39E /* DesignSystem */,
 				3F6806CE29CBBD1B00B4F915 /* Foundation */,
 				3F6806C929CBBCAF00B4F915 /* Models */,
@@ -715,7 +712,6 @@
 				3FC8C38B29D242E90081F015 /* (null) in Sources */,
 				31994AB52AD57B8800B57E7B /* CatalogViewController.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
-				BC0710EE2AEA445D00E817EE /* MainTabBarViewController.swift in Sources */,
 				BCABD6A72AE194FE00B1C2C4 /* GenericButton.swift in Sources */,
 				318C0CA32AE0082300FF0270 /* CollectionShortModel.swift in Sources */,
 				31994AA62AD5423F00B57E7B /* Order.swift in Sources */,
@@ -754,7 +750,6 @@
 				31994AA82AD544F500B57E7B /* Currency.swift in Sources */,
 				BCB1DDFF2AD70B0D002ED041 /* CartViewModel.swift in Sources */,
 				BC986C032AE57DB200E17267 /* OrderAndPaymentRequests.swift in Sources */,
-				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				314558242AEEE57F0014DB0A /* CollectionRatingStackView.swift in Sources */,
 				BC7058832AF03C76005C3D54 /* ExtensionUINavigationBar.swift in Sources */,
 				31994AD42ADAAB7700B57E7B /* CollectionRequest.swift in Sources */,
@@ -762,7 +757,6 @@
 				FAF290BB2ADD978F00DA3258 /* UserCardService.swift in Sources */,
 				FA1391452AE96AA300EBE30A /* NFTCell.swift in Sources */,
 				FA1391432AE96A5C00EBE30A /* UsersCollectionViewController.swift in Sources */,
-				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				FA6CC9D72AD5A7C000DC5406 /* UserViewCell.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				FAF290B72ADD90C300DA3258 /* UserCardViewController.swift in Sources */,
@@ -775,6 +769,7 @@
 				BC2C84D02ADC7917006C4E91 /* Observable.swift in Sources */,
 				BC2C84D22ADDA32B006C4E91 /* DeleteConfirmationViewController.swift in Sources */,
 				31994AD02ADA9C4100B57E7B /* String+Extensions.swift in Sources */,
+				BCBC66782AF1659600B44DE9 /* SceneDelegate.swift in Sources */,
 				31994ACE2ADA8FC800B57E7B /* CollectionNFTSection.swift in Sources */,
 				31994AD22ADAA85600B57E7B /* SortCollections.swift in Sources */,
 				318C0CA52AE57BF700FF0270 /* WebViewView.swift in Sources */,
