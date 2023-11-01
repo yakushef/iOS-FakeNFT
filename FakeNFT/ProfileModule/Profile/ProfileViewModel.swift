@@ -74,13 +74,11 @@ final class ProfileViewModel {
     }
     
     func getPhoto(imageView: UIImageView, index: Int, list: NFTListType) {
-        var nft: ItemNFT?
-        
-        switch list {
+        var nft: ItemNFT? = switch list {
         case .my:
-            nft = myNFTs?[index]
+            myNFTs?[index]
         case .favorites:
-            nft = favoritesNFTs?[index]
+            favoritesNFTs?[index]
         }
         
         guard let nft else { return }
