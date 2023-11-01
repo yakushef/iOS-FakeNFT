@@ -16,6 +16,7 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -23,6 +24,7 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
     private let nftLikeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+        button.isSelected = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -79,6 +81,18 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
     func updatePrice(_ price: Double) {
         priceLabel.text = "\(price) ETH"
     }
+    
+//    func updateLike() {
+//        if nftLikeButton.isSelected {
+//            print("SET INACTIVE")
+//            nftLikeButton.isSelected = false
+//            nftLikeButton.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
+//        } else {
+//            print("SET ACTIVE")
+//            nftLikeButton.isSelected = true
+//            nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+//        }
+//    }
     
     // MARK: - Private methods
     

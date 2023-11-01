@@ -84,7 +84,32 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             object: nil,
             queue: .main
         ) { [weak self] _ in
+            print("nfts")
+            var array1 = [String]()
+            self?.profileViewModel?.nfts?.forEach { array1.append($0.id) }
+            print(array1)
+            
             self?.profileViewModel?.sortNFTs()
+            
+            print("myNFTs")
+            var array2 = [String]()
+            self?.profileViewModel?.myNFTs?.forEach { array2.append($0.id) }
+            print(array2)
+            
+            print("favoritesNFTs")
+            var array3 = [String]()
+            self?.profileViewModel?.favoritesNFTs?.forEach { array3.append($0.id) }
+            print(array3)
+            
+            print("profile.nfts")
+            var array4 = [String]()
+            self?.profileViewModel?.profile?.nfts.forEach { array4.append($0) }
+            print(array4)
+            
+            print("profile.likes")
+            var array5 = [String]()
+            self?.profileViewModel?.profile?.likes.forEach { array5.append($0) }
+            print(array5)
         }
         
         profileViewModel?.getProfile(id: "1")

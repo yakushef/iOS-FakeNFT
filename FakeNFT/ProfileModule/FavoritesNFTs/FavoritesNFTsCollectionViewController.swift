@@ -137,11 +137,12 @@ extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
         
         cell.backgroundColor = .ypWhite
         
-        cell.buttonTappedHandler = {
-            print("Something")
-        }
-        
         guard let nft = profileViewModel?.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
+        
+        cell.buttonTappedHandler = { [weak self] in
+            self?.profileViewModel?.updateLikeInfo(nft: nft)
+            self?.reloadData()
+        }
         
         cell.updateNameLabel(nft.name)
         cell.updateRating(nft.rating)
