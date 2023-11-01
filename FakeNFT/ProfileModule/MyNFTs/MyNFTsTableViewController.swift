@@ -87,7 +87,9 @@ final class MyNFTsTableViewController: UIViewController {
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let topOffset: CGFloat = 20
+        tableView.contentInset = UIEdgeInsets(top: topOffset, left: 0, bottom: 0, right: 0)
+        tableView.setContentOffset(CGPoint(x: 0, y: -topOffset), animated: false)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
