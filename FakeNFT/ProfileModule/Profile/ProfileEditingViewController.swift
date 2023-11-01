@@ -86,7 +86,7 @@ final class ProfileEditingViewController: UIViewController {
     }
     
     private func setupView() {
-        [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView].forEach {
+        [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView, activityIndicator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
