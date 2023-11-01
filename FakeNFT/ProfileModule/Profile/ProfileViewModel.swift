@@ -85,6 +85,7 @@ final class ProfileViewModel {
         
         guard let nft else { return }
         
+        imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: URL(string: nft.images[0]),
             options: [.processor(RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .ypBlack))]
