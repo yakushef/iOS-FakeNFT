@@ -113,6 +113,7 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
     
     @objc
     private func backButtonDidTap() {
+        profileViewModel?.updateProfileInfo()
         navigationController?.popViewController(animated: true)
     }
 }
