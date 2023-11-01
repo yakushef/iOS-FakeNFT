@@ -13,8 +13,6 @@ protocol ProfileServiceProtocol {
 }
 
 final class ProfileService: ProfileServiceProtocol {
-    typealias Model = Codable
-    
     private let networkClient = DefaultNetworkClient()
     
     func makeGetProfileRequest(id: String, _ handler: @escaping (Codable) -> Void) {

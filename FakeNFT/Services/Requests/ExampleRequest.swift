@@ -9,6 +9,7 @@ struct ProfileRequest: NetworkRequest {
     init(id: String, httpMethod: HttpMethod = .get, dto: Encodable? = nil) {
         self.id = id
         self.httpMethod = httpMethod
+        self.dto = dto
         endpoint = URL(string: "\(Config.baseUrl)profile/\(self.id)")
     }
 }

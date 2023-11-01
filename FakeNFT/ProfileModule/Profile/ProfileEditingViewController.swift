@@ -174,7 +174,7 @@ final class ProfileEditingViewController: UIViewController {
     
     @objc
     private func closeButtonDidTap() {
-        profileViewModel?.updateProfileInfo(id: "1")
+        profileViewModel?.updateProfileInfo()
         dismiss(animated: true)
     }
     

@@ -51,8 +51,10 @@ final class ProfileViewModel {
         imageView.kf.setImage(with: URL(string: profileImagePath), options: [.processor(processor)])
     }
     
-    func updateProfileInfo(id: String) {
-        profileService?.makePutRequest(id: id, profile: profile) { [weak self] profile in
+    func updateProfileInfo() {
+        guard let profile else { return }
+        
+        profileService?.makePutRequest(id: profile.id, profile: profile) { [weak self] profile in
             if let profile = profile as? Profile {
                 self?.profile = profile
                 NotificationCenter.default.post(name: ProfileViewModel.didChangeNotification, object: self)
