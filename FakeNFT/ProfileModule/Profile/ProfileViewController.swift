@@ -108,7 +108,10 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         profileNameLabel.text = profileViewModel?.profile?.name
         profileViewModel?.updatePhoto(profileImageView)
         
-        guard let description = profileViewModel?.profile?.description, let website = profileViewModel?.profile?.website else {
+        guard
+            let description = profileViewModel?.profile?.description,
+            let website = profileViewModel?.profile?.website
+        else {
             return
         }
         
@@ -123,7 +126,12 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileBioLabel.attributedText = attrString
         
-        let attributedString = NSMutableAttributedString(string: website)
+        // remove "https://" part of a string and "/" at the end
+        let websiteSubstring = website
+            .suffix(from: website.index(website.startIndex, offsetBy: 8))
+            .prefix(upTo: website.index(website.endIndex, offsetBy: -1))
+        
+        let attributedString = NSMutableAttributedString(string: String(websiteSubstring))
         attributedString.addAttribute(.link, value: website, range: NSMakeRange(0, attributedString.length))
         siteLabel.attributedText = attributedString
     }
