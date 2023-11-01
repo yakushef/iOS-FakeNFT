@@ -8,10 +8,7 @@
 import UIKit
 
 final class FavoritesNFTsCollectionViewController: UIViewController {
-    var profileViewModel: ProfileViewModel?
-    var navTitle: String?
-    
-    private var profileObserver: NSObjectProtocol?
+    // MARK: - UI-elements
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activitiIndicator = UIActivityIndicatorView(style: .medium)
@@ -39,6 +36,17 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
         return label
     }()
     
+    // MARK: - Private Properties
+    
+    private var profileObserver: NSObjectProtocol?
+    
+    // MARK: - Public properties
+    
+    var profileViewModel: ProfileViewModel?
+    var navTitle: String?
+    
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +67,8 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
         
         reloadData()
     }
+    
+    // MARK: - Private methods
     
     private func setupCollectionView() {
         collectionView.delegate = self

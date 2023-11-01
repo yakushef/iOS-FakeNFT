@@ -8,7 +8,11 @@
 import UIKit
 
 final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
+    // MARK: - Static properties
+    
     static let reuseIdentifier = "NFTCell"
+    
+    // MARK: - UI-elements
     
     let nftImageView: UIImageView = {
         let imageView = UIImageView()
@@ -52,7 +56,11 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Public properties
+    
     var buttonTappedHandler: (() -> Void)?
+    
+    // MARK: - UICollectionViewCell
     
     override init(frame: CGRect) {
         super.init(frame: frame)

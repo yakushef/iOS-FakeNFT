@@ -333,6 +333,15 @@
 			path = FakeNFT/WebView;
 			sourceTree = "<group>";
 		};
+		CB2CDBEE2AF2E6AE009E0E7F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */,
+				CB3C32C82AEEA92E00D1C793 /* NFTListType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		CB3DEADC2AEAA89C008C9427 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,7 +349,6 @@
 				CB85C9B02AE4077C00B2C5B9 /* ProfileViewModel.swift */,
 				CB4186A22AD99055003974A8 /* ProfileEditingViewController.swift */,
 				CB85C9AE2AE4069C00B2C5B9 /* ProfileService.swift */,
-				CB3DEADA2AEAA5EE008C9427 /* ProfileInfo.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -374,11 +382,11 @@
 		CBA8DF502AD6E6C8006A2601 /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
+				CB2CDBEE2AF2E6AE009E0E7F /* Enums */,
 				CB6F168A2AD84E630070D0E3 /* Extensions */,
 				CB3DEADC2AEAA89C008C9427 /* Profile */,
 				CB85C9AB2AE4033D00B2C5B9 /* MyNFTs */,
 				CB85C9AC2AE4034D00B2C5B9 /* FavoritesNFTs */,
-				CB3C32C82AEEA92E00D1C793 /* NFTListType.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";

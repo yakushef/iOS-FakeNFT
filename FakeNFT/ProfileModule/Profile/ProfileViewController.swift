@@ -12,6 +12,8 @@ protocol ProfileViewControllerProtocol {
 }
 
 final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    // MARK: - UI-elements
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Userpic_Placeholder")
@@ -55,11 +57,15 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         return tableView
     }()
     
+    // MARK: - Private properties
+    
     private let cells = ["Мои NFT", "Избранные NFT", "О разработчике"]
     
     private var profileViewModel: ProfileViewModel?
     private var profileObserver: NSObjectProtocol?
     private var nftsObserver: NSObjectProtocol?
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +101,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         setupActivityIndicator()
         activityIndicator.startAnimating()
     }
+    
+    // MARK: - Private methods
     
     private func setupUI() {
         setupNavigationBar()
@@ -248,6 +256,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cells.count
@@ -272,6 +282,8 @@ extension ProfileViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

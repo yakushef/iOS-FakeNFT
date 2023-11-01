@@ -8,7 +8,11 @@
 import UIKit
 
 final class MyNFTsTableViewCell: UITableViewCell {
+    // MARK: - Static properties
+    
     static let reuseIdentifier = "NFTCell"
+    
+    // MARK: - UI-elements
 
     let nftImageView: UIImageView = {
         let imageView = UIImageView()
@@ -61,7 +65,11 @@ final class MyNFTsTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Public properties
+    
     var buttonTappedHandler: (() -> Void)?
+    
+    // MARK: - UITableViewCell
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

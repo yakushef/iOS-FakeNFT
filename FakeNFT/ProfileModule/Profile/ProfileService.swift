@@ -13,7 +13,11 @@ protocol ProfileServiceProtocol {
 }
 
 final class ProfileService: ProfileServiceProtocol {
+    // MARK: - Private properties
+    
     private let networkClient = DefaultNetworkClient()
+    
+    // MARK: - Private methods
     
     func makeGetProfileRequest(id: String, _ handler: @escaping (Codable) -> Void) {
         let networkRequest = ProfileRequest(id: id)

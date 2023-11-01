@@ -8,10 +8,12 @@
 import UIKit
 
 final class MyNFTsTableViewController: UIViewController {
+    // MARK: - Public properties
+    
     var profileViewModel: ProfileViewModel?
     var navTitle: String?
     
-    private var profileObserver: NSObjectProtocol?
+    // MARK: - UI-elements
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activitiIndicator = UIActivityIndicatorView(style: .medium)
@@ -36,6 +38,12 @@ final class MyNFTsTableViewController: UIViewController {
         return label
     }()
     
+    // MARK: - Private properties
+    
+    private var profileObserver: NSObjectProtocol?
+    
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +58,8 @@ final class MyNFTsTableViewController: UIViewController {
 
         reloadData()
     }
+    
+    // MARK: - Private methods
     
     private func setupNavigationBar() {
         title = navTitle

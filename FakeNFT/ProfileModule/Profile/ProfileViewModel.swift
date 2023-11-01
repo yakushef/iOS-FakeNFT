@@ -9,8 +9,12 @@ import UIKit
 import Kingfisher
 
 final class ProfileViewModel {
+    // MARK: - Static properties
+    
     static let didChangeNotification = Notification.Name(rawValue: "ProfileInfoDidChange")
     static let nftsChangedNotification = Notification.Name(rawValue: "NFTsInfoDidChange")
+    
+    // MARK: - Public properties
     
     var profile: Profile?
     var myNFTs: [ItemNFT]?
@@ -20,6 +24,8 @@ final class ProfileViewModel {
     
     let profileService: ProfileServiceProtocol?
     let viewController: ProfileViewControllerProtocol?
+    
+    // MARK: - ProfileViewModel - init()
     
     init(viewController: ProfileViewControllerProtocol) {
         self.viewController = viewController

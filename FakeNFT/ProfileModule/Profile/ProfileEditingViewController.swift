@@ -8,6 +8,8 @@
 import UIKit
 
 final class ProfileEditingViewController: UIViewController {
+    // MARK: - UI-elements
+    
     private let closeButton: UIButton = {
        let button = UIButton()
         button.frame.size = CGSize(width: 42, height: 42)
@@ -55,7 +57,11 @@ final class ProfileEditingViewController: UIViewController {
     private let siteLabel = UILabel(text: "Сайт")
     private let siteTextView = UITextView()
     
+    // MARK: - Public properties
+    
     var profileViewModel: ProfileViewModel?
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +70,8 @@ final class ProfileEditingViewController: UIViewController {
         
         setupUI()
     }
+    
+    // MARK: - Private properties
     
     private func setupUI() {
         setupView()
@@ -209,17 +217,15 @@ final class ProfileEditingViewController: UIViewController {
     }
 }
 
+// MARK: - UITextViewDelegate
+
 extension ProfileEditingViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let info: ProfileInfo? = switch textView {
-        case nameTextView:
-            .name
-        case bioTextView:
-            .description
-        case siteTextView:
-            .website
-        default:
-            nil
+        case nameTextView: .name
+        case bioTextView: .description
+        case siteTextView: .website
+        default: nil
         }
         
         if let info {
