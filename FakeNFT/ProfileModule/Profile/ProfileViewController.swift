@@ -102,6 +102,12 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         activityIndicator.startAnimating()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
