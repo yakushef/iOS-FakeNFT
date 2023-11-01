@@ -61,22 +61,22 @@
 - Переиспользуемая ячейка коллекции с иконкой NFT, сердечком, названием, рейтингом и ценой (est: 120 min; fact: 60 min).
 `Total:` est: 270 min; fact: 130 min).
 
-## Module 3 (est 720 min; fact x min).
+## Module 3 (est 720 min; fact 720 min).
 ### Экран Мои NFT
 #### Логика
-- Загрузка и отображение списка "Мои NFT" с сервера (est: 90 min; fact: x min).
-- Сортировка ячеек по цене, рейтингу и названию (est: 300 min; fact: x min).
-- Отображение надписи об отсутствии NFT (est: 60 min; fact: x min).
-`Total:` est: 450 min; fact: x min.
+- Загрузка и отображение списка "Мои NFT" с сервера (est: 90 min; fact: 180 min).
+- Сортировка ячеек по цене, рейтингу и названию (est: 300 min; fact: 60 min).
+- Отображение надписи об отсутствии NFT (est: 60 min; fact: 60 min).
+`Total:` est: 450 min; fact: 300 min.
 
 ### Экран Избранные NFT
 #### Логика
-- Загрузка и отображение списка "Избранные NFT" с сервера (est: 90 min; fact: x min).
-- Удаление NFT из избранного при нажатии на сердечко (est: 120 min; fact: x min).
-- Отображение надписи об отсутствии избранных NFT (est: 60 min; fact: x min).
-`Total:` est: 270 min; fact: x min.
+- Загрузка и отображение списка "Избранные NFT" с сервера (est: 90 min; fact: 180 min).
+- Удаление NFT из избранного при нажатии на сердечко (est: 120 min; fact: 180 min).
+- Отображение надписи об отсутствии избранных NFT (est: 60 min; fact: 60 min).
+`Total:` est: 270 min; fact: 420 min.
 <hr>
 
 <b>
-`Total:` est: 2160 min; fact: x min.
+`Total:` est: 2160 min; fact: 1760 min.
 </b>
