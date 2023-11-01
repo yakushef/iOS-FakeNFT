@@ -129,51 +129,71 @@ final class ProfileViewModel {
     }
     
     func isLiked(_ nft: ItemNFT) -> Bool {
-        guard let profile else { return false }
+        guard let favoritesNFTs else { return false }
         
-        return if profile.likes.contains(nft.id) { true } else { false }
+        return if favoritesNFTs.contains(nft) { true } else { false }
     }
     
-    func updateLikeInfo(nft: ItemNFT) {
-        print("updateLikeInfo")
+    func removeLike(nft: ItemNFT) {
         guard
             var favoritesNFTs,
-            let index = favoritesNFTs.firstIndex(of: nft)
+            let index = favoritesNFTs.firstIndex(of: nft),
+            let profile
         else {
             return
         }
-        
-        print("likes BEFORE")
-        var array = [String]()
-        self.profile?.likes.forEach { array.append($0) }
-        print(array)
-        
-        print("favoritesNFTs BEFORE")
-        var array1 = [String]()
-        self.favoritesNFTs?.forEach { array1.append($0.id) }
-        print(array1)
         
         favoritesNFTs.remove(at: index)
         self.favoritesNFTs = favoritesNFTs
         
         let likes = favoritesNFTs.map { $0.id }
         
-        guard let profile else { return }
-        
-        self.profile = Profile(name: profile.name, avatar: profile.avatar, description: profile.description, website: profile.website, nfts: profile.nfts, likes: likes, id: profile.id)
-        
-        print("likes AFTER")
-        var array2 = [String]()
-        self.profile?.likes.forEach { array2.append($0) }
-        print(array2)
-        
-        print("favoritesNFTs AFTER")
-        var array3 = [String]()
-        self.favoritesNFTs?.forEach { array3.append($0.id) }
-        print(array3)
+        self.profile = Profile(
+            name: profile.name,
+            avatar: profile.avatar,
+            description: profile.description,
+            website: profile.website,
+            nfts: profile.nfts,
+            likes: likes,
+            id: profile.id
+        )
+    }
+    
+    func updateLike(for nft: ItemNFT, _ isLiked: Bool) {
+        if isLiked {
+            removeLike(nft: nft)
+        } else {
+            addLike(nft: nft)
+        }
     }
     
     // MARK: - Private methods
+    
+    private func addLike(nft: ItemNFT) {
+        guard
+            var favoritesNFTs,
+            let profile
+        else {
+            return
+        }
+        
+        favoritesNFTs.append(nft)
+        favoritesNFTs.sort { $0.id < $1.id }
+        
+        self.favoritesNFTs = favoritesNFTs
+        
+        let likes = favoritesNFTs.map { $0.id }
+        
+        self.profile = Profile(
+            name: profile.name,
+            avatar: profile.avatar,
+            description: profile.description,
+            website: profile.website,
+            nfts: profile.nfts,
+            likes: likes,
+            id: profile.id
+        )
+    }
     
     private func sortProfileNFTs(_ profile: Profile) -> Profile {
         var likes = sortArray(profile.likes)

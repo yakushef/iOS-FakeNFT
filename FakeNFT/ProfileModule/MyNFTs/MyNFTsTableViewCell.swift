@@ -14,6 +14,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12
+        imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -60,6 +61,8 @@ final class MyNFTsTableViewCell: UITableViewCell {
         return label
     }()
     
+    var buttonTappedHandler: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -96,8 +99,12 @@ final class MyNFTsTableViewCell: UITableViewCell {
         nftAuthorLabel.text = "от \(author)"
     }
     
-    func updateLike() {
-        nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+    func updateLike(_ isLiked: Bool) {
+        if isLiked {
+            nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+        } else {
+            nftLikeButton.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
+        }
     }
     
     // MARK: - Private methods
@@ -129,6 +136,7 @@ final class MyNFTsTableViewCell: UITableViewCell {
     }
     
     private func setupNFTLikeButton() {
+        nftLikeButton.addTarget(self, action: #selector(likeButtonDidTap(_:)), for: .touchUpInside)
         nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
@@ -195,5 +203,10 @@ final class MyNFTsTableViewCell: UITableViewCell {
             priceLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 2),
             priceLabel.leadingAnchor.constraint(equalTo: priceTitleLabel.leadingAnchor)
         ])
+    }
+    
+    @objc
+    private func likeButtonDidTap(_ sender: UIButton) {
+        buttonTappedHandler?()
     }
 }

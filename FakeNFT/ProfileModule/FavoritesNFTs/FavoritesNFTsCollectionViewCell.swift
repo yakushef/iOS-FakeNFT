@@ -82,18 +82,6 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         priceLabel.text = "\(price) ETH"
     }
     
-//    func updateLike() {
-//        if nftLikeButton.isSelected {
-//            print("SET INACTIVE")
-//            nftLikeButton.isSelected = false
-//            nftLikeButton.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
-//        } else {
-//            print("SET ACTIVE")
-//            nftLikeButton.isSelected = true
-//            nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
-//        }
-//    }
-    
     // MARK: - Private methods
     
     private func setupNFTImageView() {

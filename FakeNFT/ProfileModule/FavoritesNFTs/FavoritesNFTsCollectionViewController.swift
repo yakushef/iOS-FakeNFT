@@ -140,7 +140,7 @@ extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
         guard let nft = profileViewModel?.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
         
         cell.buttonTappedHandler = { [weak self] in
-            self?.profileViewModel?.updateLikeInfo(nft: nft)
+            self?.profileViewModel?.removeLike(nft: nft)
             self?.reloadData()
         }
         

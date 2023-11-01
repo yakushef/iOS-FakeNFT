@@ -186,15 +186,23 @@ extension MyNFTsTableViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        cell.buttonTappedHandler = { [weak self, weak cell, weak profileViewModel] in
+            guard let profileViewModel else { return }
+            
+            let isLiked = profileViewModel.isLiked(nft)
+            
+            self?.profileViewModel?.updateLike(for: nft, isLiked)
+            cell?.updateLike(isLiked)
+            
+            self?.reloadData()
+        }
+        
         cell.updateNameLabel(nft.name)
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
         cell.updateAuthor(authorName)
+        cell.updateLike(profileViewModel.isLiked(nft))
         profileViewModel.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .my)
-        
-        if profileViewModel.isLiked(nft) {
-            cell.updateLike()
-        }
         
         return cell
     }
