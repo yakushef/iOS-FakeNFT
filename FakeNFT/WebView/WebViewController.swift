@@ -5,11 +5,10 @@
 //  Created by Aleksey Yakushev on 22.10.2023.
 //
 
-import ProgressHUD
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController {
+final class WebViewController: UIViewController {
     var model: WebViewModel?
     
     private let webView: WKWebView = {
@@ -31,7 +30,6 @@ class WebViewController: UIViewController {
         
         if let request = model?.makeRequest() {
             webView.load(request)
-//            ProgressHUD.show()
             activityIndicator.startAnimating()
         }
     }
@@ -64,7 +62,6 @@ class WebViewController: UIViewController {
     
     @objc
     private func backButtonTapped() {
-//        ProgressHUD.dismiss()
         activityIndicator.stopAnimating()
         navigationController?.popViewController(animated: true)
     }
@@ -72,7 +69,6 @@ class WebViewController: UIViewController {
 
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        ProgressHUD.dismiss()
         activityIndicator.stopAnimating()
     }
 }
