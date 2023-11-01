@@ -42,6 +42,12 @@ final class ProfileEditingViewController: UIViewController {
         return label
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        return activitiIndicator
+    }()
+    
     private let nameLabel = UILabel(text: "Имя")
     private let nameTextView = UITextView()
     private let bioLabel = UILabel(text: "Описание")
@@ -56,6 +62,10 @@ final class ProfileEditingViewController: UIViewController {
         
         view.backgroundColor = .ypWhite
         
+        setupUI()
+    }
+    
+    private func setupUI() {
         setupView()
         setupCloseButton()
         setupProfileImageView()
@@ -70,6 +80,7 @@ final class ProfileEditingViewController: UIViewController {
         siteTextView.bottomAnchor.constraint(
             lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor
         ).isActive = true
+        setupActivityIndicator()
         
         addGesture()
     }
@@ -87,6 +98,15 @@ final class ProfileEditingViewController: UIViewController {
         nameTextView.text = profileViewModel.profile?.name
         bioTextView.text = profileViewModel.profile?.description
         siteTextView.text = profileViewModel.profile?.website
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func setupCloseButton() {
@@ -181,10 +201,10 @@ final class ProfileEditingViewController: UIViewController {
     @objc
     private func changeImageDidTap() {
         // simulation of downloading photo
-        UIBlockingProgressHUD.show()
+        activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            UIBlockingProgressHUD.dismiss()
+            self.activityIndicator.stopAnimating()
         }
     }
 }
