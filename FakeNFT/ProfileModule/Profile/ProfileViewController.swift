@@ -84,6 +84,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             object: nil,
             queue: .main
         ) { [weak self] _ in
+            self?.setupUI()
             self?.profileViewModel?.sortNFTs()
         }
         
@@ -91,17 +92,19 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         profileViewModel?.getAllNFTs()
         
         setupView()
+        setupActivityIndicator()
+        activityIndicator.startAnimating()
+    }
+    
+    private func setupUI() {
         setupNavigationBar()
         setupProfileImageView()
         setupProfileNameLabel()
         setupBioLabel()
         setupSiteLabel()
         setupProfileTableView()
-        setupActivityIndicator()
         
         addGesture()
-        
-        activityIndicator.startAnimating()
     }
     
     private func updateProfileInfo() {
