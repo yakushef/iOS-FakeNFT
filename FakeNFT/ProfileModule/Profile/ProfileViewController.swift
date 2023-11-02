@@ -143,10 +143,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileBioLabel.attributedText = attrString
         
-        // remove "https://" part of a string and "/" at the end
-        let websiteSubstring = website
-            .suffix(from: website.index(website.startIndex, offsetBy: 8))
-            .prefix(upTo: website.index(website.endIndex, offsetBy: -1))
+        // remove "https://" part of a string
+        let websiteSubstring = website.suffix(from: website.index(website.startIndex, offsetBy: 8))
         
         let attributedString = NSMutableAttributedString(string: String(websiteSubstring))
         attributedString.addAttribute(.link, value: website, range: NSMakeRange(0, attributedString.length))
