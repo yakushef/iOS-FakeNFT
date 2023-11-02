@@ -38,11 +38,12 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private var profileObserver: NSObjectProtocol?
-    
     private let profileViewModel: ProfileViewModel
     
+    private var profileObserver: NSObjectProtocol?
+    
     // MARK: - Public properties
+    
     var navTitle: String?
     
     // MARK: - UIViewController

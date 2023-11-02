@@ -36,9 +36,9 @@ final class MyNFTsTableViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private var profileObserver: NSObjectProtocol?
-    
     private let profileViewModel: ProfileViewModel
+    
+    private var profileObserver: NSObjectProtocol?
     
     // MARK: - Public properties
     
