@@ -1,5 +1,5 @@
 //
-//  MyNFTsCollectionViewCell.swift
+//  MyNFTsTableViewCell.swift
 //  FakeNFT
 //
 //  Created by Антон Кашников on 19/10/2023.
@@ -8,20 +8,25 @@
 import UIKit
 
 final class MyNFTsTableViewCell: UITableViewCell {
+    // MARK: - Static properties
+    
     static let reuseIdentifier = "NFTCell"
+    
+    // MARK: - UI-elements
 
-    private let nftImageView: UIImageView = {
+    let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12
+        imageView.isUserInteractionEnabled = true
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let nftLikeView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Favorites_Inactive")
-        return imageView
+    private let nftLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
+        return button
     }()
     
     private let containerView = UIView()
@@ -60,12 +65,18 @@ final class MyNFTsTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Public properties
+    
+    var buttonTappedHandler: (() -> Void)?
+    
+    // MARK: - UITableViewCell
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
         setupNFTImageView()
-        setupNFTLikeView()
+        setupNFTLikeButton()
         setupContainerView()
         setupNFTNameLabel()
         setupRatingView()
@@ -78,10 +89,38 @@ final class MyNFTsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    
+    func updateNameLabel(_ string: String) {
+        nftNameLabel.text = string
+    }
+    
+    func updateRating(_ int: Int) {
+        ratingView.setRating(to: UInt(int))
+    }
+    
+    func updatePrice(_ price: Double) {
+        priceLabel.text = "\(price) ETH"
+    }
+    
+    func updateAuthor(_ author: String) {
+        nftAuthorLabel.text = "от \(author)"
+    }
+    
+    func updateLike(_ isLiked: Bool) {
+        if isLiked {
+            nftLikeButton.setImage(UIImage(named: "Favorites_Active"), for: .normal)
+        } else {
+            nftLikeButton.setImage(UIImage(named: "Favorites_Inactive"), for: .normal)
+        }
+    }
+    
+    // MARK: - Private methods
+    
     private func setupView() {
         [
             nftImageView,
-            nftLikeView,
+            nftLikeButton,
             containerView,
             nftNameLabel,
             ratingView,
@@ -104,14 +143,15 @@ final class MyNFTsTableViewCell: UITableViewCell {
         ])
     }
     
-    private func setupNFTLikeView() {
-        nftImageView.addSubview(nftLikeView)
+    private func setupNFTLikeButton() {
+        nftLikeButton.addTarget(self, action: #selector(likeButtonDidTap(_:)), for: .touchUpInside)
+        nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
-            nftLikeView.widthAnchor.constraint(equalToConstant: 42),
-            nftLikeView.heightAnchor.constraint(equalToConstant: 42),
-            nftLikeView.topAnchor.constraint(equalTo: nftImageView.topAnchor),
-            nftLikeView.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor)
+            nftLikeButton.widthAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.heightAnchor.constraint(equalToConstant: 42),
+            nftLikeButton.topAnchor.constraint(equalTo: nftImageView.topAnchor),
+            nftLikeButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor)
         ])
     }
     
@@ -119,9 +159,9 @@ final class MyNFTsTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            containerView.widthAnchor.constraint(equalToConstant: 192),
             containerView.heightAnchor.constraint(equalToConstant: 62),
             containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            containerView.leadingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 20),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -39)
         ])
     }
@@ -171,5 +211,10 @@ final class MyNFTsTableViewCell: UITableViewCell {
             priceLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 2),
             priceLabel.leadingAnchor.constraint(equalTo: priceTitleLabel.leadingAnchor)
         ])
+    }
+    
+    @objc
+    private func likeButtonDidTap(_ sender: UIButton) {
+        buttonTappedHandler?()
     }
 }

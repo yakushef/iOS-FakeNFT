@@ -8,6 +8,8 @@
 import UIKit
 
 final class ProfileEditingViewController: UIViewController {
+    // MARK: - UI-elements
+    
     private let closeButton: UIButton = {
        let button = UIButton()
         button.frame.size = CGSize(width: 42, height: 42)
@@ -42,6 +44,12 @@ final class ProfileEditingViewController: UIViewController {
         return label
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        return activitiIndicator
+    }()
+    
     private let nameLabel = UILabel(text: "Имя")
     private let nameTextView = UITextView()
     private let bioLabel = UILabel(text: "Описание")
@@ -49,13 +57,23 @@ final class ProfileEditingViewController: UIViewController {
     private let siteLabel = UILabel(text: "Сайт")
     private let siteTextView = UITextView()
     
+    // MARK: - Public properties
+    
     var profileViewModel: ProfileViewModel?
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .ypWhite
         
+        setupUI()
+    }
+    
+    // MARK: - Private properties
+    
+    private func setupUI() {
         setupView()
         setupCloseButton()
         setupProfileImageView()
@@ -70,12 +88,13 @@ final class ProfileEditingViewController: UIViewController {
         siteTextView.bottomAnchor.constraint(
             lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor
         ).isActive = true
+        setupActivityIndicator()
         
         addGesture()
     }
     
     private func setupView() {
-        [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView].forEach {
+        [closeButton, profileImageView, profileView, changeProfileImageLabel, nameLabel, nameTextView, bioLabel, bioTextView, siteLabel, siteTextView, activityIndicator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -87,6 +106,15 @@ final class ProfileEditingViewController: UIViewController {
         nameTextView.text = profileViewModel.profile?.name
         bioTextView.text = profileViewModel.profile?.description
         siteTextView.text = profileViewModel.profile?.website
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func setupCloseButton() {
@@ -148,6 +176,7 @@ final class ProfileEditingViewController: UIViewController {
     }
     
     private func setupTextView(_ textView: UITextView, under topView: UIView) {
+        textView.delegate = self
         textView.isScrollEnabled = false
         textView.textContainerInset = UIEdgeInsets(top: 11, left: 16, bottom: 11, right: 16)
         textView.font = UIFont.systemFont(ofSize: 17)
@@ -173,16 +202,34 @@ final class ProfileEditingViewController: UIViewController {
     
     @objc
     private func closeButtonDidTap() {
+        profileViewModel?.updateProfileInfo()
         dismiss(animated: true)
     }
     
     @objc
     private func changeImageDidTap() {
         // simulation of downloading photo
-        UIBlockingProgressHUD.show()
+        activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            UIBlockingProgressHUD.dismiss()
+            self.activityIndicator.stopAnimating()
+        }
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension ProfileEditingViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let info: ProfileInfo? = switch textView {
+        case nameTextView: .name
+        case bioTextView: .description
+        case siteTextView: .website
+        default: nil
+        }
+        
+        if let info {
+            profileViewModel?.changeProfileInfo(for: info, textView.text)
         }
     }
 }

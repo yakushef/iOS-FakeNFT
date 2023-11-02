@@ -8,23 +8,29 @@
 import UIKit
 
 final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
+    // MARK: - Static properties
+    
     static let reuseIdentifier = "NFTCell"
     
-    private let nftImageView: UIImageView = {
+    // MARK: - UI-elements
+    
+    let nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.frame.size = CGSize(width: 80, height: 80)
         imageView.image = UIImage(named: "NFT_Placeholder")
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let nftLikeView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Favorites_Active")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private let nftLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Heart"), for: .normal)
+        button.isSelected = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let nftNameLabel: UILabel = {
@@ -50,11 +56,17 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Public properties
+    
+    var buttonTappedHandler: (() -> Void)?
+    
+    // MARK: - UICollectionViewCell
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupNFTImageView()
-        setupNFTLikeView()
+        setupNFTLikeButton()
         setupNFTNameLabel()
         setupRatingView()
         setupPriceLabel()
@@ -63,6 +75,22 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public methods
+    
+    func updateNameLabel(_ string: String) {
+        nftNameLabel.text = string
+    }
+    
+    func updateRating(_ int: Int) {
+        ratingView.setRating(to: UInt(int))
+    }
+    
+    func updatePrice(_ price: Double) {
+        priceLabel.text = "\(price) ETH"
+    }
+    
+    // MARK: - Private methods
     
     private func setupNFTImageView() {
         contentView.addSubview(nftImageView)
@@ -75,14 +103,15 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    private func setupNFTLikeView() {
-        nftImageView.addSubview(nftLikeView)
+    private func setupNFTLikeButton() {
+        nftLikeButton.addTarget(self, action: #selector(likeButtonDidTap(_:)), for: .touchUpInside)
+        nftImageView.addSubview(nftLikeButton)
         
         NSLayoutConstraint.activate([
-            nftLikeView.widthAnchor.constraint(equalToConstant: 42),
-            nftLikeView.heightAnchor.constraint(equalToConstant: 42),
-            nftLikeView.topAnchor.constraint(equalTo: nftImageView.topAnchor, constant: -6.19),
-            nftLikeView.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 6.19)
+            nftLikeButton.widthAnchor.constraint(equalToConstant: 21),
+            nftLikeButton.heightAnchor.constraint(equalToConstant: 18),
+            nftLikeButton.topAnchor.constraint(equalTo: nftImageView.topAnchor, constant: 5.81),
+            nftLikeButton.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: -4.81)
         ])
     }
     
@@ -113,5 +142,10 @@ final class FavoritesNFTsCollectionViewCell: UICollectionViewCell {
             priceLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: nftNameLabel.leadingAnchor)
         ])
+    }
+    
+    @objc
+    private func likeButtonDidTap(_ sender: UIButton) {
+        buttonTappedHandler?()
     }
 }

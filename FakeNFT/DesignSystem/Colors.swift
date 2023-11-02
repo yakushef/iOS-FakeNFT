@@ -24,6 +24,7 @@ extension UIColor {
     static let ypBlack = UIColor(named: "Black") ?? .black
     static let ypLightGrey = UIColor(named: "Light grey") ?? .lightGray
     static let ypWhite = UIColor(named: "White") ?? .white
+    static let alertColor = UIColor(named: "AlertColor") ?? .lightGray
 
     // Universal Colors
     static let backgroundUniversal = UIColor(named: "Background Universal") ?? .gray

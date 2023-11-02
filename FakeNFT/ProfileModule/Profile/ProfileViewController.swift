@@ -12,6 +12,8 @@ protocol ProfileViewControllerProtocol {
 }
 
 final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    // MARK: - UI-elements
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Userpic_Placeholder")
@@ -21,9 +23,16 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         return imageView
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activitiIndicator = UIActivityIndicatorView(style: .medium)
+        activitiIndicator.color = .ypBlack
+        return activitiIndicator
+    }()
+    
     private let profileNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.Bold.medium
+        label.numberOfLines = 0
         return label
     }()
     
@@ -41,16 +50,22 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     
     private let profileTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .ypWhite
         tableView.isScrollEnabled = false
         tableView.rowHeight = 54
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileCell")
         return tableView
     }()
     
+    // MARK: - Private properties
+    
     private let cells = ["Мои NFT", "Избранные NFT", "О разработчике"]
     
     private var profileViewModel: ProfileViewModel?
     private var profileObserver: NSObjectProtocol?
+    private var nftsObserver: NSObjectProtocol?
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +74,43 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileViewModel = ProfileViewModel(viewController: self)
         
+        UserDefaults.standard.set(1, forKey: "indexOfFilter")
+        
         profileObserver = NotificationCenter.default.addObserver(
             forName: ProfileViewModel.didChangeNotification,
             object: nil,
             queue: .main
         ) { [weak self] _ in
             self?.updateProfileInfo()
+            self?.activityIndicator.stopAnimating()
         }
         
-        profileViewModel?.getProfile()
+        nftsObserver = NotificationCenter.default.addObserver(
+            forName: ProfileViewModel.nftsChangedNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.setupUI()
+            self?.profileViewModel?.sortNFTs()
+        }
+        
+        profileViewModel?.getProfile(id: "1")
+        profileViewModel?.getAllNFTs()
         
         setupView()
+        setupActivityIndicator()
+        activityIndicator.startAnimating()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupUI() {
         setupNavigationBar()
         setupProfileImageView()
         setupProfileNameLabel()
@@ -84,7 +125,10 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         profileNameLabel.text = profileViewModel?.profile?.name
         profileViewModel?.updatePhoto(profileImageView)
         
-        guard let description = profileViewModel?.profile?.description, let website = profileViewModel?.profile?.website else {
+        guard
+            let description = profileViewModel?.profile?.description,
+            let website = profileViewModel?.profile?.website
+        else {
             return
         }
         
@@ -99,7 +143,12 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         
         profileBioLabel.attributedText = attrString
         
-        let attributedString = NSMutableAttributedString(string: website)
+        // remove "https://" part of a string and "/" at the end
+        let websiteSubstring = website
+            .suffix(from: website.index(website.startIndex, offsetBy: 8))
+            .prefix(upTo: website.index(website.endIndex, offsetBy: -1))
+        
+        let attributedString = NSMutableAttributedString(string: String(websiteSubstring))
         attributedString.addAttribute(.link, value: website, range: NSMakeRange(0, attributedString.length))
         siteLabel.attributedText = attributedString
     }
@@ -112,15 +161,26 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     private func openWebView() {
+        guard let url = profileViewModel?.profile?.website else { return }
+        
         let webViewController = WebViewController()
-        webViewController.selectedWebSite = profileViewModel?.profile?.website
+        webViewController.model = WebViewModel(url: url)
         navigationController?.pushViewController(webViewController, animated: true)
     }
     
     private func setupView() {
-        [profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
+        [activityIndicator, profileImageView, profileNameLabel, profileBioLabel, siteLabel, profileTableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+    }
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func setupNavigationBar() {
@@ -202,6 +262,8 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cells.count
@@ -209,6 +271,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
+        cell.backgroundColor = .ypWhite
         cell.accessoryView = UIImageView(image: UIImage(named: "chevron.forward"))
         cell.selectionStyle = .none
         
@@ -226,15 +289,21 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let myNFTsTableViewController = MyNFTsTableViewController()
+            guard let profileViewModel else { return }
+            let myNFTsTableViewController = MyNFTsTableViewController(profileViewModel: profileViewModel)
             myNFTsTableViewController.navTitle = cells[indexPath.row]
             navigationController?.pushViewController(myNFTsTableViewController, animated: true)
         case 1:
-            let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController()
+            guard let profileViewModel else { return }
+            let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController(
+                profileViewModel: profileViewModel
+            )
             favoritesNFTsCollectionViewController.navTitle = cells[indexPath.row]
             navigationController?.pushViewController(favoritesNFTsCollectionViewController, animated: true)
         case 2:
