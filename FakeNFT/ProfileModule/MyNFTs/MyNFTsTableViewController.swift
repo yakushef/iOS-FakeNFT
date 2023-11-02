@@ -122,8 +122,8 @@ final class MyNFTsTableViewController: UIViewController {
         let filterStatus = UserDefaults.standard.integer(forKey: "indexOfFilter")
         
         switch filterStatus {
-        case 0: profileViewModel?.myNFTs?.sort { $0.price < $1.price }
-        case 1: profileViewModel?.myNFTs?.sort { $0.rating < $1.rating }
+        case 0: profileViewModel?.myNFTs?.sort { $0.price > $1.price }
+        case 1: profileViewModel?.myNFTs?.sort { $0.rating > $1.rating }
         case 2: profileViewModel?.myNFTs?.sort { $0.name < $1.name }
         default: break
         }
