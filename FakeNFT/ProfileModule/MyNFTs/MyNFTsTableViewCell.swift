@@ -159,9 +159,9 @@ final class MyNFTsTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            containerView.widthAnchor.constraint(equalToConstant: 192),
             containerView.heightAnchor.constraint(equalToConstant: 62),
             containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            containerView.leadingAnchor.constraint(equalTo: nftImageView.trailingAnchor, constant: 20),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -39)
         ])
     }
