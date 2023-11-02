@@ -1,6 +1,6 @@
 # Демонстрация работы приложения
 - [Профиль](https://disk.yandex.ru/i/O7lh871n-52YTA)
-- Каталог
+- [Каталог](https://drive.google.com/file/d/1oCUCGAS-AV1a85jKYM882yX8hfsTaaPJ/view?usp=share_link)
 - [Корзина](https://www.loom.com/share/bdfee510348b4d65a352f450489ff228?sid=d55cb93d-956d-4d34-b427-7c93919a6028)
 - Статистика
 ---
