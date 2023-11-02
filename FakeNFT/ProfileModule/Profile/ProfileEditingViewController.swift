@@ -221,11 +221,16 @@ final class ProfileEditingViewController: UIViewController {
 
 extension ProfileEditingViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        let info: ProfileInfo? = switch textView {
-        case nameTextView: .name
-        case bioTextView: .description
-        case siteTextView: .website
-        default: nil
+        let info: ProfileInfo?
+        switch textView {
+        case nameTextView:
+            info = .name
+        case bioTextView:
+            info = .description
+        case siteTextView:
+            info = .website
+        default:
+            info = nil
         }
         
         if let info {
