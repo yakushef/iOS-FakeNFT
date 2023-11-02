@@ -12,7 +12,7 @@ enum StatSortType: String {
     case byRating = "BYRATING"
 }
 
-struct ItemNFT: Codable {
+struct ItemNFT: Codable, Equatable {
     let createdAt: String
     let name: String
     let images: [String]

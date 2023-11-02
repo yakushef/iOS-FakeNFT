@@ -82,11 +82,12 @@ final class ProfileViewModel {
     }
     
     func getPhoto(imageView: UIImageView, index: Int, list: NFTListType) {
-        let nft: ItemNFT? = switch list {
+        let nft: ItemNFT?
+        switch list {
         case .my:
-            myNFTs?[index]
+            nft = myNFTs?[index]
         case .favorites:
-            favoritesNFTs?[index]
+            nft = favoritesNFTs?[index]
         }
         
         guard let nft else { return }
@@ -138,7 +139,7 @@ final class ProfileViewModel {
     func isLiked(_ nft: ItemNFT) -> Bool {
         guard let favoritesNFTs else { return false }
         
-        return if favoritesNFTs.contains(nft) { true } else { false }
+        if favoritesNFTs.contains(nft) { return true } else { return false }
     }
     
     func removeLike(nft: ItemNFT) {
