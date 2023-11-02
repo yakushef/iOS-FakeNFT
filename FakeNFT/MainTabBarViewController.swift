@@ -1,9 +1,5 @@
 import UIKit
 
-//MARK: - временные классы до объединения эпиков
-
-final class ProfileViewController: UIViewController { }
-
 final class MainTabBarViewController: UITabBarController {
     let statisticVC = UINavigationController(rootViewController: StatisticsViewController())
     let cartVC = UINavigationController(rootViewController: CartViewController())
