@@ -8,10 +8,6 @@
 import UIKit
 
 final class MyNFTsTableViewController: UIViewController {
-    // MARK: - Public properties
-    
-    var profileViewModel: ProfileViewModel?
-    var navTitle: String?
     
     // MARK: - UI-elements
     
@@ -42,7 +38,22 @@ final class MyNFTsTableViewController: UIViewController {
     
     private var profileObserver: NSObjectProtocol?
     
+    private let profileViewModel: ProfileViewModel
+    
+    // MARK: - Public properties
+    
+    var navTitle: String?
+    
     // MARK: - UIViewController
+    
+    init(profileViewModel: ProfileViewModel) {
+        self.profileViewModel = profileViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,9 +133,9 @@ final class MyNFTsTableViewController: UIViewController {
         let filterStatus = UserDefaults.standard.integer(forKey: "indexOfFilter")
         
         switch filterStatus {
-        case 0: profileViewModel?.myNFTs?.sort { $0.price > $1.price }
-        case 1: profileViewModel?.myNFTs?.sort { $0.rating > $1.rating }
-        case 2: profileViewModel?.myNFTs?.sort { $0.name < $1.name }
+        case 0: profileViewModel.myNFTs?.sort { $0.price > $1.price }
+        case 1: profileViewModel.myNFTs?.sort { $0.rating > $1.rating }
+        case 2: profileViewModel.myNFTs?.sort { $0.name < $1.name }
         default: break
         }
         
@@ -134,7 +145,7 @@ final class MyNFTsTableViewController: UIViewController {
     }
     
     private func reloadPlaceholderView() {
-        if let nfts = profileViewModel?.myNFTs {
+        if let nfts = profileViewModel.myNFTs {
             if nfts.isEmpty {
                 title = ""
                 tableView.isHidden = true
@@ -152,7 +163,7 @@ final class MyNFTsTableViewController: UIViewController {
     
     @objc
     private func backButtonDidTap() {
-        profileViewModel?.updateProfileInfo()
+        profileViewModel.updateProfileInfo()
         navigationController?.popViewController(animated: true)
     }
     
@@ -180,7 +191,7 @@ final class MyNFTsTableViewController: UIViewController {
 
 extension MyNFTsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profileViewModel?.myNFTs?.count ?? 0
+        profileViewModel.myNFTs?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -192,7 +203,6 @@ extension MyNFTsTableViewController: UITableViewDataSource {
         cell.backgroundColor = .ypWhite
         
         guard
-            let profileViewModel,
             let nft = profileViewModel.myNFTs?[indexPath.row],
             let authorName = profileViewModel.authors?[indexPath.row].name
         else {
@@ -204,7 +214,7 @@ extension MyNFTsTableViewController: UITableViewDataSource {
             
             let isLiked = profileViewModel.isLiked(nft)
             
-            self?.profileViewModel?.updateLike(for: nft, isLiked)
+            self?.profileViewModel.updateLike(for: nft, isLiked)
             cell?.updateLike(isLiked)
             
             self?.reloadData()

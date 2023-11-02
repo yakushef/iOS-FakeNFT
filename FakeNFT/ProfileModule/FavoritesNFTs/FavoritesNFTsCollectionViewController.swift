@@ -40,12 +40,21 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
     
     private var profileObserver: NSObjectProtocol?
     
-    // MARK: - Public properties
+    private let profileViewModel: ProfileViewModel
     
-    var profileViewModel: ProfileViewModel?
+    // MARK: - Public properties
     var navTitle: String?
     
     // MARK: - UIViewController
+    
+    init(profileViewModel: ProfileViewModel) {
+        self.profileViewModel = profileViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +119,7 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
     }
     
     private func reloadPlaceholderView() {
-        if let nfts = profileViewModel?.favoritesNFTs {
+        if let nfts = profileViewModel.favoritesNFTs {
             if nfts.isEmpty {
                 title = ""
                 collectionView.isHidden = true
@@ -123,7 +132,7 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
     
     @objc
     private func backButtonDidTap() {
-        profileViewModel?.updateProfileInfo()
+        profileViewModel.updateProfileInfo()
         navigationController?.popViewController(animated: true)
     }
 }
@@ -132,7 +141,7 @@ final class FavoritesNFTsCollectionViewController: UIViewController {
 
 extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        profileViewModel?.favoritesNFTs?.count ?? 0
+        profileViewModel.favoritesNFTs?.count ?? 0
     }
 
     func collectionView(
@@ -148,17 +157,17 @@ extension FavoritesNFTsCollectionViewController: UICollectionViewDataSource {
         
         cell.backgroundColor = .ypWhite
         
-        guard let nft = profileViewModel?.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
+        guard let nft = profileViewModel.favoritesNFTs?[indexPath.row] else { return UICollectionViewCell() }
         
         cell.buttonTappedHandler = { [weak self] in
-            self?.profileViewModel?.removeLike(nft: nft)
+            self?.profileViewModel.removeLike(nft: nft)
             self?.reloadData()
         }
         
         cell.updateNameLabel(nft.name)
         cell.updateRating(nft.rating)
         cell.updatePrice(nft.price)
-        profileViewModel?.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .favorites)
+        profileViewModel.getPhoto(imageView: cell.nftImageView, index: indexPath.row, list: .favorites)
     
         return cell
     }

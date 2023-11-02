@@ -295,14 +295,16 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let myNFTsTableViewController = MyNFTsTableViewController()
+            guard let profileViewModel else { return }
+            let myNFTsTableViewController = MyNFTsTableViewController(profileViewModel: profileViewModel)
             myNFTsTableViewController.navTitle = cells[indexPath.row]
-            myNFTsTableViewController.profileViewModel = profileViewModel
             navigationController?.pushViewController(myNFTsTableViewController, animated: true)
         case 1:
-            let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController()
+            guard let profileViewModel else { return }
+            let favoritesNFTsCollectionViewController = FavoritesNFTsCollectionViewController(
+                profileViewModel: profileViewModel
+            )
             favoritesNFTsCollectionViewController.navTitle = cells[indexPath.row]
-            favoritesNFTsCollectionViewController.profileViewModel = profileViewModel
             navigationController?.pushViewController(favoritesNFTsCollectionViewController, animated: true)
         case 2:
             openWebView()
