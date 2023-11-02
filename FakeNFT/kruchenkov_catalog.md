@@ -5,6 +5,7 @@
 #### Выбранная командой архитектура - MVVM
 #### Способ верстки - кодом
 #### Ссылка на доску https://github.com/users/prostokot14/projects/4/views/1
+#### Cсылка на скринкаст https://drive.google.com/file/d/1oCUCGAS-AV1a85jKYM882yX8hfsTaaPJ/view?usp=share_link
 
 
 ## Декомпозиция:
